@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./restaurant-menu.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="restaurant-menu">
+      <nav class="header4">
+        <img
+          class="headerlogo-icon"
+          alt=""
+          src="./public/forklyft-logo@2x.png"
+        /><a class="homebutton3" href="./restaurant-home.html" id="homeButton"
+          ><h4 class="home1">Home</h4></a
+        >
+      </nav>
+      <main class="body5">
+        <div class="ourmenuframe"><h3 class="our-menu">Our Menu</h3></div>
+        <div class="bodydetails">
+          <div class="menu1">
+            <div class="startersframe">
+              <h3 class="starters1">Starters</h3>
+              <div class="item11">
+                <img
+                  class="image-5-icon2"
+                  alt=""
+                  src="./public/image-51@2x.png"
+                />
+                <h3 class="item-1-name-container4">
+                  <p class="item-1-name4">Item 1 name</p>
+                  <p class="item-1-name4">&nbsp;</p>
+                  <p class="item-1-name4">Price: 44$</p>
+                </h3>
+                <button class="minusbutton">
+                  <img
+                    class="minusbutton-child"
+                    alt=""
+                    src="./public/line-14.svg"
+                  />
+                </button>
+              </div>
+              <div class="item11">
+                <img
+                  class="image-6-icon2"
+                  alt=""
+                  src="./public/image-61@2x.png"
+                />
+                <h3 class="item-1-name-container4">
+                  <p class="item-1-name4">Item 2 name</p>
+                  <p class="item-1-name4">&nbsp;</p>
+                  <p class="item-1-name4">Price: 34$</p>
+                </h3>
+                <button class="minusbutton">
+                  <img
+                    class="minusbutton-child"
+                    alt=""
+                    src="./public/line-14.svg"
+                  />
+                </button>
+              </div>
+            </div>
+            <div class="filler"></div>
+            <div class="dessertsframe">
+              <h3 class="desserts1">Desserts</h3>
+              <div class="item11">
+                <img
+                  class="image-5-icon2"
+                  alt=""
+                  src="./public/image-9@2x.png"
+                />
+                <h3 class="item-1-name-container4">
+                  <p class="item-1-name4">Item 1 name</p>
+                  <p class="item-1-name4">&nbsp;</p>
+                  <p class="item-1-name4">Price: 44$</p>
+                </h3>
+                <button class="minusbutton">
+                  <img
+                    class="minusbutton-child"
+                    alt=""
+                    src="./public/line-141.svg"
+                  />
+                </button>
+              </div>
+              <div class="item11">
+                <img
+                  class="image-6-icon2"
+                  alt=""
+                  src="./public/image-8@2x.png"
+                />
+                <h3 class="item-1-name-container4">
+                  <p class="item-1-name4">Item 2 name</p>
+                  <p class="item-1-name4">&nbsp;</p>
+                  <p class="item-1-name4">Price: 34$</p>
+                </h3>
+                <button class="minusbutton">
+                  <img
+                    class="minusbutton-child"
+                    alt=""
+                    src="./public/line-141.svg"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="buttons1">
+            <button class="addbutton" id="addButton">
+              <h3 class="name7">Add item</h3></button
+            ><button class="addbutton">
+              <h3 class="name7">Delete item</h3>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      var homeButton = document.getElementById("homeButton");
+      if (homeButton) {
+        homeButton.addEventListener("click", function (e) {
+          window.location.href = "./restaurant-home.html";
+        });
+      }
+      
+      var addButton = document.getElementById("addButton");
+      if (addButton) {
+        addButton.addEventListener("click", function (e) {
+          window.location.href = "./restaurant-add-item.html";
+        });
+      }
+      </script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./restaurant-home.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="restaurant-home">
+      <nav class="header5">
+        <div class="headerlogo3">
+          <img
+            class="forklyft-logo-icon3"
+            alt=""
+            src="./public/forklyft-logo@2x.png"
+          />
+        </div>
+        <a
+          class="logoutbutton1"
+          href="./restaurant-login.html"
+          id="logoutButton"
+          ><h4 class="logout1">Logout</h4></a
+        >
+      </nav>
+      <main class="body6">
+        <div class="resnameframe">
+          <h3 class="order-history">Restaurant name</h3>
+        </div>
+        <div class="orderhis">
+          <div class="orderhistext">
+            <h3 class="order-history">
+              <p class="order-history1">Order History</p>
+            </h3>
+          </div>
+          <div class="hisbody">
+            <img class="image-4-icon1" alt="" src="./public/image-4@2x.png" />
+            <h4 class="item-1-price-container1">
+              <p class="order-history1">Item 1</p>
+              <p class="order-history1">&nbsp;</p>
+              <p class="order-history1">Price: 44$</p>
+            </h4>
+            <h4 class="quantity3">quantity:</h4>
+            <div class="quantitycoun"><div class="div">1</div></div>
+            <h4 class="userid-abcgmailcom">UserId : abc@gmail.com</h4>
+          </div>
+          <div class="clicktext">
+            <a class="click-here-to" href="./my-orders.html"
+              >click here to view complete order history</a
+            >
+          </div>
+        </div>
+        <div class="ourmenu">
+          <div class="orderhistext">
+            <h3 class="order-history">Our Menu</h3>
+          </div>
+          <div class="item12">
+            <img class="image-5-icon3" alt="" src="./public/image-9@2x.png" />
+            <h4 class="item-1-price-container1">
+              <p class="order-history1">Item 1 name</p>
+              <p class="order-history1">&nbsp;</p>
+              <p class="order-history1">Price: 44$</p>
+            </h4>
+          </div>
+          <div class="item22">
+            <img class="image-5-icon3" alt="" src="./public/image-51@2x.png" />
+            <h4 class="item-1-price-container1">
+              <p class="order-history1">Item 2 name</p>
+              <p class="order-history1">&nbsp;</p>
+              <p class="order-history1">Price: 34$</p>
+            </h4>
+          </div>
+          <div class="clicktext1">
+            <a
+              class="click-here-to1"
+              href="./restaurant-menu.html"
+              id="clickHereTo1"
+              >click here to view the entire menu</a
+            >
+          </div>
+          <img class="line-icon1" alt="" src="./public/line@2x.png" />
+        </div>
+      </main>
+    </div>
+
+    <script>
+      var logoutButton = document.getElementById("logoutButton");
+      if (logoutButton) {
+        logoutButton.addEventListener("click", function (e) {
+          window.location.href = "./restaurant-login.html";
+        });
+      }
+      
+      var clickHereTo1 = document.getElementById("clickHereTo1");
+      if (clickHereTo1) {
+        clickHereTo1.addEventListener("click", function (e) {
+          window.location.href = "./restaurant-menu.html";
+        });
+      }
+      </script>
+  </body>
+</html>

@@ -1,0 +1,325 @@
+.forklyft-logo-icon {
+  position: relative;
+  width: 70px;
+  height: 60px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.headerlogo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.my-cart1 {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-base);
+  line-height: 27px;
+  font-weight: 400;
+  font-family: var(--font-roboto);
+  color: var(--color-white);
+  text-align: center;
+}
+.mycartbutton {
+  border-radius: var(--br-8xs);
+  background-color: var(--color-dodgerblue);
+  width: 90px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.my-profile {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-mini);
+  line-height: 27px;
+  font-weight: 400;
+  font-family: var(--font-roboto);
+  color: var(--color-white);
+  text-align: center;
+}
+.myprofilebutton {
+  text-decoration: none;
+  border-radius: var(--br-8xs);
+  width: 90px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.subtract-icon {
+  position: absolute;
+  height: 60%;
+  width: 60%;
+  top: 20%;
+  right: 20%;
+  bottom: 20%;
+  left: 20%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.home-favorite,
+.homebutton {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+}
+.home-favorite {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.homebutton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.headerbuttons,
+.userheadervariant2 {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.headerbuttons {
+  width: 500px;
+}
+.userheadervariant2 {
+  align-self: stretch;
+  background-color: var(--color-gray);
+  height: 120px;
+  padding: var(--padding-11xl);
+  box-sizing: border-box;
+}
+.your-cart {
+  display: inline-block;
+  width: 502px;
+}
+.restaurant-name,
+.your-cart {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: inherit;
+}
+.restaurant-name-wrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-3xs);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--font-size-21xl);
+}
+.image-4-icon {
+  position: relative;
+  width: 253px;
+  height: 116px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.blank-line {
+  margin: 0;
+}
+.i1 {
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-3xs);
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frame-child {
+  width: 41px;
+  height: 38px;
+}
+.frame-child,
+.frame-item,
+.h4 {
+  position: relative;
+  flex-shrink: 0;
+}
+.h4 {
+  margin: 0;
+  font-size: inherit;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  width: 31px;
+  height: 26px;
+}
+.frame-item {
+  width: 35.51px;
+  height: 28.57px;
+}
+.image-4-parent,
+.polygon-parent {
+  display: flex;
+  align-items: center;
+}
+.polygon-parent {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.image-4-parent {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.image-5-icon {
+  position: relative;
+  width: 250px;
+  height: 96px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.quantity1 {
+  margin: 0;
+  font-size: inherit;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  width: 134px;
+  height: 40px;
+}
+.image-6-icon,
+.quantity1,
+.quantity2 {
+  position: relative;
+  flex-shrink: 0;
+}
+.image-6-icon {
+  width: 251px;
+  height: 98px;
+  object-fit: cover;
+}
+.quantity2 {
+  margin: 0;
+  font-size: inherit;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  width: 134px;
+}
+.frame-container {
+  border-radius: 48px;
+  background-color: var(--color-powderblue);
+  width: 1053px;
+  height: 512px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-31xl) var(--padding-81xl);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-6xl);
+  font-size: var(--font-size-11xl);
+}
+.delivery-charges-20,
+.items-03-95 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.items-03-95 {
+  width: 472px;
+  height: 58px;
+}
+.delivery-charges-20 {
+  width: 485px;
+  height: 74px;
+}
+.name3,
+.price {
+  font-size: var(--font-size-16xl);
+}
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.name3 {
+  margin: 0;
+  position: relative;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: var(--font-inter);
+  color: var(--color-black);
+  text-align: center;
+}
+.ob-forms,
+.ob-forms1 {
+  cursor: pointer;
+  border: 1px solid var(--color-mediumslateblue);
+  padding: var(--padding-3xs) var(--padding-mini);
+  background-color: var(--color-dodgerblue);
+  border-radius: var(--br-8xs);
+  box-sizing: border-box;
+  width: 282px;
+  height: 84px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.ob-forms1 {
+  width: 286px;
+  align-items: center;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 70px;
+}
+.body2,
+.my-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.body2 {
+  align-self: stretch;
+  flex: 1;
+  padding: var(--padding-31xl) var(--padding-131xl);
+  justify-content: space-between;
+  text-align: center;
+  font-size: var(--font-size-31xl);
+  color: var(--color-black);
+  font-family: var(--font-inter);
+}
+.my-cart {
+  position: relative;
+  background-color: var(--color-azure);
+  width: 100%;
+  height: 1024px;
+  overflow: hidden;
+  justify-content: center;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/restaurant-add-item.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <!-- <form method="POST" action="/restaurant/{{id}}">
+      <label for="login">food name</label>
+      <input type="text" id="login" name="username">
+      <label for="login">food price</label>
+      <input type="text" id="login" name="price">
+      <label for="login">food type</label>
+      <input type="text" id="login" name="type">
+      <label for="login">food url</label>
+      <input type="text" id="login" name="url">
+      <button>Submit</button>
+    </form>  -->
+    <div class="restaurant-add-item">
+      <nav class="header3">
+        <img
+          class="forklyft-logo-inverted-1-icon2"
+          alt=""
+          src="C:\Users\hp\Desktop\project\static\public\forklyft-logo@2x.png"
+        />
+        <a class="home" href="./restaurant-home.html" id="home">Home</a>
+      </nav>
+      <main class="body4">
+        <div class="heading"><h3 class="add-item">Add item</h3></div>
+        <form class="additem-baxxa" method="POST">
+          <div class="foodname">
+            <div class="ob-formsfood-name">
+              <label for="food_name" class="food-name">Food Name*</label>
+              <input name="food_name" class="frame6" type="text" />
+            </div>
+          </div>
+          <div class="foodname">
+            <div class="ob-formsfood-name">
+              <label for="price" class="price2">Price*</label>
+              <input name="price" class="frame7" type="number" />
+            </div>
+          </div>
+          <div class="foodname">
+            <div class="ob-formsfood-name">
+              <label for="type" class="type2">Food Type*</label>
+              <input class="frame7" type="number" />
+              <select name="type" class="frame7">
+                <option value="starter">starter</option>
+                <option value="main">main</option>
+                <option value="dessert">dessert</option>
+                <option value="drink">drink</option>
+              </select>
+            </div>
+          </div>
+          <div class="foodname">
+            <div class="ob-formsfood-name">
+              <label for="url" class="food-name">Image url</label>
+              <input name="url" class="frame7" type="text" />
+            </div>
+          </div>
+          <div class="foodname">
+            <button class="ob-formsupload-image" id="oBFormsUploadImage1">
+              <h4 class="name5">Submit</h4>
+            </button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <!-- <script>
+      var home = document.getElementById("home");
+      if (home) {
+        home.addEventListener("click", function (e) {
+          window.location.href = "./restaurant-home.html";
+        });
+      }
+      
+      var oBFormsUploadImage1 = document.getElementById("oBFormsUploadImage1");
+      if (oBFormsUploadImage1) {
+        oBFormsUploadImage1.addEventListener("click", function (e) {
+          window.location.href = "./restaurant-menu.html";
+        });
+      }
+      </script> -->
+  </body>
+</html>

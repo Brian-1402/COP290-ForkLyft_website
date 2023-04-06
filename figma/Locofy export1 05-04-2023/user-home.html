@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./user-home.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="user-home">
+      <nav class="header10">
+        <img
+          class="headerlogo-icon2"
+          alt=""
+          src="./public/forklyft-logo@2x.png"
+        />
+        <div class="pre-search">
+          <div class="pre-search-child"></div>
+          <img class="pre-search-item" alt="" src="./public/group-1.svg" />
+        </div>
+        <div class="headerbuttons6">
+          <a class="mycartbutton6" href="./my-cart.html" id="myCartButton"
+            ><div class="my-cart7">My cart</div></a
+          ><a
+            class="mycartbutton6"
+            href="./my-profile.html"
+            id="myProfileButton"
+            ><div class="my-profile8">My Profile</div></a
+          ><a
+            class="mycartbutton6"
+            href="./contact-us.html"
+            id="contactUsButton"
+            ><div class="my-profile8">Contact Us</div></a
+          ><button class="homebutton7">
+            <img
+              class="home-favorite-icon1"
+              alt=""
+              src="./public/home-favorite.svg"
+            />
+          </button>
+        </div>
+      </nav>
+      <main class="body10">
+        <div class="catchphrase">
+          <h3 class="you-wont-be">
+            You won’t be able to resist lifting your forks ;)
+          </h3>
+        </div>
+        <div class="text1"><h4 class="hot-new-picks">Hot New Picks</h4></div>
+        <div class="boxes1">
+          <div class="frame-div">
+            <div class="food-rectmain-wrapper">
+              <div class="food-rectmain">
+                <div class="food-rectmain-child"></div>
+              </div>
+            </div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+          </div>
+          <div class="frame-div">
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+          </div>
+        </div>
+        <div class="text1">
+          <h4 class="hot-new-picks">Trending Restaurants</h4>
+        </div>
+        <div class="boxes1">
+          <div class="frame-parent2">
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+          </div>
+          <div class="frame-parent2">
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+            <div class="frame-child3"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      var myCartButton = document.getElementById("myCartButton");
+      if (myCartButton) {
+        myCartButton.addEventListener("click", function (e) {
+          window.location.href = "./my-cart.html";
+        });
+      }
+      
+      var myProfileButton = document.getElementById("myProfileButton");
+      if (myProfileButton) {
+        myProfileButton.addEventListener("click", function (e) {
+          window.location.href = "./my-profile.html";
+        });
+      }
+      
+      var contactUsButton = document.getElementById("contactUsButton");
+      if (contactUsButton) {
+        contactUsButton.addEventListener("click", function (e) {
+          window.location.href = "./contact-us.html";
+        });
+      }
+      </script>
+  </body>
+</html>

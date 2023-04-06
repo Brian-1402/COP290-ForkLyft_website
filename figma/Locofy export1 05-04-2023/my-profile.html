@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./my-profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="my-profile1">
+      <nav class="userheadervariant21">
+        <div class="headerlogo1">
+          <img
+            class="forklyft-logo-icon1"
+            alt=""
+            src="./public/forklyft-logo@2x.png"
+          />
+        </div>
+        <div class="headerbuttons1">
+          <a class="mycartbutton1" href="./my-cart.html" id="myCartButton"
+            ><h5 class="my-cart2">My cart</h5></a
+          >
+          <div class="myprofilebutton1">
+            <h5 class="my-profile2">My Profile</h5>
+          </div>
+          <a class="mycartbutton1" href="./contact-us.html" id="contactUsButton"
+            ><h5 class="my-profile2">Contact Us</h5></a
+          ><button class="homebutton1" id="homeButton">
+            <button class="home-favorite1" id="homeFavorite">
+              <img class="subtract-icon1" alt="" src="./public/subtract.svg" />
+            </button>
+          </button>
+        </div>
+      </nav>
+      <div class="bodyframe">
+        <div class="bodycontentframe">
+          <div class="headingtext"><h3 class="my-profile3">My Profile</h3></div>
+          <form class="profileframe">
+            <div class="profilefields">
+              <div class="usernameframe">
+                <h5 class="email-id">Username</h5>
+                <input class="usernametextfield" type="text" />
+              </div>
+              <div class="usernameframe">
+                <h5 class="email-id">Email ID</h5>
+                <input class="usernametextfield" type="text" />
+              </div>
+              <div class="usernameframe">
+                <h5 class="email-id">Phone Number</h5>
+                <input class="usernametextfield" type="text" />
+              </div>
+              <div class="usernameframe">
+                <h5 class="email-id">Password</h5>
+                <input class="usernametextfield" type="text" />
+              </div>
+            </div>
+            <div class="editbuttonframe">
+              <button class="editbutton"><h5 class="edit">Edit</h5></button>
+            </div>
+          </form>
+          <div class="addressordersframe2">
+            <div class="addressordersframe1">
+              <button class="addressesbutton" id="addressesButton">
+                <img
+                  class="image-1-icon"
+                  alt=""
+                  src="./public/image-1@2x.png"
+                />
+                <h4 class="my-addresses">My addresses</h4></button
+              ><button class="addressesbutton" id="ordersButton">
+                <img
+                  class="image-1-icon"
+                  alt=""
+                  src="./public/image-2@2x.png"
+                />
+                <h4 class="my-addresses">My orders</h4>
+              </button>
+            </div>
+          </div>
+          <div class="logoutframe">
+            <button class="logoutbutton" id="logoutButton">
+              <h4 class="logout" id="lOGOUT">LOGOUT</h4>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var myCartButton = document.getElementById("myCartButton");
+      if (myCartButton) {
+        myCartButton.addEventListener("click", function (e) {
+          window.location.href = "./my-cart.html";
+        });
+      }
+      
+      var contactUsButton = document.getElementById("contactUsButton");
+      if (contactUsButton) {
+        contactUsButton.addEventListener("click", function (e) {
+          window.location.href = "./contact-us.html";
+        });
+      }
+      
+      var homeFavorite = document.getElementById("homeFavorite");
+      if (homeFavorite) {
+        homeFavorite.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      
+      var homeButton = document.getElementById("homeButton");
+      if (homeButton) {
+        homeButton.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      
+      var addressesButton = document.getElementById("addressesButton");
+      if (addressesButton) {
+        addressesButton.addEventListener("click", function (e) {
+          window.location.href = "./addresses.html";
+        });
+      }
+      
+      var ordersButton = document.getElementById("ordersButton");
+      if (ordersButton) {
+        ordersButton.addEventListener("click", function (e) {
+          window.location.href = "./my-orders.html";
+        });
+      }
+      
+      var lOGOUT = document.getElementById("lOGOUT");
+      if (lOGOUT) {
+        lOGOUT.addEventListener("click", function (e) {
+          window.location.href = "./user-login.html";
+        });
+      }
+      
+      var logoutButton = document.getElementById("logoutButton");
+      if (logoutButton) {
+        logoutButton.addEventListener("click", function (e) {
+          window.location.href = "./user-login.html";
+        });
+      }
+      </script>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./user-signup.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="user-signup">
+      <nav class="header8">
+        <img
+          class="forklyft-logo-inverted-1-icon3"
+          alt=""
+          src="./public/forklyft-logo@2x.png"
+        />
+      </nav>
+      <main class="body8">
+        <div class="bodyblock1">
+          <form class="details1">
+            <div class="firstname1">
+              <div class="ob-formsfirst-name1">
+                <h4 class="first-name1">First Name*</h4>
+                <input class="frame9" type="text" />
+              </div>
+            </div>
+            <div class="firstname1">
+              <div class="ob-formsfirst-name1">
+                <h4 class="first-name1">Last Name*</h4>
+                <input class="frame10" type="text" />
+              </div>
+            </div>
+            <div class="firstname1">
+              <div class="ob-formsfirst-name1">
+                <h4 class="first-name1">Username*</h4>
+                <input class="frame10" type="text" />
+              </div>
+            </div>
+            <div class="firstname1">
+              <div class="ob-formsfirst-name1">
+                <h4 class="first-name1">Password*</h4>
+                <input class="frame10" type="password" />
+              </div>
+            </div>
+            <div class="firstname1">
+              <button class="ob-formsjoin-now1" id="oBFormsJoinNow">
+                <h4 class="name9">Join now</h4>
+              </button>
+            </div>
+          </form>
+          <div class="seperator1">
+            <img class="seperator-inner" alt="" src="./public/line-5.svg" />
+            <h4 class="or1">or</h4>
+            <img class="seperator-child1" alt="" src="./public/line-6.svg" />
+          </div>
+          <div class="loginmessage1">
+            <h4 class="already-on-forklyft1">Already on ForkLyft?</h4>
+            <button class="ob-formslogin1" autofocus id="oBFormsLogin">
+              <h4 class="name9">Login</h4>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      var oBFormsJoinNow = document.getElementById("oBFormsJoinNow");
+      if (oBFormsJoinNow) {
+        oBFormsJoinNow.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      
+      var oBFormsLogin = document.getElementById("oBFormsLogin");
+      if (oBFormsLogin) {
+        oBFormsLogin.addEventListener("click", function (e) {
+          window.location.href = "./user-login.html";
+        });
+      }
+      </script>
+  </body>
+</html>
