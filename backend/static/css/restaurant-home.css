@@ -61,6 +61,7 @@
 .order-history {
   margin: 0;
   position: relative;
+  width: 100%;
   font-size: inherit;
   line-height: 28px;
   font-weight: 400;
@@ -87,7 +88,7 @@
   font-size: inherit;
   font-weight: 400;
   font-family: inherit;
-  width: 304px;
+  width: 40%;
   height: 83px;
 }
 .div,

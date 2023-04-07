@@ -26,20 +26,20 @@
 # connection.commit()
 # connection.close()
 
-import sqlite3
+# import sqlite3
 
 import pandas as pd
-import random
+# import random
 resto = pd.read_csv("zomato.csv")
 food = pd.read_csv("food.csv")
 
-connection = sqlite3.connect('restaurant.db')
+# connection = sqlite3.connect('restaurant.db')
 
 
-with open('schema.sql') as f:
-    connection.executescript(f.read())
+# with open('schema.sql') as f:
+#     connection.executescript(f.read())
 
-cur = connection.cursor()
+# cur = connection.cursor()
 
 for i in range(50):
     c = random.randint(1, 20)
@@ -64,5 +64,38 @@ for i in range(1,51):
         cur.execute("INSERT INTO menus (restaurant_id, food_type, food_name, food_price, image_url) VALUES (?, ?, ?, ?, ?)",(res_id, ftype, name, price, url))
 
 
-connection.commit()
-connection.close()
+# connection.commit()
+# connection.close()
+
+from sqlalchemy import create_engine, text
+user = 'root'
+password = 'Prathamagra27#'
+host = 'LAPTOP-N2DLHE8V'
+port = 3306
+database = 'restaurant'
+def get_connection():
+    return create_engine(
+        url="mysql+pymysql://{0}:{1}@{2}:{3}/{4}".format(
+            user, password, host, port, database
+        ),
+        connect_args={
+            "ssl":{
+                "ssl_ca":"/etc/ssl/certs/ca-certificates.crt"
+            }
+        }
+    )
+engine = get_connection()
+with engine.connect() as conn:
+    result = conn.execute(text("select * from restaurants"))
+    print(result.all())
+
+# if __name__ == '__main__':
+ 
+#     try:
+       
+#         # GET THE CONNECTION OBJECT (ENGINE) FOR THE DATABASE
+#         engine = get_connection()
+#         print(
+#             f"Connection to the {host} for user {user} created successfully.")
+#     except Exception as ex:
+#         print("Connection could not be made due to the following error: \n", ex)

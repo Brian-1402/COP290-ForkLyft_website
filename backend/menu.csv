@@ -1,0 +1,253 @@
+menu_id,image_url,restaurant_id,food_type,food_name,food_price
+1,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,1,dessert,"Chocolate Ice Cream",238
+2,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,1,drink,Fanta,78
+3,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,1,main,"White sauce pasta",378
+4,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,1,dessert,"Chocolate Ice Cream",238
+5,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,1,dessert,"Rabdi Jalebi",118
+6,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,2,main,"Chicken Pizza",607
+7,https://images.unsplash.com/photo-1606755456206-b25206cde27e,2,starter,"French Fries",247
+8,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,2,dessert,"Rabdi Jalebi",107
+9,https://images.unsplash.com/photo-1580064003296-29deb3521370,2,main,Parantha,37
+10,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,2,drink,Fanta,67
+11,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,3,main,"Tricolor pasta",386
+12,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,3,starter,"Cheese Block",86
+13,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,3,drink,Sprite,86
+14,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,3,main,"Paneer Makhani",226
+15,https://images.unsplash.com/photo-1601050690597-df0568f70950,3,starter,Samosa,96
+16,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,4,drink,Sprite,74
+17,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,4,dessert,"Rabdi Jalebi",114
+18,https://images.unsplash.com/photo-1497034825429-c343d7c6a68f,4,dessert,"Strawberry Ice Cream",234
+19,https://images.unsplash.com/photo-1573821663912-569905455b1c,4,main,"Paneer Pizza",414
+20,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,4,main,"White sauce pasta",374
+21,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,5,main,"Chicken Pizza",657
+22,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,5,main,"White sauce pasta",417
+23,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,5,dessert,"Chocolate Ice Cream",277
+24,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,5,dessert,"Chocolate Ice Cream",277
+25,https://images.unsplash.com/photo-1554866585-cd94860890b7,5,drink,Coke,117
+26,https://images.unsplash.com/photo-1595854341625-f33ee10dbf94,6,main,"Margherita Pizza",574
+27,https://images.unsplash.com/photo-1554866585-cd94860890b7,6,drink,Coke,134
+28,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,6,drink,Sprite,134
+29,https://images.unsplash.com/photo-1601050690597-df0568f70950,6,starter,Samosa,144
+30,https://images.unsplash.com/photo-1634496064950-02f043806b09,6,drink,"Virgin Mojito",264
+31,https://images.unsplash.com/photo-1576468475364-6ff071f7bc7c,7,drink,"Bottled Water",86
+32,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,7,drink,Sprite,116
+33,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,7,starter,"Cheese Block",116
+34,https://images.unsplash.com/photo-1497034825429-c343d7c6a68f,7,dessert,"Strawberry Ice Cream",276
+35,https://images.unsplash.com/photo-1609951651556-5334e2706168,7,drink,"Devils cocktail",326
+36,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,8,dessert,"Gulab Jamun",90
+37,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,8,dessert,"Rabdi Jalebi",90
+38,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,8,main,"Chicken Pizza",590
+39,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,8,drink,Sprite,50
+40,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,8,main,"Paneer Makhani",190
+41,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,9,main,"White sauce pasta",436
+42,https://images.unsplash.com/photo-1497034825429-c343d7c6a68f,9,dessert,"Strawberry Ice Cream",296
+43,https://images.unsplash.com/photo-1541657267876-788b156193bc,9,starter,"Veg Burger",346
+44,https://images.unsplash.com/photo-1595854341625-f33ee10dbf94,9,main,"Margherita Pizza",576
+45,https://images.unsplash.com/photo-1625944525803-d510d5a4a262,9,main,"Red Sauce Pasta",436
+46,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,10,starter,"Cheese Block",112
+47,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,10,main,"White sauce pasta",412
+48,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,10,dessert,"Rabdi Jalebi",152
+49,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,10,dessert,"Gulab Jamun",152
+50,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,10,starter,"Cheese Block",112
+51,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,11,starter,"Cheese Block",133
+52,https://images.unsplash.com/photo-1541657267876-788b156193bc,11,starter,"Veg Burger",343
+53,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,11,drink,Sprite,133
+54,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,11,dessert,"Chocolate Ice Cream",293
+55,https://images.unsplash.com/photo-1554866585-cd94860890b7,11,drink,Coke,133
+56,https://images.unsplash.com/photo-1549395156-e0c1fe6fc7a5,12,dessert,"Butterscotch Ice Cream",204
+57,https://images.unsplash.com/photo-1621263764928-df1444c5e859,12,drink,"Lemon Juice",44
+58,https://images.unsplash.com/photo-1609951651556-5334e2706168,12,drink,"Devils cocktail",254
+59,https://images.unsplash.com/photo-1580064003296-29deb3521370,12,main,Parantha,14
+60,https://images.unsplash.com/photo-1497034825429-c343d7c6a68f,12,dessert,"Strawberry Ice Cream",204
+61,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,13,main,"Chicken Pizza",659
+62,https://images.unsplash.com/photo-1634496064950-02f043806b09,13,drink,"Virgin Mojito",249
+63,https://images.unsplash.com/photo-1601050690597-df0568f70950,13,starter,Samosa,129
+64,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,13,main,"Tricolor pasta",419
+65,https://images.unsplash.com/photo-1576468475364-6ff071f7bc7c,13,drink,"Bottled Water",89
+66,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,14,starter,"Cheese Block",40
+67,https://images.unsplash.com/photo-1625944525803-d510d5a4a262,14,main,"Red Sauce Pasta",340
+68,https://images.unsplash.com/photo-1625944525803-d510d5a4a262,14,main,"Red Sauce Pasta",340
+69,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,14,main,"Chicken Pizza",580
+70,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,14,main,"Chicken Pizza",580
+71,https://images.unsplash.com/photo-1576468475364-6ff071f7bc7c,15,drink,"Bottled Water",44
+72,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,15,drink,Fanta,74
+73,https://images.unsplash.com/photo-1573821663912-569905455b1c,15,main,"Paneer Pizza",414
+74,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,15,main,"Chicken Pizza",614
+75,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,15,main,"White sauce pasta",374
+76,https://images.unsplash.com/photo-1601050690597-df0568f70950,16,starter,Samosa,108
+77,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,16,dessert,"Chocolate Ice Cream",258
+78,https://images.unsplash.com/photo-1580064003296-29deb3521370,16,main,Parantha,68
+79,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,16,main,"Chicken Pizza",638
+80,https://images.unsplash.com/photo-1513104890138-7c749659a591,16,main,"Farmhouse Pizza",558
+81,https://images.unsplash.com/photo-1625944525803-d510d5a4a262,17,main,"Red Sauce Pasta",385
+82,https://images.unsplash.com/photo-1497034825429-c343d7c6a68f,17,dessert,"Strawberry Ice Cream",245
+83,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,17,drink,Sprite,85
+84,https://images.unsplash.com/photo-1573821663912-569905455b1c,17,main,"Paneer Pizza",425
+85,https://images.unsplash.com/photo-1609951651556-5334e2706168,17,drink,"Devils cocktail",295
+86,https://images.unsplash.com/photo-1609951651556-5334e2706168,18,drink,"Devils cocktail",346
+87,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,18,dessert,"Chocolate Ice Cream",296
+88,https://images.unsplash.com/photo-1573821663912-569905455b1c,18,main,"Paneer Pizza",476
+89,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,18,starter,"Cheese Block",136
+90,https://images.unsplash.com/photo-1601050690597-df0568f70950,18,starter,Samosa,146
+91,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,19,main,"Paneer Makhani",209
+92,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,19,drink,Fanta,69
+93,https://images.unsplash.com/photo-1549395156-e0c1fe6fc7a5,19,dessert,"Butterscotch Ice Cream",229
+94,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,19,drink,Sprite,69
+95,https://images.unsplash.com/photo-1513104890138-7c749659a591,19,main,"Farmhouse Pizza",529
+96,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,20,main,"White sauce pasta",369
+97,https://images.unsplash.com/photo-1580064003296-29deb3521370,20,main,Parantha,39
+98,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,20,starter,"Cheese Block",69
+99,https://images.unsplash.com/photo-1576468475364-6ff071f7bc7c,20,drink,"Bottled Water",39
+100,https://images.unsplash.com/photo-1573821663912-569905455b1c,20,main,"Paneer Pizza",409
+101,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,21,drink,Fanta,90
+102,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,21,main,"Chicken Pizza",630
+103,https://images.unsplash.com/photo-1554866585-cd94860890b7,21,drink,Coke,90
+104,https://images.unsplash.com/photo-1621263764928-df1444c5e859,21,drink,"Lemon Juice",90
+105,https://images.unsplash.com/photo-1549395156-e0c1fe6fc7a5,21,dessert,"Butterscotch Ice Cream",250
+106,https://images.unsplash.com/photo-1541657267876-788b156193bc,22,starter,"Veg Burger",329
+107,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,22,dessert,"Rabdi Jalebi",159
+108,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,22,main,"White sauce pasta",419
+109,https://images.unsplash.com/photo-1554866585-cd94860890b7,22,drink,Coke,119
+110,https://images.unsplash.com/photo-1549395156-e0c1fe6fc7a5,22,dessert,"Butterscotch Ice Cream",279
+111,https://images.unsplash.com/photo-1606755456206-b25206cde27e,23,starter,"French Fries",305
+112,https://images.unsplash.com/photo-1541657267876-788b156193bc,23,starter,"Veg Burger",335
+113,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,23,dessert,"Gulab Jamun",165
+114,https://images.unsplash.com/photo-1609951651556-5334e2706168,23,drink,"Devils cocktail",335
+115,https://images.unsplash.com/photo-1554866585-cd94860890b7,23,drink,Coke,125
+116,https://images.unsplash.com/photo-1573821663912-569905455b1c,24,main,"Paneer Pizza",441
+117,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,24,starter,"Cheese Block",101
+118,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,24,main,"Chicken Pizza",641
+119,https://images.unsplash.com/photo-1609951651556-5334e2706168,24,drink,"Devils cocktail",311
+120,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,24,starter,"Cheese Block",101
+121,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,25,main,"Tricolor pasta",348
+122,https://images.unsplash.com/photo-1513104890138-7c749659a591,25,main,"Farmhouse Pizza",508
+123,https://images.unsplash.com/photo-1554866585-cd94860890b7,25,drink,Coke,48
+124,https://images.unsplash.com/photo-1606755456206-b25206cde27e,25,starter,"French Fries",228
+125,https://images.unsplash.com/photo-1621263764928-df1444c5e859,25,drink,"Lemon Juice",48
+126,https://images.unsplash.com/photo-1609951651556-5334e2706168,26,drink,"Devils cocktail",260
+127,https://images.unsplash.com/photo-1606755456206-b25206cde27e,26,starter,"French Fries",230
+128,https://images.unsplash.com/photo-1513104890138-7c749659a591,26,main,"Farmhouse Pizza",510
+129,https://images.unsplash.com/photo-1541657267876-788b156193bc,26,starter,"Veg Burger",260
+130,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,26,main,"Chicken Pizza",590
+131,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,27,dessert,"Chocolate Ice Cream",292
+132,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,27,drink,Fanta,132
+133,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,27,main,"Paneer Makhani",272
+134,https://images.unsplash.com/photo-1580064003296-29deb3521370,27,main,Parantha,102
+135,https://images.unsplash.com/photo-1634496064950-02f043806b09,27,drink,"Virgin Mojito",262
+136,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,28,dessert,"Gulab Jamun",147
+137,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,28,main,"Paneer Makhani",247
+138,https://images.unsplash.com/photo-1554866585-cd94860890b7,28,drink,Coke,107
+139,https://images.unsplash.com/photo-1549395156-e0c1fe6fc7a5,28,dessert,"Butterscotch Ice Cream",267
+140,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,28,dessert,"Chocolate Ice Cream",267
+141,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,29,drink,Sprite,115
+142,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,29,main,"White sauce pasta",415
+143,https://images.unsplash.com/photo-1497034825429-c343d7c6a68f,29,dessert,"Strawberry Ice Cream",275
+144,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,29,main,"Chicken Pizza",655
+145,https://images.unsplash.com/photo-1580064003296-29deb3521370,29,main,Parantha,85
+146,https://images.unsplash.com/photo-1573821663912-569905455b1c,30,main,"Paneer Pizza",437
+147,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,30,main,"Tricolor pasta",397
+148,https://images.unsplash.com/photo-1609951651556-5334e2706168,30,drink,"Devils cocktail",307
+149,https://images.unsplash.com/photo-1573821663912-569905455b1c,30,main,"Paneer Pizza",437
+150,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,30,dessert,"Rabdi Jalebi",137
+151,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,31,starter,"Cheese Block",45
+152,https://images.unsplash.com/photo-1549395156-e0c1fe6fc7a5,31,dessert,"Butterscotch Ice Cream",205
+153,https://images.unsplash.com/photo-1601050690597-df0568f70950,31,starter,Samosa,55
+154,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,31,drink,Sprite,45
+155,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,31,dessert,"Gulab Jamun",85
+156,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,32,main,"Tricolor pasta",370
+157,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,32,dessert,"Rabdi Jalebi",110
+158,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,32,main,"Paneer Makhani",210
+159,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,32,dessert,"Gulab Jamun",110
+160,https://images.unsplash.com/photo-1554866585-cd94860890b7,32,drink,Coke,70
+161,https://images.unsplash.com/photo-1595854341625-f33ee10dbf94,33,main,"Margherita Pizza",526
+162,https://images.unsplash.com/photo-1625944525803-d510d5a4a262,33,main,"Red Sauce Pasta",386
+163,https://images.unsplash.com/photo-1497034825429-c343d7c6a68f,33,dessert,"Strawberry Ice Cream",246
+164,https://images.unsplash.com/photo-1549395156-e0c1fe6fc7a5,33,dessert,"Butterscotch Ice Cream",246
+165,https://images.unsplash.com/photo-1621263764928-df1444c5e859,33,drink,"Lemon Juice",86
+166,https://images.unsplash.com/photo-1573821663912-569905455b1c,34,main,"Paneer Pizza",403
+167,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,34,main,"Tricolor pasta",363
+168,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,34,drink,Fanta,63
+169,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,34,main,"Chicken Pizza",603
+170,https://images.unsplash.com/photo-1513104890138-7c749659a591,34,main,"Farmhouse Pizza",523
+171,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,35,drink,Sprite,104
+172,https://images.unsplash.com/photo-1554866585-cd94860890b7,35,drink,Coke,104
+173,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,35,main,"Tricolor pasta",404
+174,https://images.unsplash.com/photo-1576468475364-6ff071f7bc7c,35,drink,"Bottled Water",74
+175,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,35,dessert,"Gulab Jamun",144
+176,https://images.unsplash.com/photo-1634496064950-02f043806b09,36,drink,"Virgin Mojito",204
+177,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,36,dessert,"Rabdi Jalebi",114
+178,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,36,dessert,"Rabdi Jalebi",114
+179,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,36,main,"Tricolor pasta",374
+180,https://images.unsplash.com/photo-1573821663912-569905455b1c,36,main,"Paneer Pizza",414
+181,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,37,main,"Paneer Makhani",223
+182,https://images.unsplash.com/photo-1573821663912-569905455b1c,37,main,"Paneer Pizza",423
+183,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,37,dessert,"Rabdi Jalebi",123
+184,https://images.unsplash.com/photo-1513104890138-7c749659a591,37,main,"Farmhouse Pizza",543
+185,https://images.unsplash.com/photo-1609951651556-5334e2706168,37,drink,"Devils cocktail",293
+186,https://images.unsplash.com/photo-1497034825429-c343d7c6a68f,38,dessert,"Strawberry Ice Cream",271
+187,https://images.unsplash.com/photo-1565299624946-b28f40a0ae38,38,main,"Chicken Pizza",651
+188,https://images.unsplash.com/photo-1580064003296-29deb3521370,38,main,Parantha,81
+189,https://images.unsplash.com/photo-1576468475364-6ff071f7bc7c,38,drink,"Bottled Water",81
+190,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,38,dessert,"Gulab Jamun",151
+191,https://images.unsplash.com/photo-1573821201069-dbf297ca410a,39,main,"White sauce pasta",430
+192,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,39,dessert,"Rabdi Jalebi",170
+193,https://images.unsplash.com/photo-1541657267876-788b156193bc,39,starter,"Veg Burger",340
+194,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,39,starter,"Cheese Block",130
+195,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,39,drink,Sprite,130
+196,https://images.unsplash.com/photo-1497034825429-c343d7c6a68f,40,dessert,"Strawberry Ice Cream",283
+197,https://images.unsplash.com/photo-1625944525803-d510d5a4a262,40,main,"Red Sauce Pasta",423
+198,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,40,dessert,"Rabdi Jalebi",163
+199,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,40,dessert,"Rabdi Jalebi",163
+200,https://images.unsplash.com/photo-1580915411954-282cb1b0d780,40,dessert,"Chocolate Ice Cream",283
+201,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,41,dessert,"Rabdi Jalebi",115
+202,https://images.unsplash.com/photo-1621263764928-df1444c5e859,41,drink,"Lemon Juice",75
+203,https://images.unsplash.com/photo-1541657267876-788b156193bc,41,starter,"Veg Burger",285
+204,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,41,drink,Fanta,75
+205,https://images.unsplash.com/photo-1576468475364-6ff071f7bc7c,41,drink,"Bottled Water",45
+206,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,42,dessert,"Gulab Jamun",101
+207,https://images.unsplash.com/photo-1609951651556-5334e2706168,42,drink,"Devils cocktail",271
+208,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,42,dessert,"Gulab Jamun",101
+209,https://images.unsplash.com/photo-1573821663912-569905455b1c,42,main,"Paneer Pizza",401
+210,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,42,drink,Sprite,61
+211,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,43,starter,"Cheese Block",60
+212,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,43,main,"Paneer Makhani",200
+213,https://images.unsplash.com/photo-1554866585-cd94860890b7,43,drink,Coke,60
+214,https://images.unsplash.com/photo-1634496064950-02f043806b09,43,drink,"Virgin Mojito",190
+215,https://images.unsplash.com/photo-1513104890138-7c749659a591,43,main,"Farmhouse Pizza",520
+216,https://images.unsplash.com/photo-1601050690597-df0568f70950,44,starter,Samosa,68
+217,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,44,drink,Fanta,58
+218,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,44,starter,"Cheese Block",58
+219,https://images.unsplash.com/photo-1609951651556-5334e2706168,44,drink,"Devils cocktail",268
+220,https://images.unsplash.com/photo-1573821663912-569905455b1c,44,main,"Paneer Pizza",398
+221,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,45,main,"Paneer Makhani",228
+222,https://images.unsplash.com/photo-1601050690597-df0568f70950,45,starter,Samosa,98
+223,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,45,main,"Tricolor pasta",388
+224,https://images.unsplash.com/photo-1580064003296-29deb3521370,45,main,Parantha,58
+225,https://images.unsplash.com/photo-1576468475364-6ff071f7bc7c,45,drink,"Bottled Water",58
+226,https://images.unsplash.com/photo-1632818924360-68d4994cfdb2,46,drink,Fanta,107
+227,https://images.unsplash.com/photo-1557746534-7e6ca4397ff5,46,drink,Sprite,107
+228,https://images.unsplash.com/photo-1622715395476-3dbcd161df05,46,dessert,"Rabdi Jalebi",147
+229,https://images.unsplash.com/photo-1609951651556-5334e2706168,46,drink,"Devils cocktail",317
+230,https://images.unsplash.com/photo-1606755456206-b25206cde27e,46,starter,"French Fries",287
+231,https://images.unsplash.com/photo-1593701461250-d7b22dfd3a77,47,dessert,"Gulab Jamun",111
+232,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,47,main,"Tricolor pasta",371
+233,https://images.unsplash.com/photo-1541657267876-788b156193bc,47,starter,"Veg Burger",281
+234,https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d,47,starter,"Cheese Block",71
+235,https://www.thecookierookie.com/wp-content/uploads/2022/04/tricolor-pasta-salad-recipe-3.jpg,47,main,"Tricolor pasta",371
+236,https://images.unsplash.com/photo-1554866585-cd94860890b7,48,drink,Coke,44
+237,https://images.unsplash.com/photo-1549395156-e0c1fe6fc7a5,48,dessert,"Butterscotch Ice Cream",204
+238,https://images.unsplash.com/photo-1601050690597-df0568f70950,48,starter,Samosa,54
+239,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,48,main,"Paneer Makhani",184
+240,https://images.unsplash.com/photo-1634496064950-02f043806b09,48,drink,"Virgin Mojito",174
+241,https://images.unsplash.com/photo-1621263764928-df1444c5e859,49,drink,"Lemon Juice",46
+242,https://images.unsplash.com/photo-1541657267876-788b156193bc,49,starter,"Veg Burger",256
+243,https://images.unsplash.com/photo-1513104890138-7c749659a591,49,main,"Farmhouse Pizza",506
+244,https://images.unsplash.com/photo-1589647363585-f4a7d3877b10,49,main,"Paneer Makhani",186
+245,https://images.unsplash.com/photo-1601050690597-df0568f70950,49,starter,Samosa,56
+246,https://images.unsplash.com/photo-1621263764928-df1444c5e859,50,drink,"Lemon Juice",116
+247,https://images.unsplash.com/photo-1634496064950-02f043806b09,50,drink,"Virgin Mojito",246
+248,https://images.unsplash.com/photo-1625944525803-d510d5a4a262,50,main,"Red Sauce Pasta",416
+249,https://images.unsplash.com/photo-1601050690597-df0568f70950,50,starter,Samosa,126
+250,https://images.unsplash.com/photo-1576468475364-6ff071f7bc7c,50,drink,"Bottled Water",86
+251,https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60,21,main,margherita,100
+252,https://images.unsplash.com/photo-1606525437679-037aca74a3e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3ByaW5nJTIwcm9sbHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60,21,starter,"spring roll",12

@@ -41,7 +41,7 @@
       </nav>
       <main class="body6">
         <div class="resnameframe">
-          <h3 class="order-history">{{rest['restaurant_name']}}</h3>
+          <h3 class="order-history">{{rest[0][1]}}</h3>
         </div>
         <div class="orderhis">
           <div class="orderhistext">
@@ -50,18 +50,15 @@
             </h3>
           </div>
           <div class="hisbody">
-            <img class="image-4-icon1" alt="" src="../static/public/image-4@2x.png" />
-            <h4 class="item-1-price-container1">
-              <p class="order-history1">Item 1</p>
-              <p class="order-history1">&nbsp;</p>
-              <p class="order-history1">Price: 44$</p>
-            </h4>
-            <h4 class="quantity3">quantity:</h4>
-            <div class="quantitycoun"><div class="div">1</div></div>
-            <h4 class="userid-abcgmailcom">UserId : abc@gmail.com</h4>
+            {%if order:%}
+              <div class="item-1-price-container1">
+                <p class="order-history1">Item ID: {{order[-1][4]}}</p>
+                <p class="order-history1">Quantity: {{order[-1][5]}}</p>
+              </div>
+            {%endif%}
           </div>
           <div class="clicktext">
-            <a class="click-here-to" href="./my-orders.html"
+            <a class="click-here-to" href="/restaurant/{{rest[0][0]}}/order_his"
               >click here to view complete order history</a
             >
           </div>
@@ -70,26 +67,38 @@
           <div class="orderhistext">
             <h3 class="order-history">Our Menu</h3>
           </div>
-          <div class="item12">
-            <img class="image-5-icon3" alt="" src="../static/public/image-9@2x.png" />
-            <h4 class="item-1-price-container1">
-              <p class="order-history1">Item 1 name</p>
-              <p class="order-history1">&nbsp;</p>
-              <p class="order-history1">Price: 44$</p>
-            </h4>
-          </div>
-          <div class="item22">
+          {%if menu|length>0:%}
+            <div class="item12">
+              <img class="image-5-icon3" alt="" src="{{menu[0][1]}}" />
+              <h4 class="item-1-price-container1">
+                <p class="order-history1">{{menu[0][4]}}</p>
+                <p class="order-history1">Type: {{menu[0][3]}}</p>
+                <p class="order-history1">Price: {{menu[0][5]}}$</p>
+              </h4>
+            </div>
+          {%endif%}
+          {%if menu|length>1:%}
+            <div class="item12">
+              <img class="image-5-icon3" alt="" src="{{menu[1][1]}}" />
+              <div class="item-1-price-container1">
+                <p class="order-history1">{{menu[1][4]}}</p>
+                <p class="order-history1">Type: {{menu[1][3]}}</p>
+                <p class="order-history1">Price: {{menu[1][5]}}$</p>
+              </div>
+            </div>
+          {%endif%}
+          <!-- <div class="item22">
             <img class="image-5-icon3" alt="" src="../static/public/image-51@2x.png" />
             <h4 class="item-1-price-container1">
               <p class="order-history1">Item 2 name</p>
               <p class="order-history1">&nbsp;</p>
               <p class="order-history1">Price: 34$</p>
             </h4>
-          </div>
+          </div> -->
           <div class="clicktext1">
             <a
               class="click-here-to1"
-              href="/restaurant/{{rest['restaurant_id']}}/menu"
+              href="/restaurant/{{rest[0][0]}}/menu"
               id="clickHereTo1"
               >click here to view the entire menu</a
             >

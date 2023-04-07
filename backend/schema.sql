@@ -19,3 +19,20 @@ create table menus(
     food_price integer not null,
     foreign key (restaurant_id) references restaurants(restaurant_id)
 );
+
+create table orders(
+    index integer primary key autoincrement,
+    order_id integer not null,
+    restaurant_id integer not null,
+    user_id integer not null,
+    item_id integer not null,
+    quantity integer not null
+);
+
+create table users(
+    user_id integer primary key autoincrement,
+    user_address text not null
+    username text not null,
+    name_user text not null,
+    user_pass text not null
+);
