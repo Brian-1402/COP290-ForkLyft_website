@@ -1,0 +1,212 @@
+.forklyft-logo-inverted-1-icon {
+  position: relative;
+  width: 70px;
+  height: 60px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.header {
+  align-self: stretch;
+  background-color: var(--color-gray);
+  height: 120px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-11xl);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.first-name,
+.frame {
+  font-family: var(--font-inter);
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+.first-name {
+  margin: 0;
+  height: 33.33%;
+  top: 1.19%;
+  font-size: var(--font-size-6xl);
+  line-height: 28px;
+  font-weight: 400;
+  color: var(--color-black);
+  text-align: left;
+  display: inline-block;
+}
+.frame {
+  border: 1px solid var(--color-gainsboro);
+  font-size: var(--font-size-sm);
+  background-color: var(--color-white);
+  top: 28px;
+  right: 0;
+  border-radius: var(--br-8xs);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-3xs) var(--padding-mini);
+  align-items: flex-start;
+  justify-content: center;
+}
+.ob-formsfirst-name {
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+.firstname {
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.frame1,
+.name {
+  font-family: var(--font-inter);
+}
+.frame1 {
+  border: 1px solid var(--color-gainsboro);
+  font-size: var(--font-size-sm);
+  background-color: var(--color-white);
+  position: absolute;
+  width: 100%;
+  top: 28px;
+  right: 0;
+  left: 0;
+  border-radius: var(--br-8xs);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-3xs) var(--padding-mini);
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.name {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-6xl);
+  line-height: 28px;
+  font-weight: 400;
+  color: var(--color-white);
+  text-align: center;
+}
+.details,
+.ob-formsjoin-now {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ob-formsjoin-now {
+  cursor: pointer;
+  border: 1px solid var(--color-mediumslateblue);
+  padding: var(--padding-3xs) var(--padding-mini);
+  background-color: var(--color-dodgerblue);
+  border-radius: var(--br-8xs);
+  box-sizing: border-box;
+  width: 300px;
+}
+.details {
+  align-self: stretch;
+  flex: 1;
+  padding: 0 var(--padding-31xl);
+}
+.seperator-child {
+  width: 246.01px;
+  height: 3px;
+}
+.or,
+.seperator-child,
+.seperator-item {
+  position: relative;
+  flex-shrink: 0;
+}
+.or {
+  margin: 0;
+  font-size: inherit;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  width: 71px;
+  height: 33px;
+}
+.seperator-item {
+  width: 245.01px;
+  height: 3px;
+}
+.seperator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-6xs);
+}
+.already-on-forklyft {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: inherit;
+}
+.ob-formslogin {
+  cursor: pointer;
+  border: 1px solid var(--color-mediumslateblue);
+  padding: var(--padding-3xs) var(--padding-mini);
+  background-color: var(--color-dodgerblue);
+  border-radius: var(--br-8xs);
+  box-sizing: border-box;
+  width: 114px;
+  height: 49px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.loginmessage {
+  width: 444px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.bodyblock {
+  align-self: stretch;
+  border-radius: var(--br-28xl);
+  background-color: var(--color-powderblue);
+  flex-direction: column;
+  padding: var(--padding-31xl) 0;
+  gap: var(--gap-21xl);
+  text-align: center;
+  font-size: var(--font-size-6xl);
+  color: var(--color-black);
+  font-family: var(--font-inter);
+}
+.body,
+.bodyblock,
+.restaurant-signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.body {
+  align-self: stretch;
+  flex: 1;
+  flex-direction: row;
+  padding: var(--padding-81xl) 0;
+}
+.restaurant-signup {
+  position: relative;
+  background-color: var(--color-azure);
+  width: 100%;
+  height: 1024px;
+  overflow: hidden;
+  flex-direction: column;
+}

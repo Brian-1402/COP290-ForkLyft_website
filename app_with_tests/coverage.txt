@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.10, pytest-7.2.2, pluggy-1.0.0
+rootdir: /mnt/c/Users/brian/My Files/Study/Work/Code/COP290/Lab 3/cop_website/app_with_tests
+plugins: cov-4.0.0
+collected 2 items
+
+test/unit/test_login.py ..                                               [100%]
+
+---------- coverage: platform linux, python 3.8.10-final-0 -----------
+Name                       Stmts   Miss  Cover
+----------------------------------------------
+forklyft_app/__init__.py      10      0   100%
+forklyft_app/db.py            15      1    93%
+forklyft_app/forklyft.py     408    314    23%
+----------------------------------------------
+TOTAL                        433    315    27%
+
+
+============================== 2 passed in 6.25s ===============================
