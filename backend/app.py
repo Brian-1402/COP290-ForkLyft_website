@@ -4,7 +4,12 @@ from sqlalchemy import text
 import re
 from werkzeug.exceptions import abort
 
-app = Flask(__name__)
+def create_app():
+	app = Flask(__name__)
+	app.config['DEBUG'] = True
+	return app
+
+app=create_app()
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 # app.config['MYSQL_DATABASE_USER']='root'

@@ -1,4 +1,4 @@
 _ignored
 backend/__pycache__
 .vscode
-backend/test/_example
+.gitignore
