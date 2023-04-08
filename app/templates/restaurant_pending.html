@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/order_history.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="restaurant-menu">
+      <nav class="header4">
+        <img
+          class="headerlogo-icon"
+          alt=""
+          src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
+        /><a class="homebutton3" href="/restaurant" id="homeButton"
+          ><h4 class="home1">Home</h4></a
+        >
+      </nav>
+      <main class="body5">
+        <div class="ourmenuframe"><h3 class="our-menu">Pending Orders</h3></div>
+        {%if menu==[]:%}
+          <h3>No pending orders!!</h3>
+        {%else:%}
+          {%for i in range(menu[-1][6],menu[0][6]-1,-1)%}
+            {%if i in list:%}
+              <div class="bodydetails">
+                <!-- <div class="menu1"> -->
+                <div class="startersframe">
+                  <h3 class="starters1"><i><u>Order ID #{{i}}</u></i></h3>
+                  <a href='{{url_for("delete_order_pending",order_id=i)}}'>close order</a>
+                  <!-- <h4 class="starters1">User ID {{i}}</h4> -->
+                  {%for row in menu:%}  
+                      {%if row[6]==i:%}
+                        <div class="item11">
+                          <h3 class="item-1-name-container4">
+                            <ul>
+                              <li><p class="item-1-name4">Item ID: {{row[3]}}</p>
+                              <p class="item-1-name4">Quanity: {{row[4]}}</p>
+                              <p class="item-1-name4">Address: {{row[5]}}</p>
+                            </ul>
+                          </h3>
+                        </div> 
+                      {%endif%}
+                  {%endfor%}    
+                </div>
+              </div>
+            {%endif%}
+          {%endfor%}
+        {%endif%}
+      </main>
+    </div>
+
+    <script>
+      var homeButton = document.getElementById("homeButton");
+      if (homeButton) {
+        homeButton.addEventListener("click", function (e) {
+          window.location.href = "./restaurant-home.html";
+        });
+      }
+      
+      var addButton = document.getElementById("addButton");
+      if (addButton) {
+        addButton.addEventListener("click", function (e) {
+          window.location.href = "./restaurant-add-item.html";
+        });
+      }
+      </script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/my-cart.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/restaurant-menu.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+    <div class="my-cart">
+      <nav class="userheadervariant2">
+        <div class="headerlogo">
+          <img
+            class="forklyft-logo-icon"
+            alt=""
+            src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
+          />
+        </div>
+        <div class="headerbuttons">
+          <div class="mycartbutton"><h5 class="my-cart1">My cart</h5></div>
+          <a
+            class="myprofilebutton"
+            href="./profile"
+            id="myProfileButton"
+            ><h5 class="my-profile">My Profile</h5></a
+          ><a
+            class="myprofilebutton"
+            href="./contact_us"
+            id="contactUsButton"
+            ><h5 class="my-profile">Contact Us</h5></a
+          >
+          <a class="myprofilebutton" href="/user"><button class="home-favorite">
+              <img class="subtract-icon" alt="" src="{{ url_for('static', filename= 'public/subtract.svg') }}" />
+            </button></a>
+        </div>
+      </nav>
+      <main class="body2">
+        <h3 class="your-cart">Your Cart</h3>
+        <br>
+        {%for row in cart%}
+        <div class="frame-container">
+          <div class="image-4-parent">
+            <img class="image-4-icon" alt="" src="{{dict1[row[1]][2]}}" />
+            <div class="i1">
+              <h4 class="restaurant-name">
+                <p class="blank-line">{{dict1[row[1]][0]}}</p>
+                <p class="blank-line">&nbsp;</p>
+                <p class="blank-line">Price: {{dict1[row[1]][1]}}$</p>
+              </h4>
+            </div>
+            <h4 class="restaurant-name">Quantity</h4>
+            <div class="polygon-parent">
+              <a href='{{url_for("increase_quantity",item_id=row[1], quantity=row[5])}}'><img class="frame-child" alt="" src="{{ url_for('static', filename= 'public/polygon-5.svg') }}" /></a>
+              <h4 class="h4">{{row[5]}}</h4>
+              <a href='{{url_for("decrease_quantity",item_id=row[1], quantity=row[5])}}'><img class="frame-child" alt="" src="{{ url_for('static', filename= 'public/polygon-4.svg') }}" /></a>
+            </div>
+            <a href='{{url_for("remove",item_id=row[1], quantity=row[5])}}'><button class="minusbutton">
+              <img
+                class="minusbutton-child"
+                alt=""
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Ambox_emblem_minus.svg/1200px-Ambox_emblem_minus.svg.png"
+              />
+            </button></a>
+          </div>
+        </div>
+        {%endfor%}
+        <div class="price">
+          <h3 class="items-03-95">Items ({{cart|length}}) {{total_price}}$</h3>
+          <h3 class="items-03-95">Delivery charges {{delivery_price}}$</h3>
+          <h3 class="items-03-95"><b>Total charges {{total_price+delivery_price}}$</b></h3>
+        </div>
+        <p style="font-size: x-large;">Free delivery on order value greater than 500$</p>
+        <br>
+        <div class="buttons">
+          <a href='./pay'><button class="ob-forms"><h4 class="name3">Proceed to Pay</h4></button></a>
+        </div>
+      </main>
+    </div>
+
+    <!-- <script>
+      var myProfileButton = document.getElementById("myProfileButton");
+      if (myProfileButton) {
+        myProfileButton.addEventListener("click", function (e) {
+          window.location.href = "./my-profile.html";
+        });
+      }
+      
+      var contactUsButton = document.getElementById("contactUsButton");
+      if (contactUsButton) {
+        contactUsButton.addEventListener("click", function (e) {
+          window.location.href = "./contact-us.html";
+        });
+      }
+      
+      var homeButton = document.getElementById("homeButton");
+      if (homeButton) {
+        homeButton.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      
+      var frameContainer1 = document.getElementById("frameContainer1");
+      if (frameContainer1) {
+        frameContainer1.addEventListener("click", function (e) {
+          // Please sync "old_User Login" to the project
+        });
+      }
+      
+      var oBForms1 = document.getElementById("oBForms1");
+      if (oBForms1) {
+        oBForms1.addEventListener("click", function (e) {
+          window.location.href = "./user-restaurant-menu.html";
+        });
+      }
+      </script> -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

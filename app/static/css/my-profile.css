@@ -1,0 +1,313 @@
+.forklyft-logo-icon1 {
+  position: relative;
+  width: 70px;
+  height: 60px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.headerlogo1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.my-cart2 {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-base);
+  line-height: 27px;
+  font-weight: 400;
+  font-family: var(--font-roboto);
+  color: var(--color-white);
+  text-align: center;
+}
+.mycartbutton1 {
+  text-decoration: none;
+  border-radius: var(--br-8xs);
+  width: 90px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.my-profile2 {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-mini);
+  line-height: 27px;
+  font-weight: 400;
+  font-family: var(--font-roboto);
+  color: var(--color-white);
+  text-align: center;
+}
+.myprofilebutton1 {
+  border-radius: var(--br-8xs);
+  background-color: var(--color-dodgerblue);
+  width: 90px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.subtract-icon1 {
+  position: absolute;
+  height: 60%;
+  width: 60%;
+  top: 20%;
+  right: 20%;
+  bottom: 20%;
+  left: 20%;
+  max-width: 100%;
+  overflow: auto;
+  max-height: 100%;
+}
+.home-favorite1,
+.homebutton1 {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+}
+.home-favorite1 {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  overflow: auto;
+}
+.homebutton1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.headerbuttons1,
+.userheadervariant21 {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.headerbuttons1 {
+  width: 500px;
+}
+.userheadervariant21 {
+  align-self: stretch;
+  background-color: var(--color-gray);
+  height: 120px;
+  overflow: auto;
+  padding: var(--padding-11xl);
+  box-sizing: border-box;
+}
+.my-profile3 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+}
+.headingtext {
+  align-self: stretch;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-3xs);
+  align-items: center;
+  justify-content: flex-start;
+}
+.usernameframe,
+.usernametextfield {
+  align-self: stretch;
+  display: flex;
+  padding: var(--padding-8xs) var(--padding-3xs);
+}
+.usernametextfield {
+  border: 1px solid var(--color-darkgray);
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-xs);
+  background-color: var(--color-silver);
+  border-radius: var(--br-5xs);
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.usernameframe {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--gap-8xs);
+}
+.email-id {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  font-family: var(--font-poppins);
+  color: var(--color-black);
+  text-align: center;
+}
+.profilefields {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.edit {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-mini);
+  font-weight: 700;
+  font-family: var(--font-poppins);
+  color: var(--color-white);
+  text-align: center;
+}
+.editbutton,
+.editbuttonframe,
+.profileframe {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+.editbutton {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-3xs);
+  background-color: var(--color-gray);
+  border-radius: var(--br-3xs);
+  height: 35px;
+  flex-shrink: 0;
+  flex-direction: row;
+  box-sizing: border-box;
+  justify-content: center;
+}
+.editbuttonframe,
+.profileframe {
+  flex-direction: column;
+}
+.editbuttonframe {
+  padding: var(--padding-8xs) var(--padding-81xl);
+  justify-content: center;
+}
+.profileframe {
+  justify-content: flex-start;
+  gap: var(--gap-lgi);
+}
+.image-1-icon {
+  position: relative;
+  width: 121px;
+  height: 121px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.my-addresses {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  font-family: var(--font-poppins);
+  color: var(--color-black);
+  text-align: center;
+}
+.addressesbutton {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--color-powderblue);
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-7xs);
+}
+.addressordersframe1,
+.addressordersframe2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.addressordersframe1 {
+  flex-direction: row;
+  gap: 169px;
+}
+.addressordersframe2 {
+  align-self: stretch;
+  overflow: auto;
+  flex-direction: column;
+  padding: var(--padding-xl) 90px;
+}
+.logout {
+  margin: 0;
+  position: relative;
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  font-family: var(--font-poppins);
+  color: var(--color-black);
+  text-align: center;
+  cursor: pointer;
+}
+.logoutbutton {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-3xs);
+  background-color: var(--color-dodgerblue);
+  border-radius: var(--br-5xs);
+  width: 120px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+.bodycontentframe,
+.logoutframe {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logoutframe {
+  padding: var(--padding-3xs);
+  justify-content: center;
+}
+.bodycontentframe {
+  flex: 1;
+  justify-content: space-between;
+}
+.bodyframe,
+.my-profile1 {
+  overflow: auto;
+  display: flex;
+}
+.bodyframe {
+  align-self: stretch;
+  flex: 1;
+  flex-direction: row;
+  padding: 32px 342px;
+  align-items: center;
+  justify-content: center;
+}
+.my-profile1 {
+  position: relative;
+  background-color: var(--color-azure);
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: var(--font-size-21xl);
+  color: var(--color-black);
+  font-family: var(--font-poppins);
+}

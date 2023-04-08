@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/user-login.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+    <div class="user-login">
+      <nav class="header9" id="header">
+        <img
+          class="forklyft-logo-inverted-1-icon4"
+          alt=""
+          src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
+        /><a class="signupbutton1" href="./user-signup.html" id="signupButton"
+          ><a class="signup1" href="./signup" id="signup"
+            >Signup</a
+          ></a
+        >
+      </nav>
+      <main class="body9">
+        <div class="loginframeouter">
+          <div class="loginframeinner">
+            <div class="heading4"><h3 class="login-below">User Login</h3></div>
+            <form class="loginform" method="POST">
+              <div class="usernameframe1">
+                <div class="ob-formsusername3">
+                  <label for="username" class="username6">Username*</label>
+                  <input id="username" class="frame13" type="text" name="username" placeholder="enter username"/>
+                </div>
+              </div>
+              <div class="passwordframeouter">
+                <div class="passwordframeinner">
+                  <div class="ob-formspassword3">
+                    <label for="password" class="username6">Password*</h3>
+                    <input id="password" class="frame13" type="password" name="password" placeholder="enter password"/>
+                  </div>
+                </div>
+                <!-- <div class="forgotpasswordframe">
+                  <h3 class="forgot-password1">forgot password?</h3>
+                </div> -->
+              </div>
+              <div class="passwordframeinner">
+                <button class="ob-formssubmit1" id="oBFormsSubmit">
+                  <h3 class="name11">Login</h3>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="seperator2">
+            <img
+              class="seperator-child2"
+              alt=""
+              src="{{ url_for('static', filename= 'public/line-13@2x.png') }}"
+            />
+            <h4 class="or-sign-up">Or sign up using</h4>
+            <img
+              class="seperator-child3"
+              alt=""
+              src="{{ url_for('static', filename= 'public/line-12@2x.png') }}"
+            />
+          </div>
+          <div class="signupoptions">
+            <div class="signup3rdpartybuttons">
+              <button class="tablerbrand-facebook-filled">
+                <img
+                  class="group-icon"
+                  alt=""
+                  src="{{ url_for('static', filename= 'public/group.svg') }}"
+                /></button
+              ><button class="googlesignup">
+                <img
+                  class="vector-icon"
+                  alt=""
+                  src="{{ url_for('static', filename= 'public/vector.svg') }}"
+                /></button
+              ><button class="basilgmail-solid">
+                <img class="vector-icon1" alt="" src="{{ url_for('static', filename= 'public/vector1.svg') }}" />
+              </button>
+            </div>
+            <div class="restaurantloginbuttonheading">
+              <h3 class="restaurant">
+                <p class="restaurant1">Restaurant?</p>
+                <p class="restaurant1">&nbsp;</p>
+                <p class="restaurant1">&nbsp;</p>
+              </h3>
+              <h3 class="login-below">
+                <p class="restaurant1">Login below</p>
+              </h3>
+            </div>
+            <div class="passwordframeinner">
+              <button class="ob-formssubmit2" id="oBFormsSubmit1">
+                <h4 class="name11">Click here for restaurant</h4>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      var signup = document.getElementById("signup");
+      if (signup) {
+        signup.addEventListener("click", function (e) {
+          window.location.href = "./user-signup.html";
+        });
+      }
+      
+      var signupButton = document.getElementById("signupButton");
+      if (signupButton) {
+        signupButton.addEventListener("click", function (e) {
+          window.location.href = "./user-signup.html";
+        });
+      }
+      
+      var header = document.getElementById("header");
+      if (header) {
+        header.addEventListener("click", function (e) {
+          window.location.href = "./user-signup.html";
+        });
+      }
+      
+      var oBFormsSubmit = document.getElementById("oBFormsSubmit");
+      if (oBFormsSubmit) {
+        oBFormsSubmit.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      
+      var oBFormsSubmit1 = document.getElementById("oBFormsSubmit1");
+      if (oBFormsSubmit1) {
+        oBFormsSubmit1.addEventListener("click", function (e) {
+          window.location.href = "./restaurant/login";
+        });
+      }
+      </script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
