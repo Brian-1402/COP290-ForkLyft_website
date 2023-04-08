@@ -3,6 +3,7 @@ backend/__pycache__
 .vscode
 backend/test/_example
 
+misc_code
 venv/
 
 *.pyc

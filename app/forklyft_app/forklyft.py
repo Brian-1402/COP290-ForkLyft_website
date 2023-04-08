@@ -5,7 +5,7 @@ import re
 from werkzeug.exceptions import abort
 from forklyft_app import create_app # potential rename
 # app=create_app()
-bp=Blueprint("app",__name__)
+bp=Blueprint("forklyft_bp",__name__)
 # app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 # app.config['MYSQL_DATABASE_USER']='root'
@@ -121,7 +121,7 @@ def res_login():
 			session['id1'] = restaurant[0]
 			session['username'] = restaurant[5]
 			flash("successfully logged in!!",'success')
-			return redirect(url_for('display_restaurant'))
+			return redirect(url_for('forklyft_bp.display_restaurant'))
 		else:
 			flash("try again!! incorrect username or password!! sign up if new restaurant",'error')
 	return render_template('restaurant-login.html')
@@ -151,11 +151,11 @@ def restaurant_register():
 			e1='success'
 			a=True
 		flash(msg1,e1)
-		if(a):return redirect(url_for('res_login'))
-		else: return redirect(url_for('restaurant_register'))
+		if(a):return redirect(url_for('forklyft_bp.res_login'))
+		else: return redirect(url_for('forklyft_bp.restaurant_register'))
 	elif request.method == 'POST':
 		flash('Please fill out the form !','error')
-		return redirect(url_for('restaurant_register'))
+		return redirect(url_for('forklyft_bp.restaurant_register'))
 	return render_template('index.html')
 
 @bp.route("/restaurant")
@@ -193,7 +193,7 @@ def display_add_form():
 			with get_db().connect() as conn:
 				conn.execute(text('INSERT INTO menus(restaurant_id, image_url, food_name, food_price, food_type) VALUES (:1, :2, :3, :4, :5)'),
 								{'1':restaurant_id, '2':furl, '3':fname, '4':fprice, '5':ftype})
-			return redirect(url_for('display_menu_restaurant'))
+			return redirect(url_for('forklyft_bp.display_menu_restaurant'))
 	return render_template("restaurant-add-item.html",restaurant_id=restaurant_id)
 
 @bp.route("/restaurant/order_his")
@@ -247,7 +247,7 @@ def address():
 		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':fhome, '2':fwork, '3':fother, 'user_id':user_id})
 		# return "updated!!"
-		return redirect(url_for('view_profile'))
+		return redirect(url_for('forklyft_bp.view_profile'))
 	return render_template("addresses.html",user=user,id=user_id)
 
 @bp.route("/user/profile",methods=('GET','POST'))
@@ -260,7 +260,7 @@ def view_profile():
 		contact=request.form.get('contact')
 		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET username = :1, mail = :2, phone_number =:3 WHERE user_id = :user_id"),{'1':username, '2':mail, '3':contact, 'user_id':user_id})
-		return redirect(url_for('view_profile'))
+		return redirect(url_for('forklyft_bp.view_profile'))
 	return render_template("my-profile.html",user=user,id=user_id)
 
 @bp.route("/user/orders")
@@ -287,7 +287,7 @@ def contact():
 		with get_db().connect() as conn:
 			conn.execute(text("INSERT INTO contact_us (user_id, name_user, mail, message) VALUES (:1, :2, :3, :4)"),{'1':user_id, '2':name, '3':mail, '4':message})
 		flash("succesfully submitted!!","success")
-		return redirect(url_for('contact'))
+		return redirect(url_for('forklyft_bp.contact'))
 	return render_template("contact-us.html",id=user_id)
 
 
@@ -307,7 +307,7 @@ def login():
 			session['id'] = user[0]
 			session['username'] = user[4]
 			flash("successfully logged in!!",'success')
-			return redirect(url_for('user_home'))
+			return redirect(url_for('forklyft_bp.user_home'))
 		else:
 			flash("try again!! incorrect username or password!! sign up if new user",'error')
 	return render_template('user-login.html')
@@ -341,11 +341,11 @@ def register():
 			e1='success'
 			a=True
 		flash(msg1,e1)
-		if(a):return redirect(url_for('login'))
-		else: return redirect(url_for('register'))
+		if(a):return redirect(url_for('forklyft_bp.login'))
+		else: return redirect(url_for('forklyft_bp.register'))
 	elif request.method == 'POST':
 		flash('Please fill out the form !','error')
-		return redirect(url_for('register'))
+		return redirect(url_for('forklyft_bp.register'))
 	return render_template('user-signup.html')
 
 @bp.route('/logout')
@@ -353,14 +353,14 @@ def logout():
 	session.pop('loggedin', None)
 	session.pop('id', None)
 	session.pop('username', None)   
-	return redirect(url_for('login'))
+	return redirect(url_for('forklyft_bp.login'))
 
 @bp.route('/restaurant/logout')
 def restaurant_logout():
 	session.pop('loggedin', None)
 	session.pop('id1', None)
 	session.pop('username', None)   
-	return redirect(url_for('res_login'))
+	return redirect(url_for('forklyft_bp.res_login'))
 
 
 # bp.run(debug=True)
