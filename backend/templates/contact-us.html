@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/contact-us.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="contact-us5">
+      <!-- {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %} -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+      <nav class="contactusheader">
+        <div class="headerlogo5">
+          <img
+            class="forklyft-logo-icon5"
+            alt=""
+            src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
+          />
+        </div>
+        <div class="headerbuttons5">
+          <a class="mycartbutton5" href="./my-cart.html" id="myCartButton"
+            ><h5 class="my-cart6">My cart</h5></a
+          ><a
+            class="mycartbutton5"
+            href="./profile"
+            id="myProfileButton"
+            ><h5 class="my-profile7">My Profile</h5></a
+          >
+          <div class="contactusbutton5">
+            <h5 class="my-profile7">Contact Us</h5>
+          </div>
+          <a class="mycartbutton5" href="/user">
+            <button class="home-favorite4" id="homeFavorite">
+              <img class="subtract-icon4" alt="" src="{{ url_for('static', filename= 'public/subtract.svg') }}" />
+            </button></a>
+        </div>
+      </nav>
+      <main class="bodyframe11">
+        <div class="bodyframe1-child"></div>
+
+        <div class="bodyleft">
+          <form class="detailsframe" method="POST">
+            <div class="entername">
+              <div class="enternameheading">
+                <label for="name" class="enter-your-name">Enter your name*</label>
+              </div>
+              <input
+                id="name"
+                class="enternamefield"
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div class="entername">
+              <div class="enternameheading">
+                <label for="mail" class="enter-your-name">Enter your email ID*</label>
+              </div>
+              <input
+                class="enternamefield"
+                type="text"
+                placeholder="Enter your email ID" id="mail" name="mail"
+              />
+            </div>
+            <div class="entermessage">
+              <div class="enternameheading">
+                <label for="message" class="enter-your-name">Enter your message</label>
+              </div>
+              <textarea
+                class="entermessagefield"
+                placeholder="Enter your message" id="message" name="message"
+              ></textarea>
+            </div>
+            <div class="detailsframe-inner">
+              <button class="name-wrapper">
+                <h4 class="name13">Submit</h4>
+              </button>
+            </div>
+          </form>
+          <div class="getintouchtext">
+            <h3 class="get-in-touch-container">
+              <p class="get-in-touch">GET IN TOUCH</p>
+              <p class="hope-you-enjoyed">&nbsp;</p>
+              <p class="hope-you-enjoyed">&nbsp;</p>
+              <p class="hope-you-enjoyed">Hope you enjoyed the food</p>
+            </h3>
+          </div>
+        </div>
+        <div class="callandcitiesframe">
+          <div class="callusframe">
+            <h3 class="call-us">CALL US</h3>
+            <h3 class="h3">8076060549</h3>
+          </div>
+          <div class="citiesframe">
+            <h3 class="centres-at">CENTRES AT</h3>
+            <h3 class="delhi-ncr">Delhi NCR</h3>
+            <h3 class="delhi-ncr">Mumbai</h3>
+            <h3 class="delhi-ncr">Bangalore</h3>
+            <h3 class="delhi-ncr">Hyderabad</h3>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      var myCartButton = document.getElementById("myCartButton");
+      if (myCartButton) {
+        myCartButton.addEventListener("click", function (e) {
+          window.location.href = "./my-cart.html";
+        });
+      }
+      
+      var myProfileButton = document.getElementById("myProfileButton");
+      if (myProfileButton) {
+        myProfileButton.addEventListener("click", function (e) {
+          window.location.href = "./my-profile.html";
+        });
+      }
+      
+      var homeFavorite = document.getElementById("homeFavorite");
+      if (homeFavorite) {
+        homeFavorite.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      
+      var homeButton = document.getElementById("homeButton");
+      if (homeButton) {
+        homeButton.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      </script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

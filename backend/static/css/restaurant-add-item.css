@@ -6,14 +6,14 @@
   object-fit: cover;
 }
 .home {
-  text-decoration: none;
+  margin: 0;
   position: relative;
-  font-size: var(--font-size-11xl);
-  line-height: 28px;
-  font-family: var(--font-inter);
+  font-size: var(--font-size-base);
+  line-height: 27px;
+  font-weight: 400;
+  font-family: var(--font-roboto);
   color: var(--color-white);
   text-align: center;
-  cursor: pointer;
 }
 .header3 {
   align-self: stretch;

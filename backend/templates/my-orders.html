@@ -29,14 +29,13 @@
           class="headerlogo-icon"
           alt=""
           src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
-        /><a class="homebutton3" href="/restaurant" id="homeButton"
-          ><h4 class="home1">Home</h4></a
-        >
+        />
+        <a class="homebutton3" href="/user/profile" id="homeButton"><h4 class="home1">My Profile</h4></a>
       </nav>
       <main class="body5">
         <div class="ourmenuframe"><h3 class="our-menu">Order History</h3></div>
         {%if menu==[]:%}
-          <h3>No orders yet!! please order karlo!!</h3>
+          <h3>No orders yet!! please order karle bsdk!!</h3>
         {%else:%}
           {%for i in range(menu[-1][1],menu[0][1]-1,-1)%}
             {%if i in list:%}
@@ -50,7 +49,14 @@
                         <div class="item11">
                           <h3 class="item-1-name-container4">
                             <ul>
-                              <li><p class="item-1-name4">Item ID: {{row[4]}}</p>
+                              <li><img
+                                class="image-5-icon2"
+                                alt=""
+                                src="{{item[row[4]][0][2]}}"
+                              /></li>
+                              <p class="item-1-name4">Item ID: {{row[4]}}</p>
+                              <p class="item-1-name4">name: {{item[row[4]][0][0]}}</p>
+                              <p class="item-1-name4">price: {{item[row[4]][0][1]}}$</p>
                               <p class="item-1-name4">Quanity: {{row[5]}}</p>
                             </ul>
                           </h3>
@@ -65,7 +71,7 @@
       </main>
     </div>
 
-    <script>
+    <!-- <script>
       var homeButton = document.getElementById("homeButton");
       if (homeButton) {
         homeButton.addEventListener("click", function (e) {
@@ -79,6 +85,6 @@
           window.location.href = "./restaurant-add-item.html";
         });
       }
-      </script>
+      </script> -->
   </body>
 </html>

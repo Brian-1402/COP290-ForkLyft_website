@@ -1,13 +1,15 @@
 drop table if exists restaurants;
 drop table if exists menus;
+drop table if exists orders;
 
 create table restaurants(
     restaurant_id integer primary key autoincrement,
     restaurant_name text not null,
     restaurant_location text not null,
-    -- restaurant_reviews text,
     restaurant_rating_sum integer,
-    restaurant_rating_count integer
+    restaurant_rating_count integer,
+    restaurant_username text not null distinct,
+    restaurant_password text not null,
 );
 
 create table menus(
@@ -17,7 +19,7 @@ create table menus(
     food_type text not null,
     food_name text not null,
     food_price integer not null,
-    foreign key (restaurant_id) references restaurants(restaurant_id)
+    food_desc text
 );
 
 create table orders(
@@ -29,10 +31,22 @@ create table orders(
     quantity integer not null
 );
 
-create table users(
-    user_id integer primary key autoincrement,
-    user_address text not null
-    username text not null,
-    name_user text not null,
-    user_pass text not null
-);
+-- create table users(
+--     user_id integer primary key autoincrement,
+--     home text,
+--     work text,
+--     other text,
+--     username text not null distinct,
+--     name_user text not null,
+--     mail text,
+--     phone_number text,
+--     user_pass text not null
+-- );
+
+-- create table contact_us(
+-- 	contact_id integer primary key auto_increment,
+--     user_id integer not null,
+--     name_user text not null,
+--     mail text not null,
+--     message text
+-- );

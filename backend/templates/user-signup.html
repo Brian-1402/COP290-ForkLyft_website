@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/user-signup.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+    <div class="user-signup">
+      <nav class="header8">
+        <img
+          class="forklyft-logo-inverted-1-icon3"
+          alt=""
+          src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
+        />
+      </nav>
+      <main class="body8">
+        <div class="bodyblock1">
+          <form class="details1" method="POST">
+            <div class="firstname1">
+              <div class="ob-formsfirst-name1">
+                <label class="first-name1" for="name">Name*</label>
+                <input class="frame9" type="text" id="name" name="name"/>
+              </div>
+            </div>
+            <div class="firstname1">
+              <div class="ob-formsfirst-name1">
+                <label for="mail "class="first-name1">Email Id</label>
+                <input class="frame10" type="text" id="mail" name="mail"/>
+              </div>
+            </div>
+            <div class="firstname1">
+              <div class="ob-formsfirst-name1">
+                <label for="username" class="first-name1">Username*</label>
+                <input class="frame10" type="text" id="username" name="username"/>
+              </div>
+            </div>
+            <div class="firstname1">
+              <div class="ob-formsfirst-name1">
+                <label for="password" class="first-name1">Password*</label>
+                <input class="frame10" type="password" id="password" name="password"/>
+              </div>
+            </div>
+            <div class="firstname1">
+              <div class="ob-formsfirst-name1">
+                <label for="contact" class="first-name1">Contact</label>
+                <input class="frame10" type="text" id="contact" name="contact"/>
+              </div>
+            </div>
+            <div class="firstname1">
+              <button class="ob-formsjoin-now1" id="oBFormsJoinNow">
+                <h4 class="name9">Join now</h4>
+              </button>
+            </div>
+          </form>
+          <div class="seperator1">
+            <img class="seperator-inner" alt="" src="{{ url_for('static', filename= 'public/line-5.svg') }}" />
+            <h4 class="or1">or</h4>
+            <img class="seperator-child1" alt="" src="{{ url_for('static', filename= 'public/line-6.svg') }}" />
+          </div>
+          <div class="loginmessage1">
+            <h4 class="already-on-forklyft1">Already on ForkLyft?</h4>
+            <button class="ob-formslogin1" autofocus id="oBFormsLogin">
+              <h4 class="name9">Login</h4>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      var oBFormsJoinNow = document.getElementById("oBFormsJoinNow");
+      if (oBFormsJoinNow) {
+        oBFormsJoinNow.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      
+      var oBFormsLogin = document.getElementById("oBFormsLogin");
+      if (oBFormsLogin) {
+        oBFormsLogin.addEventListener("click", function (e) {
+          window.location.href = "./login";
+        });
+      }
+      </script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

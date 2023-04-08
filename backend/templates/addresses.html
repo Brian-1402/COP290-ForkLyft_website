@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/addresses.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/my-profile.css') }}" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
@@ -22,63 +23,57 @@
       href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
     />
   </head>
-  <body>
+  <body style="background-color: #C0EEF2;">
     <div class="addresses">
       <nav class="header6">
         <img
           class="headerlogo-icon1"
           alt=""
-          src="../static/public/forklyft-logo@2x.png"
+          src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
         />
         <div class="headerbuttons3">
           <a class="mycartbutton3" id="myCartButton"
             ><h4 class="my-cart4">My cart</h4></a
           ><a
             class="mycartbutton3"
-            href="./my-profile.html"
+            href="./profile"
             id="myProfileButton"
             ><h4 class="my-profile5">My Profile</h4></a
           ><a
             class="mycartbutton3"
-            href="./contact-us.html"
+            href="./contact_us"
             id="contactUsButton"
             ><h4 class="my-profile5">Contact Us</h4></a
-          ><button class="homebutton4" id="homeButton">
+          >
+          <a class="mycartbutton3" href="/user">
+          <button class="homebutton4" id="homeButton">
             <img
               class="home-favorite-icon"
               alt=""
-              src="../home-favorite.svg"
+              src="{{ url_for('static', filename= 'public/home-favorite.svg') }}"
             />
-          </button>
+          </button></a>
         </div>
       </nav>
       <main class="bodyframe1">
         <div class="heading1"><h3 class="my-addresses1">My Addresses</h3></div>
-        <form class="addressbox" method="POST">
-          <div class="addressestext">
-            <div class="homeaddress">
-              <div>
-                <label for="home" class="labelframe"><h4 class="homelabel">Home</label>
-              </div>
-              <div>
-                <input id="name" class="homeaddressframe" type="text" name="home" value="{{user[0][1]}}"/>
-              </div>
+        <form class="profileframe" method="POST">
+          <div class="profilefields">
+            <div class="usernameframe">
+              <label for="home" class="email-id">Home address</label>
+              <input id="home" class="usernametextfield" type="text" name="home" value="{{user[0][1]}}"/>
             </div>
-            <div class="homeaddress">
-              <div>
-                <label for="work" class="labelframe"><h4 class="homelabel">Work</label>
-              </div>
-              <div><input id="work" class="homeaddressframe" type="text" name="work" value="{{user[0][2]}}"/></div>
+            <div class="usernameframe">
+              <label for="work" class="email-id">Work address</label>
+              <input id="work" class="usernametextfield" type="text" name="work" value="{{user[0][2]}}"/>
             </div>
-            <div class="homeaddress">
-              <div><label for="other" class="labelframe"><h4 class="homelabel">Other</h4></label></div>
-              <div><input id="other" class="homeaddressframe" type="text" name="other" value="{{user[0][3]}}" /></div>
+            <div class="usernameframe">
+              <label for="other" class="email-id">Other address</label>
+              <input id="other" class="usernametextfield" type="text" name="other" value="{{user[0][3]}}"/>
             </div>
-            <div class="addressbuttons">
-              <button class="updatebutton">
-                <h4 class="update">Update</h4>
-              </button>
-            </div>
+          </div>
+          <div class="editbuttonframe">
+            <button class="editbutton"><h5 class="edit">Update!!</h5></button>
           </div>
         </form>
       </main>

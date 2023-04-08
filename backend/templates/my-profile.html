@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/my-profile.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+  </head>
+  <body>
+    <div class="my-profile1">
+      <nav class="userheadervariant21">
+        <div class="headerlogo1">
+          <img
+            class="forklyft-logo-icon1"
+            alt=""
+            src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
+          />
+        </div>
+        <div class="headerbuttons1">
+          <a class="mycartbutton1" href="./my-cart.html" id="myCartButton"
+            ><h5 class="my-cart2">My cart</h5></a
+          >
+          <div class="myprofilebutton1">
+            <h5 class="my-profile2">My Profile</h5>
+          </div>
+          <a class="mycartbutton1" href="./contact_us" id="contactUsButton"
+            ><h5 class="my-profile2">Contact Us</h5></a
+          >
+            <a class="mycartbutton1" href="/user" >
+              <button class="home-favorite1" id="homeFavorite">
+                <img class="subtract-icon1" alt="" src="{{ url_for('static', filename= 'public/subtract.svg') }}" />
+              </button></a>
+        </div>
+      </nav>
+      <div class="bodyframe">
+        <div class="bodycontentframe">
+          <div class="headingtext"><h3 class="my-profile3">My Profile</h3></div>
+          <form class="profileframe" method="POST">
+            <div class="profilefields">
+              <div class="usernameframe">
+                <label for="username" class="email-id">Username</label>
+                <input id="username" class="usernametextfield" type="text" name="username" value="{{user[0][4]}}"/>
+              </div>
+              <div class="usernameframe">
+                <label for="mail" class="email-id">Email ID</label>
+                <input class="usernametextfield" id="mail" type="text" name="email_id" value="{{user[0][7]}}"/>
+              </div>
+              <div class="usernameframe">
+                <label for="contact" class="email-id">Phone Number</label>
+                <input id="contact" class="usernametextfield" type="text" name="contact" value="{{user[0][8]}}"/>
+              </div>
+              <div class="usernameframe">
+                <label for="password" class="email-id">Password</label>
+                <input class="usernametextfield" type="password" name="password" id="password" value="{{user[0][6]}}"/>
+              </div>
+            </div>
+            <div class="editbuttonframe">
+              <button class="editbutton"><h5 class="edit">Edit</h5></button>
+            </div>
+          </form>
+          <div class="addressordersframe2">
+            <div class="addressordersframe1">
+              <button class="addressesbutton" id="addressesButton">
+                <img
+                  class="image-1-icon"
+                  alt=""
+                  src="{{ url_for('static', filename= 'public/image-1@2x.png') }}"
+                />
+                <h4 class="my-addresses">My addresses</h4></button
+              ><button class="addressesbutton" id="ordersButton">
+                <img
+                  class="image-1-icon"
+                  alt=""
+                  src="{{ url_for('static', filename= 'public/image-2@2x.png') }}"
+                />
+                <h4 class="my-addresses">My orders</h4>
+              </button>
+            </div>
+          </div>
+          <div class="logoutframe">
+            <a href='{{url_for("logout")}}'><button class="logoutbutton" id="logoutButton">
+              <h4 class="logout" id="lOGOUT">LOGOUT</h4>
+            </button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var myCartButton = document.getElementById("myCartButton");
+      if (myCartButton) {
+        myCartButton.addEventListener("click", function (e) {
+          window.location.href = "./my-cart.html";
+        });
+      }
+      
+      var contactUsButton = document.getElementById("contactUsButton");
+      if (contactUsButton) {
+        contactUsButton.addEventListener("click", function (e) {
+          window.location.href = "./contact-us.html";
+        });
+      }
+      
+      var homeFavorite = document.getElementById("homeFavorite");
+      if (homeFavorite) {
+        homeFavorite.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      
+      var homeButton = document.getElementById("homeButton");
+      if (homeButton) {
+        homeButton.addEventListener("click", function (e) {
+          window.location.href = "./user-home.html";
+        });
+      }
+      
+      var addressesButton = document.getElementById("addressesButton");
+      if (addressesButton) {
+        addressesButton.addEventListener("click", function (e) {
+          window.location.href = "./addresses";
+        });
+      }
+      
+      var ordersButton = document.getElementById("ordersButton");
+      if (ordersButton) {
+        ordersButton.addEventListener("click", function (e) {
+          window.location.href = "./orders";
+        });
+      }
+      
+      var lOGOUT = document.getElementById("lOGOUT");
+      if (lOGOUT) {
+        lOGOUT.addEventListener("click", function (e) {
+          window.location.href = "../login";
+        });
+      }
+      
+      // var logoutButton = document.getElementById("logoutButton");
+      // if (logoutButton) {
+      //   logoutButton.addEventListener("click", function (e) {
+      //     window.location.href = "/logout";
+      //   });
+      // }
+      </script>
+  </body>
+</html>
