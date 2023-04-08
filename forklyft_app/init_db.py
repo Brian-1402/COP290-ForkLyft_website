@@ -1,6 +1,6 @@
 # import sqlite3
 # import pandas as pd
-# import random
+import random
 
 # resto = pd.read_csv("zomato.csv")
 # connection = sqlite3.connect("restaurant.db")

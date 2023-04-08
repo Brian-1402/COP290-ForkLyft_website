@@ -1,16 +1,12 @@
-from flask import Flask, render_template, redirect, url_for, flash, request, session
-from database import engine
+from flask import Flask, render_template, redirect, url_for, flash, request, session, Blueprint
+from forklyft_app.db import get_db
 from sqlalchemy import text
 import re
 from werkzeug.exceptions import abort
-
-def create_app():
-	app = Flask(__name__)
-	app.config['DEBUG'] = True
-	return app
-
-app=create_app()
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+from forklyft_app import create_app # potential rename
+# app=create_app()
+bp=Blueprint("app",__name__)
+# app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 # app.config['MYSQL_DATABASE_USER']='root'
 # app.config['MYSQL_DATABASE_PASSWORD']='password'
@@ -18,9 +14,8 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 # app.config['MYSQL_DATABASE_HOST']='localhost'
 # mysql=MySQL(app)
 
-
 def find_restaurant(restaurant_id):
-	with engine.connect() as conn:
+	with get_db().connect() as conn:
 		result = conn.execute(text("SELECT * FROM restaurants WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
 		if result is None:
 			abort(404)
@@ -33,45 +28,45 @@ def find_restaurant(restaurant_id):
 	# return restaurant
 
 def get_menu():
-	with engine.connect() as conn:
+	with get_db().connect() as conn:
 		result = conn.execute(text('SELECT * FROM menus'))
 		return result.all()
 	
 def get_restaurant():
-	with engine.connect() as conn:
+	with get_db().connect() as conn:
 		result = conn.execute(text('SELECT * FROM restaurants'))
 		return result.all()
 
 def find_menu(restaurant_id):
-	with engine.connect() as conn:
+	with get_db().connect() as conn:
 		result = conn.execute(text("SELECT * FROM menus WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
 		if result is None:
 			abort(404)
 		return result.all()
 	
 def find_order(restaurant_id):
-	with engine.connect() as conn:
+	with get_db().connect() as conn:
 		result = conn.execute(text("SELECT * FROM orders WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
 		# if result is None:
 		#     abort(404)
 		return result.all()
 	
 def find_user_order(user_id):
-	with engine.connect() as conn:
+	with get_db().connect() as conn:
 		result = conn.execute(text("SELECT * FROM orders WHERE user_id = :user_id"),{'user_id':user_id})
 		# if result is None:
 		#     abort(404)
 		return result.all()
 	
 def find_user(user_id):
-	with engine.connect() as conn:
+	with get_db().connect() as conn:
 		result = conn.execute(text("SELECT * FROM users WHERE user_id = :user_id"),{'user_id':user_id})
 		if result is None:
 			abort(404)
 		return result.all()
 
 def update_user(user_id,home_n,work_n,other_n):
-	 with engine.connect() as conn:
+	 with get_db().connect() as conn:
 		 conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':home_n, '2':work_n, '3':other_n, 'user_id':user_id})
 		# if result is None:
 		#     abort(404)
@@ -112,12 +107,12 @@ def find_drink(menu):
 #     return render_template("display.html",menu=menu)
 
 
-@app.route('/restaurant/login', methods = ['GET', 'POST'])
+@bp.route('/restaurant/login', methods = ['GET', 'POST'])
 def res_login():
 	if request.method == 'POST' and 'restaurant_username' in request.form and 'restaurant_password' in request.form:
 		username = request.form['restaurant_username']
 		password = request.form['restaurant_password']
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			restaurant=conn.execute(text('SELECT * FROM restaurants WHERE restaurant_username = :username AND BINARY restaurant_password = :password'), {'username':username, 'password':password })
 		restaurant=restaurant.all()
 		if len(restaurant):
@@ -131,7 +126,7 @@ def res_login():
 			flash("try again!! incorrect username or password!! sign up if new restaurant",'error')
 	return render_template('restaurant-login.html')
 
-@app.route('/restaurant/signup', methods = ('GET', 'POST'))
+@bp.route('/restaurant/signup', methods = ('GET', 'POST'))
 def restaurant_register():
 	if request.method == 'POST' and 'restaurant_name' in request.form and 'username' in request.form and 'password' in request.form and 'location' in request.form:
 		username = request.form['username']
@@ -139,7 +134,7 @@ def restaurant_register():
 		location = request.form['location']
 		name = request.form['restaurant_name']
 		a=False
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			restaurant=conn.execute(text('SELECT * FROM restaurants WHERE restaurant_username = :username'), {'username':username})
 		restaurant=restaurant.all()
 		if len(restaurant):
@@ -149,7 +144,7 @@ def restaurant_register():
 			msg1 = 'username must contain only characters and numbers !'
 			e1='error'
 		else:
-			with engine.connect() as conn:
+			with get_db().connect() as conn:
 				conn.execute(text("INSERT INTO restaurants (restaurant_username, restaurant_password, restaurant_name, restaurant_location) VALUES (:uname, :pass, :name, :loc)"),
 						{'uname':username, 'pass':password, 'name':name, 'loc':location})
 			msg1='You have successfully registered !'
@@ -163,7 +158,7 @@ def restaurant_register():
 		return redirect(url_for('restaurant_register'))
 	return render_template('index.html')
 
-@app.route("/restaurant")
+@bp.route("/restaurant")
 def display_restaurant():
 	restaurant_id=session['id1']
 	rest1 = find_restaurant(restaurant_id)
@@ -171,7 +166,7 @@ def display_restaurant():
 	menu = find_menu(restaurant_id)
 	return render_template("restaurant-home.html",rest=rest1,order=order,menu=menu)
 
-@app.route("/restaurant/menu")
+@bp.route("/restaurant/menu")
 def display_menu_restaurant():
 	restaurant_id = session['id1']
 	rest = find_restaurant(restaurant_id)
@@ -183,7 +178,7 @@ def display_menu_restaurant():
 	menu_drink = find_drink(menu)
 	return render_template("restaurant-menu.html",rest=rest, menu_s=menu_starter, menu_d = menu_dessert, menu_m = menu_main, menu_dr = menu_drink)
 
-@app.route("/restaurant/add_item", methods = ('GET','POST'))
+@bp.route("/restaurant/add_item", methods = ('GET','POST'))
 def display_add_form():
 	restaurant_id=session['id1']
 	if(request.method == 'POST'):
@@ -195,13 +190,13 @@ def display_add_form():
 		if not (fname and fprice and ftype and furl):
 			flash('please fill complete information')
 		else:
-			with engine.connect() as conn:
+			with get_db().connect() as conn:
 				conn.execute(text('INSERT INTO menus(restaurant_id, image_url, food_name, food_price, food_type) VALUES (:1, :2, :3, :4, :5)'),
 								{'1':restaurant_id, '2':furl, '3':fname, '4':fprice, '5':ftype})
 			return redirect(url_for('display_menu_restaurant'))
 	return render_template("restaurant-add-item.html",restaurant_id=restaurant_id)
 
-@app.route("/restaurant/order_his")
+@bp.route("/restaurant/order_his")
 def order_history():
 	restaurant_id = session['id1']
 	rest = find_restaurant(restaurant_id)
@@ -212,12 +207,12 @@ def order_history():
 	return render_template("order_history.html",rest=rest,menu=menu,list=list)
 
 
-@app.route("/user")
+@bp.route("/user")
 def user_home():
 	result = get_menu()[-8:]
 	dict={}
 	for row in result:
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			name = conn.execute(text('SELECT restaurant_name FROM restaurants WHERE restaurant_id = :id'),{'id':row[2]}).all()[0]
 		dict[row[0]]=name
 
@@ -235,13 +230,13 @@ def user_home():
 	restaurant=restaurant[-8:]
 	image=[]
 	for row in restaurant:
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			link = conn.execute(text('SELECT image_url FROM menus WHERE restaurant_id = :id'),{'id':row[1]}).all()[0]
 		image.append(link)
 	user_id = session['id']
 	return render_template("user-home.html",user_id=user_id,menu=result, dict=dict, restaurant=restaurant,image=image)
 
-@app.route("/user/addresses",methods=('GET','POST'))
+@bp.route("/user/addresses",methods=('GET','POST'))
 def address():
 	user_id=session['id']
 	user = find_user(user_id)
@@ -249,13 +244,13 @@ def address():
 		fhome = request.form.get('home')
 		fwork = request.form.get('work')
 		fother = request.form.get('other')
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':fhome, '2':fwork, '3':fother, 'user_id':user_id})
 		# return "updated!!"
 		return redirect(url_for('view_profile'))
 	return render_template("addresses.html",user=user,id=user_id)
 
-@app.route("/user/profile",methods=('GET','POST'))
+@bp.route("/user/profile",methods=('GET','POST'))
 def view_profile():
 	user_id=session['id']
 	user= find_user(user_id)
@@ -263,49 +258,47 @@ def view_profile():
 		username=request.form.get('username')
 		mail=request.form.get('email_id')
 		contact=request.form.get('contact')
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET username = :1, mail = :2, phone_number =:3 WHERE user_id = :user_id"),{'1':username, '2':mail, '3':contact, 'user_id':user_id})
 		return redirect(url_for('view_profile'))
 	return render_template("my-profile.html",user=user,id=user_id)
 
-@app.route("/user/orders")
+@bp.route("/user/orders")
 def view_orders():
 	user_id=session['id']
 	menu = find_user_order(user_id)
 	list=[]
 	item={}
 	for row in menu:
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			result = conn.execute(text("SELECT food_name, food_price, image_url FROM menus WHERE menu_id = :item_id"),{'item_id':row[4]})
 			item[row[4]]=result.all()
 		list.append(row[1])
 	return render_template("my-orders.html",menu=menu,list=list,user_id=user_id, item=item)
 
 
-@app.route("/user/contact_us",methods=('GET','POST'))
+@bp.route("/user/contact_us",methods=('GET','POST'))
 def contact():
 	user_id=session['id']
 	if(request.method=='POST'):
 		name=request.form.get('name')
 		mail=request.form.get('mail')
 		message=request.form.get('message')
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			conn.execute(text("INSERT INTO contact_us (user_id, name_user, mail, message) VALUES (:1, :2, :3, :4)"),{'1':user_id, '2':name, '3':mail, '4':message})
 		flash("succesfully submitted!!","success")
 		return redirect(url_for('contact'))
 	return render_template("contact-us.html",id=user_id)
 
 
-# @app.route("/user/<int:user_id>/")
+# @bp.route("/user/<int:user_id>/")
 
-
-
-@app.route('/login', methods = ['GET', 'POST'])
+@bp.route('/login', methods = ['GET', 'POST'])
 def login():
 	if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
 		username = request.form['username']
 		password = request.form['password']
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			user=conn.execute(text('SELECT * FROM users WHERE username = :username AND BINARY user_pass = :password'), {'username':username, 'password':password })
 		user=user.all()
 		if len(user):
@@ -319,7 +312,7 @@ def login():
 			flash("try again!! incorrect username or password!! sign up if new user",'error')
 	return render_template('user-login.html')
 
-@app.route('/signup', methods = ('GET', 'POST'))
+@bp.route('/signup', methods = ('GET', 'POST'))
 def register():
 	if request.method == 'POST' and 'name' in request.form and 'username' in request.form and 'password' in request.form and 'mail' in request.form and 'contact' in request.form:
 		username = request.form['username']
@@ -328,7 +321,7 @@ def register():
 		contact = request.form['contact']
 		name = request.form['name']
 		a=False
-		with engine.connect() as conn:
+		with get_db().connect() as conn:
 			user=conn.execute(text('SELECT * FROM users WHERE username = :username'), {'username':username})
 		user=user.all()
 		if len(user):
@@ -341,7 +334,7 @@ def register():
 			msg1 = 'name must contain only characters and numbers !'
 			e1='error'
 		else:
-			with engine.connect() as conn:
+			with get_db().connect() as conn:
 				conn.execute(text("INSERT INTO users (username, user_pass, name_user, phone_number, mail) VALUES (:uname, :pass, :name, :contact, :email)"),
 						{'uname':username, 'pass':password, 'name':name, 'contact':contact, 'email':email})
 			msg1='You have successfully registered !'
@@ -355,14 +348,14 @@ def register():
 		return redirect(url_for('register'))
 	return render_template('user-signup.html')
 
-@app.route('/logout')
+@bp.route('/logout')
 def logout():
 	session.pop('loggedin', None)
 	session.pop('id', None)
 	session.pop('username', None)   
 	return redirect(url_for('login'))
 
-@app.route('/restaurant/logout')
+@bp.route('/restaurant/logout')
 def restaurant_logout():
 	session.pop('loggedin', None)
 	session.pop('id1', None)
@@ -370,4 +363,4 @@ def restaurant_logout():
 	return redirect(url_for('res_login'))
 
 
-app.run(debug=True)
+# bp.run(debug=True)
