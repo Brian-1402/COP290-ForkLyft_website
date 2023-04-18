@@ -17,6 +17,8 @@ def add_restaurant_details():
         with engine.connect() as conn:
             conn.execute(text("INSERT INTO restaurants (restaurant_name, restaurant_location, restaurant_rating_sum, restaurant_rating_count, restaurant_username, restaurant_password) VALUES (:name, :location, :sum, :count, :username, :password)"),
                     {'name':resto['name'][i], 'location':resto['address'][i], 'sum':s, 'count':c, 'username':name,'password':pas})
+            conn.commit()
+            
     # # with engine.connect() as conn:
     # #         result = conn.execute(text("SELECT * FROM restaurants WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
     # #         return result.all()
@@ -36,6 +38,8 @@ def add_food_items():
             desc = coun*"Very" + "Tasty"
             with engine.connect() as conn:
                 conn.execute(text("INSERT INTO menus (image_url, restaurant_id, food_type, food_name, food_price, food_desc) VALUES (:image_url, :restaurant_id, :food_type, :food_name, :food_price, :food_desc)"),{'image_url':url, 'restaurant_id':res_id, 'food_type':ftype, 'food_name':name, 'food_price':price, 'food_desc':desc})
+                conn.commit()
+
 
 
 def create_restaurant_menus():
@@ -56,6 +60,8 @@ def create_restaurant_menus():
             with engine.connect() as conn:
                 conn.execute(text("INSERT INTO orders (order_id, restaurant_id, user_id, item_id, quantity) VALUES (:order, :res, :user, :item, :qty)"),
                         {'order':order_id, 'res':res, 'user':user, 'item':item, 'qty':q})
+                conn.commit()
+                
     #     # with engine.connect() as conn:
     #     #         result = conn.execute(text("SELECT * FROM restaurants WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
     #     #         return result.all())
@@ -70,14 +76,23 @@ def create_restaurant_credentials():
         with engine.connect() as conn:
             conn.execute(text("UPDATE restaurants SET restaurant_username =:usr, restaurant_password=:pass WHERE restaurant_id = :id"),
                     {'usr':user, 'pass':passw, 'id':rid})
+            conn.commit()
+            
             
 def print_all():
     with engine.connect() as conn:
-            print(conn.execute(text("select * from restaurants")).all())
+        # print(conn.execute(text("select * from restaurants")).all())
+        # conn.execute(text('insert into restaurants values (4,"3holistics","aravali", 10, 4, "holistics123", "2holistics")'));
+        # input()
+        print(conn.execute(text("select * from restaurants")).all())
+        # input()
+        conn.commit()
+        # conn.close()
 
 
-# add_restaurant_details()
-# add_food_items()
-# create_restaurant_menus()
-# create_restaurant_credentials()
+
+add_restaurant_details()
+add_food_items()
+create_restaurant_menus()
+create_restaurant_credentials()
 # print_all()

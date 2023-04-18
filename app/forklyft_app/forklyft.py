@@ -81,11 +81,12 @@ def find_user(user_id):
 		return result.all()
 
 def update_user(user_id,home_n,work_n,other_n):
-	 with get_db().connect() as conn:
-		 conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':home_n, '2':work_n, '3':other_n, 'user_id':user_id})
+	with get_db().connect() as conn:
+		conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':home_n, '2':work_n, '3':other_n, 'user_id':user_id})
 		# if result is None:
 		#     abort(404)
 		# return result.all()
+		conn.commit()
 
 def find_starter(menu):
 	menu_starter = []
@@ -162,6 +163,7 @@ def restaurant_register():
 			with get_db().connect() as conn:
 				conn.execute(text("INSERT INTO restaurants (restaurant_username, restaurant_password, restaurant_name, restaurant_location) VALUES (:uname, :pass, :name, :loc)"),
 						{'uname':username, 'pass':password, 'name':name, 'loc':location})
+				conn.commit()
 			msg1='You have successfully registered !'
 			e1='success'
 			a=True
@@ -208,6 +210,7 @@ def display_add_form():
 			with get_db().connect() as conn:
 				conn.execute(text('INSERT INTO menus(restaurant_id, image_url, food_name, food_price, food_type) VALUES (:1, :2, :3, :4, :5)'),
 								{'1':restaurant_id, '2':furl, '3':fname, '4':fprice, '5':ftype})
+				conn.commit()
 			return redirect(url_for('forklyft_bp.display_menu_restaurant'))
 	return render_template("restaurant-add-item.html",restaurant_id=restaurant_id)
 
@@ -242,8 +245,10 @@ def delete_order_pending():
 	for row in order:
 		with get_db().connect() as conn:
 			conn.execute(text('INSERT INTO orders (order_id,restaurant_id,user_id,item_id,quantity) VALUES (:1,:2,:3,:4,:5)'),{'1':order_id,'2':res_id,'3':row[1],'4':row[3],'5':row[4]})
+			conn.commit()
 	with get_db().connect() as conn:
 		conn.execute(text('DELETE FROM pending_orders WHERE order_id = :order_id AND restaurant_id= :id'),{'order_id':order_id,'id':res_id})
+		conn.commit()
 	return redirect(url_for("forklyft_bp.pending"))
 
 
@@ -287,6 +292,7 @@ def address():
 		fother = request.form.get('other')
 		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':fhome, '2':fwork, '3':fother, 'user_id':user_id})
+			conn.commit()
 		# return "updated!!"
 		return redirect(url_for('forklyft_bp.view_profile'))
 	return render_template("addresses.html",user=user,id=user_id)
@@ -301,6 +307,7 @@ def view_profile():
 		contact=request.form.get('contact')
 		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET username = :1, mail = :2, phone_number =:3 WHERE user_id = :user_id"),{'1':username, '2':mail, '3':contact, 'user_id':user_id})
+			conn.commit()
 		return redirect(url_for('forklyft_bp.view_profile'))
 	return render_template("my-profile.html",user=user,id=user_id)
 
@@ -327,6 +334,7 @@ def contact():
 		message=request.form.get('message')
 		with get_db().connect() as conn:
 			conn.execute(text("INSERT INTO contact_us (user_id, name_user, mail, message) VALUES (:1, :2, :3, :4)"),{'1':user_id, '2':name, '3':mail, '4':message})
+			conn.commit()
 		flash("succesfully submitted!!","success")
 		return redirect(url_for('forklyft_bp.contact'))
 	return render_template("contact-us.html",id=user_id)
@@ -363,6 +371,8 @@ def cart():
 
 @bp.route("/add_to_cart")
 def add_to_cart():
+	global order_id1
+	order_id1 = order_id1+1
 	restaurant_id=request.args.get('restaurant_id')
 	item_id=request.args.get('item_id')
 	user_id=session['id']
@@ -370,10 +380,12 @@ def add_to_cart():
 		cart = conn.execute(text('SELECT * FROM my_cart WHERE user_id = :id AND item_id = :item_id'),{'id':user_id,'item_id':item_id}).all()
 	if(len(cart)==0):
 		with get_db().connect() as conn:
-			conn.execute(text('INSERT INTO my_cart (item_id, restaurant_id, user_id) VALUES (:1, :2, :3)'),{'1':item_id,'2':restaurant_id,'3':user_id})
+			conn.execute(text('INSERT INTO my_cart (item_id, restaurant_id, user_id, order_id) VALUES (:1, :2, :3, :4)'),{'1':item_id,'2':restaurant_id,'3':user_id, '4':order_id1})
+			conn.commit()
 	else:
 		with get_db().connect() as conn:
 			conn.execute(text('UPDATE my_cart SET quantity = :quantity WHERE user_id = :id AND item_id = :item_id'),{'quantity':cart[0][5]+1,'id':user_id,'item_id':item_id})
+			conn.commit()
 	return redirect(url_for("forklyft_bp.user_rest_menu",restaurant_id=restaurant_id))
 
 
@@ -384,6 +396,7 @@ def increase_quantity():
 	quantity=int(request.args.get('quantity'))
 	with get_db().connect() as conn:
 		conn.execute(text('UPDATE my_cart SET quantity = :quantity WHERE item_id =:id AND user_id =:user_id'),{'quantity':quantity+1,'id':item_id,'user_id':user_id})
+		conn.commit()
 	return redirect(url_for("forklyft_bp.cart"))
 
 @bp.route("/decrease")
@@ -394,6 +407,7 @@ def decrease_quantity():
 	with get_db().connect() as conn:
 		if(quantity>1):
 			conn.execute(text('UPDATE my_cart SET quantity = :quantity WHERE item_id =:id AND user_id =:user_id'),{'quantity':quantity-1,'id':item_id,'user_id':user_id})
+			conn.commit()
 		else:
 			conn.execute(text('DELETE FROm my_cart WHERE item_id =:id AND user_id =:user_id'),{'id':item_id,'user_id':user_id})
 	return redirect(url_for("forklyft_bp.cart"))
@@ -404,6 +418,7 @@ def remove():
 	user_id=session['id']
 	with get_db().connect() as conn:
 		conn.execute(text('DELETE FROM my_cart WHERE item_id =:id AND user_id =:user_id'),{'id':item_id,'user_id':user_id})
+		conn.commit()
 	return redirect(url_for("forklyft_bp.cart"))
 
 
@@ -425,15 +440,16 @@ def pay():
 	user = find_user(user_id)
 	if(request.method=='POST'):
 		global order_id1
-		order_id1=order_id1+1
 		option=request.form.get('flexRadioDefault')
 		with get_db().connect() as conn:
 			cart = conn.execute(text('SELECT * FROM my_cart WHERE user_id =:user_id'),{'user_id':user_id}).all()
 		for row in cart:
 			with get_db().connect() as conn:
 				conn.execute(text('INSERT INTO pending_orders (user_id,restaurant_id,item_id,quantity,address, order_id) VALUES (:1,:2,:3,:4,:5, :6)'),{'1':user_id,'2':row[2],'3':row[1],'4':row[5],'5':option, '6':order_id1})
+				conn.commit()
 		with get_db().connect() as conn:
 			conn.execute(text('DELETE FROM my_cart WHERE user_id=:id'),{'id':user_id})
+			conn.commit()
 		flash("payment successful!! will reach to you soon!!",'success')
 		return redirect(url_for("forklyft_bp.user_home"))
 	return render_template("pay.html",user=user)
@@ -486,6 +502,7 @@ def register():
 			with get_db().connect() as conn:
 				conn.execute(text("INSERT INTO users (username, user_pass, name_user, phone_number, mail) VALUES (:uname, :pass, :name, :contact, :email)"),
 						{'uname':username, 'pass':password, 'name':name, 'contact':contact, 'email':email})
+				conn.commit()
 			msg1='You have successfully registered !'
 			e1='success'
 			a=True
