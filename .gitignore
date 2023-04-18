@@ -1,7 +1,8 @@
+.ignore
 _ignore
-backend/__pycache__
+
 .vscode
-backend/test/_example
+zomato.csv
 
 misc_code
 venv/

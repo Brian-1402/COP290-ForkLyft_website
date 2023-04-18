@@ -6,7 +6,9 @@ from forklyft_app.db import init_db
 
 @pytest.fixture
 def app():
-    db_path="mysql+pymysql://642u2lgcpsr0ukt1oj0t:pscale_pw_m1im5LxSA5Gb0KC9v6YgSk3ndxCWykZaGkG6kHo9VBS@aws.connect.psdb.cloud/forklyft_test?charset=utf8mb4"
+    # db_path="mysql+pymysql://z16v371xaw89sglx9gvn:pscale_pw_ZfNGzpN8w111NiMpenlF5p2f8yq9gDUNsG99dvUxET@aws.connect.psdb.cloud/forklyft_test?charset=utf8mb4"
+    db_path="mysql://forklyft_project:forklyft@10.17.50.188:3306/forklyft_test"
+    
     # create the app with common test config
     app = create_app({"TESTING": True, "DATABASE": db_path})
 
@@ -27,7 +29,7 @@ def client(app):
 @pytest.fixture
 def runner(app):
     """A test runner for the app's Click commands."""
-    return app.test_cli_runner()
+    return app.test_cli_runner()    
 
 
 class AuthActions:

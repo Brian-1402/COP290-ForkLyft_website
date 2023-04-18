@@ -1,0 +1,1 @@
+python3 -m pytest --cov=forklift_app > "$(date +"test_coverage_%FT%H%M").txt"
