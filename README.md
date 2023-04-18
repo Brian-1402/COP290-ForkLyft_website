@@ -9,4 +9,4 @@ Website design idea, overview and documentation - ([checkpoint 1](https://docs.g
 [Figma project link](https://www.figma.com/file/6XaYre2TJufrtuY0bdsaDE/ForkLyft-team-library?node-id=0%3A1&t=0M0MVAVjKCeQOYHi-1)
 
 
-We currently have hosted our database on planetscale.com and couldn't do it yet on baadal. However, we have hosted all the pages and CSS on Baadal. The credentials of Planet Scale keep refreshing. SO in case you run into "Access denied to user" please email anyone of us and we will revert with the updated credentials for making connection in database.py.
+For seeding database, link to zomato.csv - https://csciitd-my.sharepoint.com/:x:/g/personal/cs5210609_iitd_ac_in/ETOLkvfszIpCtW6n1BJrl7gBERkxLhefJpYBDx2WwaTXjQ?e=Lf5ZWO
