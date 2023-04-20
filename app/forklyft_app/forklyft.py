@@ -22,6 +22,7 @@ def find_restaurant(restaurant_id):
 		if result is None:
 			abort(404)
 		return result.all()
+
 	# conn = get_db_connection()
 	# restaurant = conn.execute('SELECT * FROM restaurants WHERE restaurant_id = ?',(restaurant_id,)).fetchone()
 	# conn.close()
@@ -34,6 +35,10 @@ def get_menu():
 		result = conn.execute(text('SELECT * FROM menus'))
 		return result.all()
 	
+def get_menu_item(food_name):
+	with get_db().connect() as conn:
+		result = conn.execute(text("SELECT * FROM menus WHERE food_name = :1"),{'1':food_name})
+		return result
 
 def get_menu_user(restaurant_id):
 	with get_db().connect() as conn:
@@ -115,6 +120,12 @@ def find_drink(menu):
 		if item[3]=='drink':
 			menu_drink.append(item)
 	return menu_drink
+
+# def shutdown_server():
+# 	func = request.environ.get('werkzeug.server.shutdown')
+# 	if func is None:
+# 		raise RuntimeError('Not running with the Werkzeug Server')
+# 	func()
 
 # @bp.route("/")
 # def hello():
@@ -252,9 +263,31 @@ def delete_order_pending():
 	return redirect(url_for("forklyft_bp.pending"))
 
 
+@bp.route("/user/<string:item>")
+def search(item):
+	user_id = session['id']
+	items = get_menu_item(item)
+	if(items):
+		items=items.all()
+		restaurants=[]
+		menus={}
+		for item in items:
+			restaurant = find_restaurant(item[2])[0]
+			restaurants.append(restaurant)
+			menu = find_menu(restaurant[0])[0][1]
+			menus[restaurant[0]]=menu
+	else:
+		items=[]
+		restaurants=[]
+		menus={}
+	return render_template("user-home-search.html",user_id=user_id, restaurants=restaurants, menus=menus)
 
-@bp.route("/user")
+@bp.route("/user",methods=('GET','POST'))
 def user_home():
+	user_id = session['id']
+	if(request.method=='POST'):
+		fsearch = request.form.get('search')
+		return redirect(url_for('forklyft_bp.search',item=fsearch))
 	result = get_menu()[-8:]
 	dict={}
 	for row in result:
@@ -279,7 +312,7 @@ def user_home():
 		with get_db().connect() as conn:
 			link = conn.execute(text('SELECT image_url FROM menus WHERE restaurant_id = :id'),{'id':row[1]}).all()[0]
 		image.append(link)
-	user_id = session['id']
+
 	return render_template("user-home.html",user_id=user_id,menu=result, dict=dict, restaurant=restaurant,image=image)
 
 @bp.route("/user/addresses",methods=('GET','POST'))
@@ -457,6 +490,9 @@ def pay():
 	# @bp.route("/restaurant/pending")
 	# def pending():
 
+@bp.route('/')
+def main():
+	return render_template("main.html")
 
 @bp.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -519,14 +555,19 @@ def logout():
 	session.pop('loggedin', None)
 	session.pop('id', None)
 	session.pop('username', None)   
-	return redirect(url_for('forklyft_bp.login'))
+	return redirect(url_for('forklyft_bp.main'))
 
 @bp.route('/restaurant/logout')
 def restaurant_logout():
 	session.pop('loggedin', None)
 	session.pop('id1', None)
 	session.pop('username', None)   
-	return redirect(url_for('forklyft_bp.res_login'))
+	return redirect(url_for('forklyft_bp.main'))
+
+# @bp.get('/shutdown')
+# def shutdown():
+#     shutdown_server()
+#     return 'Server shutting down...'
 
 # if(__name__=='__main__'):
 # 	app.run(debug=True)

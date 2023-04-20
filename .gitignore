@@ -1,6 +1,7 @@
 .ignore
 _ignore
 
+app/proxy
 .vscode
 zomato.csv
 

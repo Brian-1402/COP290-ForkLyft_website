@@ -203,10 +203,13 @@
   font-family: var(--font-poppins);
 }
 .user-home {
-  position: relative;
-  background-color: var(--color-azure);
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+  display: table;
+	width: 100%;
+	padding: 0;
+	background: url(../../public/main/intro-bg.jpg) no-repeat center center;
+	background-color: #E9F8F9;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
 }

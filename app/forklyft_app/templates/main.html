@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style> 
+
+div.polaroid {
+  width: 80%;
+  background-color: #E9F8F9;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+div.container1 {
+  background-color: #C0EEF2;
+  text-align: center;
+  padding: 10px 10px;
+}
+
+   q {
+      display: inline;
+      font-style: italic;
+    }
+
+    .button {
+  background-color: #537FE7; /* Green */
+  border: none;
+  color: #E9F8F9;
+  padding: 16px 16px;
+  text-align: center;
+  font-family: 'Arial';
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  /* border: 2px solid #181823; */
+}
+
+.button2:hover {
+  background-color: #537FE7;
+  color: #E9F8F9;
+}
+
+#bg1 {  
+  background-color: #border: 1px solid red;;
+}
+
+#hr1{
+  background-color:  #537FE7;
+  /* border-radius: 2px; */
+}
+#name1{
+  color:  #b9bcc2;
+  /* border-radius: 2px; */
+}
+.head3{
+  color: #537FE7;
+}
+  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ForkLyft</title>
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Favicons
+    ================================================== -->
+<!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png"> -->
+
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename= 'css/main/bootstrap.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'fonts/font-awesome/css/font-awesome.css') }}">
+
+<!-- Stylesheet
+    ================================================== -->
+<link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename= 'css/main/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/main/nivo-lightbox.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/main/default.css') }}">
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<!-- Navigation
+    ==========================================-->
+<nav id="menu" class="navbar navbar-default navbar-fixed-top">
+  <div class="container"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <a class="navbar-brand page-scroll" href="#page-top"> <div id = "Name1" style = "color:white;"> ForkLyft </div> </a> </div>
+    
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about" class="page-scroll">About</a></li>
+        <li><a href="#restaurant-menu" class="page-scroll">Log-In</a></li>
+        <li><a href="#footer" class="page-scroll">Contact</a></li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+</nav>
+<!-- Header -->
+<header id="header">
+  <div class="intro">
+    <div class="overlay">
+      <div class="container">
+        <div class="row">
+          <div class="intro-text">
+            <h1>ForkLyft</h1>
+            <p>Food / Love / Comfort</p>
+            <a href="#about"  style = "background-color: 537FE7;"><button class="button button2">DISCOVER STORY</button></a> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- About Section -->
+<div id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 ">
+        <!-- <div class="about-img"><img src="img/about.jpg" class="img-responsive" alt=""></div>
+        <div class="about-img"><img src="img/ara.avif" class="img-responsive" alt=""></div> -->
+      
+
+<div class="polaroid">
+  <img src="{{ url_for('static', filename= 'public/main/about.jpg') }}" alt="5 Terre" style="width:100%">
+  <div class="container1">
+  <p>Hungry Happiness</p>
+  </div>
+</div>
+
+<div class="polaroid">
+  <img src="{{ url_for('static', filename= 'public/main/ara.avif') }}" alt="Norther Lights" style="width:100%">
+  <div class="container1">
+  <p>Where it all began</p>
+  </div>
+</div>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="about-text">
+          <h2>The ForkLyft Story</h2>
+          <hr id = "hr1">
+          <p>
+            In B33, Aravali Hostel, four friends with an <q>insatiable passion for food</q> came together to create Forklyft. Utkarsh, the master chef; Pratham, the coding whiz; Brian, the discerning food critic; and Hardik, the creative food photographer. Driven by their shared love for all things culinary, they vowed to create a platform that would revolutionize the way people experienced food.
+            <br><br>
+            Countless sleepless nights and relentless hard work later, Forklyft was born. With a tagline that said, <q>You won't be able to resist lifting your forks,</q> Forklyft quickly gained traction as a website that hosted a curated collection of restaurants, each with its unique story and culinary masterpiece. Their innovative features, personalized recommendations, and seamless ordering process brought the joy of dining out right to users' doorsteps.
+            <br><br>
+            Despite challenges and setbacks, the four founders remained steadfast in their vision. Forklyft grew by leaps and bounds, introducing live cooking classes, exclusive food events, and a charity initiative to support local food communities. Today, Forklyft stands tall as a beacon of culinary excellence, a platform that has changed the way people experience food.
+            <br><br>
+            As users lift their forks to indulge in the delectable offerings on Forklyft, they are reminded of the tagline that started it all - a testament to the <q>unwavering determination and passion</q> of four friends who dared to dream big and create a culinary revolution with Forklyft.
+          </p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Restaurant Menu Section -->
+<div id="restaurant-menu">
+  <div class="section-title text-center center">
+    <div class="overlay">
+      <h2>LogIn</h2>
+      <hr id = "hr1">
+      <p>Craving deliciousness? Click below</p>
+      <a href="./login"  style = "background-color: 537FE7;"><button class="button button2">LOGIN</button></a> 
+      <br>
+      <p>For the restaurants who want to spread happiness with their dishes</p>
+      <a href="./restaurant/login"  style = "background-color: 537FE7;"><button class="button button2">RESTAURANT </button></a> 
+    </div>
+    
+  </div>
+ 
+ </div>     
+<div id="footer">
+  <div class="container text-center">
+    <div class="col-md-4">
+      <h3 style = "color:#537FE7">Address</h3>
+      <div class="contact-item">
+        <p>4321 California St,</p>
+        <p>San Francisco, CA 12345</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3 style = "color:#537FE7">Opening Hours</h3>
+      <div class="contact-item">
+        <p>Mon-Thurs: 10:00 AM - 11:00 PM</p>
+        <p>Fri-Sun: 11:00 AM - 02:00 AM</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3 style = "color:#537FE7">Contact Info</h3>
+      <div class="contact-item">
+        <p>Phone: +1 123 456 1234</p>
+        <p>Email: info@company.com</p>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid text-center copyrights" id = "bg1">
+    <div class="col-md-8 col-md-offset-2" id = "bg1">
+      <div class="social" id = "bg1">
+        <ul>
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        </ul>
+      </div>
+      <p>&copy; 2023 ForkLyft. All rights reserved</p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/jquery.1.11.1.js') }}"></script> 
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/bootstrap.js') }}"></script> 
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/SmoothScroll.js') }}"></script> 
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/nivo-lightbox.js') }}"></script> 
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/jquery.isotope.js') }}"></script> 
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/jqBootstrapValidation.js') }}"></script> 
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/contact_me.js') }}"></script> 
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/main.js') }}"></script>
+</body>
+</html>
