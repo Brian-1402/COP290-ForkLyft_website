@@ -76,7 +76,7 @@
             </button></a>
         </div>
       </nav>
-      <main>
+      <main style="width: 100%;">
         <div>
           <div><h1 style="margin-bottom: 10px; margin-top: 10px; text-align: center;"><b>{{rest[1]}}</b></h1></div>
           <div><p style="font-size: 30px; text-align: center;">location: {{rest[2]}}</p></div>
@@ -84,9 +84,9 @@
         </div>
         <hr>
         {%if menu_s|length!=0:%}
-          <div >
+          <div style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
             <h2 style="text-align: center;">Starters</h2>
-            <div class="pratham" style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
+            <div class="pratham">
               {%for row in menu_s%}
               <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
                 <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
@@ -107,9 +107,9 @@
           <hr>
         {%endif%}
         {%if menu_m|length!=0:%}
-          <div>
+          <div style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
             <h2 style="text-align: center;">Mains</h2>
-            <div class="pratham" style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
+            <div class="pratham">
               {%for row in menu_m%}
               <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
                 <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
@@ -129,10 +129,10 @@
           </div>
           <hr>
         {%endif%}
-        {%if menu_s|length!=0:%}
-          <div>
+        {%if menu_d|length!=0:%}
+          <div  style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
             <h2 style="text-align: center;">Desserts</h2>
-            <div class="pratham" style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
+            <div class="pratham">
               {%for row in menu_d%}
               <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
                 <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
@@ -153,9 +153,9 @@
           <hr>
         {%endif%}
         {%if menu_dr|length!=0:%}
-          <div>
+          <div  style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
             <h2 style="text-align: center;">Drinks</h2>
-            <div class="pratham" style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
+            <div class="pratham">
               {%for row in menu_dr%}
               <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
                 <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">

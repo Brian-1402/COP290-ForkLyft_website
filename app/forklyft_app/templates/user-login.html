@@ -1,6 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      body {
+			background-color: #f1f1f1;
+		}
+
+		.container {
+			background-color: #ffffff;
+			border: 1px solid #cccccc;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px #cccccc;
+			margin: 100px auto;
+			padding: 20px;
+			width: 300px;
+		}
+
+		h1 {
+			text-align: center;
+			color: #333333;
+			font-family: Arial, sans-serif;
+			margin-bottom: 20px;
+		}
+
+		input[type=text], input[type=password] {
+			width: 100%;
+			padding: 10px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		button {
+			background-color: #537FE7;
+			color: white;
+			padding: 10px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			width: 100%;
+			font-size: 16px;
+			font-weight: bold;
+		}
+
+		button:hover {
+			background-color: #181823;
+		}
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
@@ -23,7 +72,7 @@
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
-  <body>
+  <body style="background-image: url(../static/public/main/intro-bg.jpg);">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
@@ -36,19 +85,27 @@
           {% endfor %}
         {% endif %}
         {% endwith %}
-    <div class="user-login">
-      <nav class="header9" id="header">
-        <img
-          class="forklyft-logo-inverted-1-icon4"
-          alt=""
-          src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
-        /><a class="signupbutton1" href="./user-signup.html" id="signupButton"
-          ><a class="signup1" href="./signup" id="signup"
-            >Signup</a
-          ></a
-        >
-      </nav>
-      <main class="body9">
+      <main style="margin-top: 150px;">
+        <div class="container" style="opacity: 0.97; width:50%;">
+          <h1>Login</h1>
+          <form method="post">
+            <label for="username" style="padding-left: 10px; margin-bottom: 0;"><b>Username</b></label>
+            <input type="text" id="username" name="username" placeholder="Enter Username" required>
+      
+            <label for="password" style="padding-left: 10px; margin-bottom: 0;"><b>Password</b></label>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required>
+      
+            <button style="margin-top: 25px;">Login</button>
+            <div style="margin-top: 20px;">
+              <p style="text-align: end;">New on Forklyft? <a href="./signup">Signup!!</a></p>
+            </div>
+            <div style="margin-top: 20px;">
+              <p style="text-align: end;">Restaurant Login? <a href="./restaurant/login">Restaurant!!</a></p>
+            </div>
+          </form>
+        </div>
+      </main>
+      <!-- <main class="body9">
         <div class="loginframeouter">
           <div class="loginframeinner">
             <div class="heading4"><h3 class="login-below">User Login</h3></div>
@@ -66,9 +123,6 @@
                     <input id="password" class="frame13" type="password" name="password" placeholder="enter password"/>
                   </div>
                 </div>
-                <!-- <div class="forgotpasswordframe">
-                  <h3 class="forgot-password1">forgot password?</h3>
-                </div> -->
               </div>
               <div class="passwordframeinner">
                 <button class="ob-formssubmit1" id="oBFormsSubmit">
@@ -125,8 +179,7 @@
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </main> -->
 
     <script>
       var signup = document.getElementById("signup");

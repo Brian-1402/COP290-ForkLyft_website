@@ -60,13 +60,13 @@
                   <div class="pratham">
                     {%for row in menu:%}
                         {%if row[1]==i:%}
-                          <div class="card text-center pratham2" style="width: 25rem; height: 35rem;">
+                          <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 32rem;">
                             <img src="{{item[row[4]][0][2]}}" class="card-img-top" alt="..." style="height: 50%;">
-                            <div class="card-body">
-                              <h5 class="card-title">Item id: {{row[4]}}</h5>
+                            <div class="card-body" style="flex:none">
+                              <h5 class="card-title" ><b>{{item[row[4]][0][0]}}</b></h5>
                             </div>
                             <ul class="list-group list-group-flush">
-                              <li class="list-group-item">name: {{item[row[4]][0][0]}}</li>
+                              <li class="list-group-item">Item id: {{row[4]}}</li>
                               <li class="list-group-item">price: {{item[row[4]][0][1]}}$</li>
                               <li class="list-group-item">Quanity: {{row[5]}}</li>
                             </ul>
