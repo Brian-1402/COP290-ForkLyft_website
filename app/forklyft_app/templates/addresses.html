@@ -23,7 +23,19 @@
       href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
     />
   </head>
-  <body style="background-color: #C0EEF2;">
+  <body style="background-color: #E9F8F9;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
     <div class="addresses">
       <nav class="header6">
         <img

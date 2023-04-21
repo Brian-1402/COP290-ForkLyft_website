@@ -7,6 +7,7 @@ zomato.csv
 
 misc_code
 venv/
+.venv/
 
 *.pyc
 __pycache__/

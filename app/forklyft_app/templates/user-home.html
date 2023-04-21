@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .pratham{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+      .pratham2{
+        margin: 15px 15px;
+      }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
@@ -25,7 +37,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   </head>
-  <body>
+  <body style="background-color: #E9F8F9;">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
@@ -38,7 +50,7 @@
           {% endfor %}
         {% endif %}
         {% endwith %}
-    <div class="user-home">
+    <div style="width:100%;" class="user-home">
       <nav class="header10">
         <img
           class="headerlogo-icon2"
@@ -47,7 +59,7 @@
         />
         <div class="pre-search">
           <form class="form-inline" method="post">
-            <input class="form-control mr-sm-2 form-lg" type="search" placeholder="Search" aria-label="Search" name="search">
+            <input class="form-control mr-sm-2 form-lg" type="search" placeholder="Search food item" aria-label="Search" name="search">
             <button class="btn btn-lg btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
@@ -83,64 +95,58 @@
           </button>
         </div>
       </nav>
-      <main class="body10">
-        <div class="catchphrase">
-          <h3 class="you-wont-be">
-            You won’t be able to resist lifting your forks ;
-          </h3>
-        </div>
-        <div class="text1"><h4 class="hot-new-picks">Hot New Picks</h4></div>
-        <div class="boxes1">
+      <main style="width: 100%;">
+        <div style="background: linear-gradient(#E9F8F9, #181823);">
+          <div class="catchphrase">
+            <h3 class="you-wont-be" style="margin-bottom: 10px;">
+              You won’t be able to resist lifting your forks ;
+            </h3>
+          </div>
+          <h3 style="text-align: center;"><b><i>Hot new picks</i></b></h3>
           <div class="frame-div">
             {%for i in range(4)%}
-            <div>
-              <div class="food-rectmain-wrapper">
-                <img  class="food-rectmain" src="{{menu[i][1]}}">
-              </div>
-              <div style="text-align: center;">
-                <h4>{{menu[i][4]}}</h4>
-                <a href="/user/{{menu[i][2]}}"><h4>{{dict[menu[i][0]][0]}}</h4></a>
+            <div class="card text-center pratham2" style="width: 20rem; height:24rem;">
+              <img src="{{menu[i][1]}}" class="card-img-top" alt="..." style="width: 100%; height: 60%;">
+              <div class="card-body">
+                <h5 class="card-title">{{menu[i][4]}}</h5>
+                <p class="card-text">{{dict[menu[i][0]][0]}}</p>
+                <a href="/user/{{menu[i][2]}}" class="btn btn-primary">View</a>
               </div>
             </div>
             {%endfor%}
           </div>
           <div class="frame-div">
             {%for i in range(4,8)%}
-            <div>
-              <div class="food-rectmain-wrapper">
-                <img  class="food-rectmain" src="{{menu[i][1]}}">
-              </div>
-              <div style="text-align: center;">
-                <h4>{{menu[i][4]}}</h4>
-                <a href="/user/{{menu[i][2]}}"><h4>{{dict[menu[i][0]][0]}}</h4></a> 
+            <div class="card text-center pratham2" style="width: 20rem; height:24rem;">
+              <img src="{{menu[i][1]}}" class="card-img-top" alt="..." style="width: 100%; height: 60%;">
+              <div class="card-body">
+                <h5 class="card-title">{{menu[i][4]}}</h5>
+                <p class="card-text">{{dict[menu[i][0]][0]}}</p>
+                <a href="/user/{{menu[i][2]}}" class="btn btn-primary">View</a>
               </div>
             </div>
             {%endfor%}
           </div>
-          <div class="text1">
-            <h4 class="hot-new-picks">Most Popular Restaurants</h4>
-          </div>
+          <hr>
+          <h3 style="text-align: center; "><b><i>Most popular restaurants</i></b></h3>
           <div class="frame-div">
             {%for i in range(4,8)%}
-            <div >
-              <div class="food-rectmain-wrapper">
-                <img  class="food-rectmain" src="{{image[i][0]}}">
-              </div>
-              <div style="text-align: center;">
-                <a href="/user/{{restaurant[i][1]}}"><h4>{{restaurant[i][2]}}</h4></a>
-                <!-- <h4>{{restaurant[i][3]}}</h4> -->
+            <div class="card text-center pratham2" style="width: 20rem; height:24rem;">
+              <img src="{{image[i][0]}}" class="card-img-top" alt="..." style="width: 100%; height: 50%;">
+              <div class="card-body">
+                <a href="/user/{{restaurant[i][1]}}"><h5 class="card-title">{{restaurant[i][2]}}</h5></a>
+                <p class="card-text">{{restaurant[i][3]}}</p>
               </div>
             </div>
             {%endfor%}
           </div>
           <div class="frame-div">
             {%for i in range(4)%}
-            <div >
-              <div class="food-rectmain-wrapper">
-                <img  class="food-rectmain" src="{{image[i][0]}}">
-              </div>
-              <div style="text-align: center;">
-                <a href="/user/{{restaurant[i][1]}}"><h4>{{restaurant[i][2]}}</h4></a>
+            <div class="card text-center pratham2" style="width: 20rem; height:24rem;">
+              <img src="{{image[i][0]}}" class="card-img-top" alt="..." style="width: 100%; height: 50%;">
+              <div class="card-body">
+                <a href="/user/{{restaurant[i][1]}}"><h5 class="card-title">{{restaurant[i][2]}}</h5></a>
+                <p class="card-text">{{restaurant[i][3]}}</p>
               </div>
             </div>
             {%endfor%}

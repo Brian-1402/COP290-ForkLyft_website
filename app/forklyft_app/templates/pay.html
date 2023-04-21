@@ -22,9 +22,9 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
     />
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
-  <body style="background-color: #C0EEF2;">
+  <body style="background-image: url(../static/public/main/intro-bg.jpg);">
     <div class="addresses">
       <nav class="header6">
         <img
@@ -33,7 +33,7 @@
           src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
         />
         <div class="headerbuttons3">
-          <a class="mycartbutton3" id="myCartButton"
+          <a class="mycartbutton3" id="myCartButton" href="./cart"
             ><h4 class="my-cart4">My cart</h4></a
           ><a
             class="mycartbutton3"
@@ -56,25 +56,9 @@
           </button></a>
         </div>
       </nav>
-      <main class="bodyframe1">
-        <div class="heading1"><h3 class="my-addresses1">Select an address to proceed!!</h3></div>
-        
+      <main style="width:100%;text-align: center;">
+        <h2 style="text-align: center; margin: 30px 40px;"><b>Select an address to proceed!!</b></h2>
         <form class="profileframe" method="POST">
-          <!-- <div class="profilefields">
-            <div class="usernameframe">
-              <label for="home" class="email-id">Home address</label>
-              <input id="home" class="usernametextfield" type="text" name="home" value="{{user[0][1]}}"/>
-            </div>
-            <div class="usernameframe">
-              <label for="work" class="email-id">Work address</label>
-              <input id="work" class="usernametextfield" type="text" name="work" value="{{user[0][2]}}"/>
-            </div>
-            <div class="usernameframe">
-              <label for="other" class="email-id">Other address</label>
-              <input id="other" class="usernametextfield" type="text" name="other" value="{{user[0][3]}}"/>
-            </div>
-          </div> -->
-          
           <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked value={{user[0][1]}}>
             <label class="form-check-label" for="flexRadioDefault1">
@@ -94,44 +78,13 @@
             </label>
           </div>
           <div class="editbuttonframe">
-            <button class="editbutton"><h5 class="edit">Pay</h5></button>
+            <button class="btn btn-primary btn-lg btn-block" style="width: 50%;">Pay</button>
           </div>
         </form>
-        <br>
         <div class="editbuttonframe">
-            <button class="editbutton"><a href="./addresses"><h5 class="edit">Change address</h5></a></button>
+          <button type="button" class="btn btn-secondary btn-lg btn-block" style="width: 50%;"><a href="./addresses" style="color: white;">Change address</a></button>
           </div>
       </main>
     </div>
-
-    <!-- <script>
-      var myCartButton = document.getElementById("myCartButton");
-      if (myCartButton) {
-        myCartButton.addEventListener("click", function (e) {
-          window.location.href = "./my-cart.html";
-        });
-      }
-      
-      var myProfileButton = document.getElementById("myProfileButton");
-      if (myProfileButton) {
-        myProfileButton.addEventListener("click", function (e) {
-          window.location.href = "./my-profile.html";
-        });
-      }
-      
-      var contactUsButton = document.getElementById("contactUsButton");
-      if (contactUsButton) {
-        contactUsButton.addEventListener("click", function (e) {
-          window.location.href = "./contact-us.html";
-        });
-      }
-      
-      var homeButton = document.getElementById("homeButton");
-      if (homeButton) {
-        homeButton.addEventListener("click", function (e) {
-          window.location.href = "./user-home.html";
-        });
-      }
-      </script> -->
   </body>
 </html>

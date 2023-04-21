@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .pratham{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+      .pratham2{
+        margin: 15px 15px;
+      }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
@@ -21,9 +33,21 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
     />
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
     <div class="user-restaurant-menu">
       <nav class="header2">
         <div class="headerlogo2">
@@ -52,78 +76,105 @@
             </button></a>
         </div>
       </nav>
-      <main class="body3">
+      <main>
         <div>
-          <div><h4 style="margin-bottom: 10px; margin-top: 10px;">{{rest[1]}}</h4></div>
-          <div><p style="font-size: 30px;">location: {{rest[2]}}</p></div>
-          <div><p style="font-size: 30px;">rating: {{rest[3]/rest[4]}}</p></div>
+          <div><h1 style="margin-bottom: 10px; margin-top: 10px; text-align: center;"><b>{{rest[1]}}</b></h1></div>
+          <div><p style="font-size: 30px; text-align: center;">location: {{rest[2]}}</p></div>
+          <div><p style="font-size: 30px; text-align: center;">rating: {{rest[3]/rest[4]}}</p></div>
         </div>
-        <div class="menu">
-          <div class="starter">
-            <div><h3 class="starters">Starters</h3></div>
-            <div></div>
-            {%for row in menu_s%}
-            <div class="item1d">
-              <img class="image-9-icon" alt="" src={{row[1]}} />
-              <div class="item-1-name-container">
-                <p class="item-1-name">{{row[4]}}</p>
-                <p class="item-1-name">Price: {{row[5]}}$</p>
-                <textarea readonly class="item-1-name">{{row[6]}}</textarea>
+        <hr>
+        {%if menu_s|length!=0:%}
+          <div >
+            <h2 style="text-align: center;">Starters</h2>
+            <div class="pratham" style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
+              {%for row in menu_s%}
+              <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
+                <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
+                <div class="card-body">
+                  <h5 class="card-title">{{row[4]}}</h5>
+                  <p class="card-text">{{row[6]}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Price: {{row[5]}}$</li>
+                </ul>
+                <div class="card-footer">
+                  <a href='{{url_for("forklyft_bp.add_to_cart",item_id=row[0],restaurant_id=row[2])}}' class="card-link"><button type="button" class="btn btn-outline-success">Add item to cart</button></a>
+                </div>
               </div>
-              <a href='{{url_for("forklyft_bp.add_to_cart",item_id=row[0],restaurant_id=row[2])}}'><button class="button" id="add_item">Add Item</button></a>
+              {%endfor%}
             </div>
-            {%endfor%}
           </div>
-          <div class="bufferframe"></div>
-          <div class="bufferframe2"></div>
-          <div class="dessert">
-            <div><h3 class="desserts">Main</h3></div>
-            <div></div>
-            {%for row in menu_m%}
-            <div class="item1d">
-              <img class="image-9-icon" alt="" src={{row[1]}} />
-              <div class="item-1-name-container">
-                <p class="item-1-name">{{row[4]}}</p>
-                <p class="item-1-name">Price: {{row[5]}}$</p>
-                <textarea readonly class="item-1-name">{{row[6]}}</textarea>
+          <hr>
+        {%endif%}
+        {%if menu_m|length!=0:%}
+          <div>
+            <h2 style="text-align: center;">Mains</h2>
+            <div class="pratham" style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
+              {%for row in menu_m%}
+              <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
+                <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
+                <div class="card-body">
+                  <h5 class="card-title">{{row[4]}}</h5>
+                  <p class="card-text">{{row[6]}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Price: {{row[5]}}$</li>
+                </ul>
+                <div class="card-footer">
+                  <a href='{{url_for("forklyft_bp.add_to_cart",item_id=row[0],restaurant_id=row[2])}}' class="card-link"><button type="button" class="btn btn-outline-success">Add item to cart</button></a>
+                </div>
               </div>
-              <a href='{{url_for("forklyft_bp.add_to_cart",item_id=row[0],restaurant_id=row[2])}}'><button class="button" id="add_item">Add Item</button></a>
+              {%endfor%}
             </div>
-            {%endfor%}
           </div>
-        </div>
-        <div class="menu">
-          <div class="starter">
-            <h3 class="starters">Desserts</h3>
-            {%for row in menu_d%}
-            <div class="item1d">
-              <img class="image-9-icon" alt="" src={{row[1]}} />
-              <div class="item-1-name-container">
-                <p class="item-1-name">{{row[4]}}</p>
-                <p class="item-1-name">Price: {{row[5]}}$</p>
-                <textarea readonly class="item-1-name">{{row[6]}}</textarea>
+          <hr>
+        {%endif%}
+        {%if menu_s|length!=0:%}
+          <div>
+            <h2 style="text-align: center;">Desserts</h2>
+            <div class="pratham" style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
+              {%for row in menu_d%}
+              <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
+                <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
+                <div class="card-body">
+                  <h5 class="card-title">{{row[4]}}</h5>
+                  <p class="card-text">{{row[6]}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Price: {{row[5]}}$</li>
+                </ul>
+                <div class="card-footer">
+                  <a href='{{url_for("forklyft_bp.add_to_cart",item_id=row[0],restaurant_id=row[2])}}' class="card-link"><button type="button" class="btn btn-outline-success">Add item to cart</button></a>
+                </div>
               </div>
-              <a href='{{url_for("forklyft_bp.add_to_cart",item_id=row[0],restaurant_id=row[2])}}'><button class="button" id="add_item">Add Item</button></a>
+              {%endfor%}
             </div>
-            {%endfor%}
           </div>
-          <div class="bufferframe"></div>
-          <div class="bufferframe2"></div>
-          <div class="dessert">
-            <h3 class="desserts">Drinks</h3>
-            {%for row in menu_dr%}
-            <div class="item1d">
-              <img class="image-9-icon" alt="" src={{row[1]}} />
-              <div class="item-1-name-container">
-                <p class="item-1-name">{{row[4]}}</p>
-                <p class="item-1-name">Price: {{row[5]}}$</p>
-                <textarea readonly class="item-1-name">{{row[6]}}</textarea>
+          <hr>
+        {%endif%}
+        {%if menu_dr|length!=0:%}
+          <div>
+            <h2 style="text-align: center;">Drinks</h2>
+            <div class="pratham" style="background:linear-gradient(#E9F8F9, #C0EEF2) ;">
+              {%for row in menu_dr%}
+              <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
+                <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
+                <div class="card-body">
+                  <h5 class="card-title">{{row[4]}}</h5>
+                  <p class="card-text">{{row[6]}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Price: {{row[5]}}$</li>
+                </ul>
+                <div class="card-footer">
+                  <a href='{{url_for("forklyft_bp.add_to_cart",item_id=row[0],restaurant_id=row[2])}}' class="card-link"><button type="button" class="btn btn-outline-success">Add item to cart</button></a>
+                </div>
               </div>
-              <a href='{{url_for("forklyft_bp.add_to_cart",item_id=row[0],restaurant_id=row[2])}}'><button  class="button" id="add_item">Add Item</button></a>
+              {%endfor%}
             </div>
-            {%endfor%}
           </div>
-        </div>
+          <hr>
+        {%endif%}
       </main>
     </div>
 
@@ -156,5 +207,8 @@
         });
       }
       </script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

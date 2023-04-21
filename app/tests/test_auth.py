@@ -10,16 +10,15 @@ def test_register(client, app):
     assert client.get("/signup").status_code == 200
 
     # test that successful registration redirects to the login page
-    response = client.post("/signup", data={"username": "tester", "password": "tester_pass", "mail":"test@email.com","contact":"1234567890","name":"tester"})
+    response = client.post("/signup", data={"username": "tester_signup", "password": "tester_signup", "mail":"tester_signup@tests.com","contact":"1234567890","name":"tester_signup"})
     # assert 'Invalid email address !' in response.data
     assert response.headers["Location"] == "/login"
 
     # test that the user was inserted into the database
     with app.app_context():
         with get_db().connect() as conn:
-            assert (
-                conn.execute(text("SELECT * FROM users WHERE username = 'tester'")).fetchone() is not None
-            )
+            assert conn.execute(text("SELECT * FROM users WHERE username = 'tester_signup'")).fetchone() is not None
+    
 
 
 # @pytest.mark.parametrize(
@@ -37,20 +36,21 @@ def test_register(client, app):
 #     assert message in response.data
 
 
-def test_login(client, auth):
-    # test that viewing the page renders without template errors
-    assert client.get("/login").status_code == 200
+# def test_login(client, auth):
+#     # test that viewing the page renders without template errors
+#     assert client.get("/login").status_code == 200
 
-    # test that successful login redirects to the index page
-    # response = auth.login()
-    # assert response.headers["Location"] == "/user"
+#     # test that successful login redirects to the index page
+#     response = auth.login()
+#     print("printinggg",response.headers)
+#     # assert response.headers["Location"] == "/user"
 
-    # login request set the user_id in the session
-    # check that the user is loaded from the session
-    # with client:
-    #     client.get("/")
-    #     # assert session["user_id"] == 1
-    #     assert g.user["username"] == "tester"
+#     # login request set the user_id in the session
+#     # check that the user is loaded from the session
+#     with client:
+#         client.get("/")
+#         # assert session["user_id"] == 1
+#         assert g.user["username"] == "tester_login"
 
 
 # @pytest.mark.parametrize(

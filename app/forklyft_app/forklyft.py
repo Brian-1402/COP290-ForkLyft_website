@@ -327,6 +327,8 @@ def address():
 			conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':fhome, '2':fwork, '3':fother, 'user_id':user_id})
 			conn.commit()
 		# return "updated!!"
+		if(fhome!=user[0][1] or fwork!=user[0][2] or fother!=user[0][3]):
+			flash("addresses updated!!","success")
 		return redirect(url_for('forklyft_bp.view_profile'))
 	return render_template("addresses.html",user=user,id=user_id)
 
@@ -338,9 +340,17 @@ def view_profile():
 		username=request.form.get('username')
 		mail=request.form.get('email_id')
 		contact=request.form.get('contact')
+		password=request.form.get('password')
 		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET username = :1, mail = :2, phone_number =:3 WHERE user_id = :user_id"),{'1':username, '2':mail, '3':contact, 'user_id':user_id})
 			conn.commit()
+		if(username!=user[0][4] or mail!=user[0][7] or contact!=user[0][8]):
+			if(password==user[0][6]):
+				flash("profile updated!! ","success")
+			else:
+				flash("profile updated!! Password cannot be updated!!","success")
+		elif(password!=user[0][6]):
+			flash("password cannot be updated","error")
 		return redirect(url_for('forklyft_bp.view_profile'))
 	return render_template("my-profile.html",user=user,id=user_id)
 
@@ -419,6 +429,7 @@ def add_to_cart():
 		with get_db().connect() as conn:
 			conn.execute(text('UPDATE my_cart SET quantity = :quantity WHERE user_id = :id AND item_id = :item_id'),{'quantity':cart[0][5]+1,'id':user_id,'item_id':item_id})
 			conn.commit()
+	flash("item added to cart","success")
 	return redirect(url_for("forklyft_bp.user_rest_menu",restaurant_id=restaurant_id))
 
 
