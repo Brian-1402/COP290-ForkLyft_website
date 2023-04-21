@@ -75,13 +75,13 @@
       <main style="width: 100%;">
         <div class="catchphrase">
           <h3 class="you-wont-be">
-            You won't be able to resist lifting your forks ;
+            <center>You won't be able to resist lifting your forks ;) </center>
           </h3>
         </div>
         {%if restaurants|length==0:%}
           <div class="text1"><h4 class="hot-new-picks">Sorry, this item is not available currently!!</h4></div>
         {%else:%}
-          <div class="text1" style="font-size: large;"><h4 class="hot-new-picks">Restaurants that sells this food</h4></div>
+          <div class="text1" style="font-size: large;"><h4 class="hot-new-picks">Restaurants with similar dishes</h4></div>
           <div class="pratham">
           {%for restaurant in restaurants:%}
             <div class="card text-center pratham2" style="width: 25rem; height:32rem;">

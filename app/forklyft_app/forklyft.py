@@ -37,7 +37,7 @@ def get_menu():
 	
 def get_menu_item(food_name):
 	with get_db().connect() as conn:
-		result = conn.execute(text("SELECT * FROM menus WHERE food_name = :1"),{'1':food_name})
+		result = conn.execute(text("SELECT * FROM menus WHERE UPPER(food_name) LIKE CONCAT('%', UPPER(:1) , '%')   "),{'1':food_name})
 		return result
 
 def get_menu_user(restaurant_id):

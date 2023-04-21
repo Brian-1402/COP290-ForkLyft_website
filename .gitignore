@@ -6,8 +6,11 @@ app/proxy
 zomato.csv
 
 misc_code
+env/
 venv/
 .venv/
+htmlcov/
+coverage_report/
 
 *.pyc
 __pycache__/
@@ -16,7 +19,6 @@ instance/
 
 .pytest_cache/
 .coverage
-htmlcov/
 
 dist/
 build/

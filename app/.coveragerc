@@ -1,2 +1,9 @@
 [run]
-source = forklift_app
+source = forklyft_app
+# dynamic_context = test_function
+
+[report]
+skip_empty = True
+
+[html]
+directory = coverage_report

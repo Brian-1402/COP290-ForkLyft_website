@@ -1,0 +1,6 @@
+flask
+mysqlclient
+sqlalchemy
+pandas
+pytest
+coverage
