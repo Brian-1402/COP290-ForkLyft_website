@@ -23,6 +23,7 @@ test_report_html: test_init
 	rm -f **/.coverage
 	rm -rf .pytest_cache
 	rm -rf **/.pytest_cache
+	rm -rf tests/__pycache__
 	rm -rf tests/**/__pycache__
 
 test_report_txt: test_init
@@ -32,11 +33,20 @@ test_report_txt: test_init
 	rm -f **/.coverage
 	rm -rf .pytest_cache
 	rm -rf **/.pytest_cache
+	rm -rf tests/__pycache__
 	rm -rf tests/**/__pycache__
+
+test_full_txt:
+	coverage run -m pytest > test_output.txt
+	coverage report > test_output_coverage.txt
 
 
 clean:
+	rm -rf tests/__pycache__
 	rm -rf tests/**/__pycache__
+	rm -rf seed_db/__pycache__
+	rm -rf seed_db/**/__pycache__
+	rm -rf forklyft_app/__pycache__
 	rm -rf forklyft_app/**/__pycache__
 	rm -f .coverage
 	rm -f **/.coverage

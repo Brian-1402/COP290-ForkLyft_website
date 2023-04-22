@@ -76,9 +76,9 @@
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">
+            <div class="alert alert-{{ category }}" style="background-color: rgb(170, 218, 170);">
               {{ message }}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="width: 10%;">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -88,7 +88,7 @@
       <main style="margin-top: 150px;">
         <div class="container" style="opacity: 0.97; width:50%;">
           <h1>User Login</h1>
-          <form method="post">
+          <form onsubmit="return validateForm()" method="post">
             <label for="username" style="padding-left: 10px; margin-bottom: 0;"><b>Username</b></label>
             <input type="text" id="username" name="username" placeholder="Enter Username" required>
       
@@ -105,7 +105,19 @@
           </form>
         </div>
       </main>
+      <script>
+        function validateForm() {
+            const username = document.getElementById("username").value.trim();
 
+            const usernameRegex = /^[a-zA-Z][a-zA-Z0-9_]{2,29}$/;
+            if (!usernameRegex.test(username)) {
+                alert("Username must start with a letter and contain only letters, numbers, or underscores. It must be between 3 and 30 characters long.");
+                return false
+            }
+            return true;
+        }
+
+    </script>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

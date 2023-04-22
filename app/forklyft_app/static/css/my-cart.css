@@ -1,6 +1,6 @@
 .forklyft-logo-icon {
   position: relative;
-  width: 70px;
+  width: auto;
   height: 60px;
   flex-shrink: 0;
   object-fit: cover;
@@ -65,6 +65,13 @@
   max-width: 100%;
   overflow: auto;
   max-height: 100%;
+  transition: transform .2s;
+
+}
+.subtract-icon:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+        -webkit-transform: scale(1.5); /* Safari 3-8 */
+        transform: scale(1.5); 
 }
 .home-favorite,
 .homebutton {

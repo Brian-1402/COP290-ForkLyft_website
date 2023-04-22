@@ -167,9 +167,9 @@ def restaurant_register():
 		if len(restaurant):
 			msg1 = 'restaurant already exists !'
 			e1='error'
-		elif not re.match(r'[A-Za-z0-9]+', username):
-			msg1 = 'username must contain only characters and numbers !'
-			e1='error'
+		# elif not re.match(r'[A-Za-z0-9]+', username):
+		# 	msg1 = 'username must contain only characters and numbers !'
+		# 	e1='error'
 		else:
 			with get_db().connect() as conn:
 				conn.execute(text("INSERT INTO restaurants (restaurant_username, restaurant_password, restaurant_name, restaurant_location) VALUES (:uname, :pass, :name, :loc)"),
@@ -288,6 +288,7 @@ def user_home():
 	if(request.method=='POST'):
 		fsearch = request.form.get('search')
 		return redirect(url_for('forklyft_bp.search',item=fsearch))
+	#! potential bug: assumes there are 8 restaurants existing already
 	result = get_menu()[-8:]
 	dict={}
 	for row in result:
@@ -378,7 +379,7 @@ def contact():
 		with get_db().connect() as conn:
 			conn.execute(text("INSERT INTO contact_us (user_id, name_user, mail, message) VALUES (:1, :2, :3, :4)"),{'1':user_id, '2':name, '3':mail, '4':message})
 			conn.commit()
-		flash("succesfully submitted!!","success")
+		flash("successfully submitted!!","success")
 		return redirect(url_for('forklyft_bp.contact'))
 	return render_template("contact-us.html",id=user_id)
 
@@ -539,12 +540,12 @@ def register():
 		if len(user):
 			msg1 = 'Account already exists !'
 			e1='error'
-		elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-			msg1 = 'Invalid email address !'
-			e1='error'
-		elif not re.match(r'[A-Za-z0-9]+', username):
-			msg1 = 'name must contain only characters and numbers !'
-			e1='error'
+		# elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+		# 	msg1 = 'Invalid email address !'
+		# 	e1='error'
+		# elif not re.match(r'[A-Za-z0-9]+', username):
+		# 	msg1 = 'name must contain only characters and numbers !'
+		# 	e1='error'
 		else:
 			with get_db().connect() as conn:
 				conn.execute(text("INSERT INTO users (username, user_pass, name_user, phone_number, mail) VALUES (:uname, :pass, :name, :contact, :email)"),

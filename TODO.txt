@@ -1,0 +1,23 @@
+in forklyft.py:
+
+-accessing links like /user etc without a login gives a internal server error. Should add exception handling and respond with a 403 forbidden or redirect to login page
+-when adding new orders in cart, set order_id as len(pending_orders) + len(my_cart) + len(orders) + 1,  OR
+-remake database structure to combine the 3 tables into one, make relevant changes in forklyft.py
+-when accessing to login page despite already logged in, redirect to user home
+-add invalid details check in the profile page too, just like in signup page
+-in profile page, "password cannot be updated" can be moved to browser js
+
+in tests:
+- in data.sql add mock food items in restaurant and mock order history. or you can actually run those directly in the tester function instead, seems easier since it's just one command.
+- in test_user.py
+    ! before the following two, you may need to update the order_id handling earlier
+    - test going to test_login_res's menu page, add to cart few items
+    - test mycart, and proceed to pay. check if it is added to pending orders section
+- entire test_restaurant.py pending
+- maybe there can be a test_order.py which requires user to add to cart and pay and then the restaurant completes it and then should be visible in my orders in user
+
+general:
+-Watch cop video and confirm on seperating frontend backend. Confirm from others as well.
+-Check baadalvm proxy by looking at baadalvm website FAQ too.
+-ML API
+-Add commments everywhere to make code cleaner.

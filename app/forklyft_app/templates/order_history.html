@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .pratham{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+      .pratham2{
+        margin: 15px 15px;
+      }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
@@ -21,9 +33,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
-  <body>
-    <div class="restaurant-menu">
+  <body style="background-color: #E9F8F9;">
+    <div class="restaurant-menu" >
       <nav class="header4">
         <img
           class="headerlogo-icon"
@@ -40,23 +53,31 @@
         {%else:%}
           {%for i in range(menu[-1][1],menu[0][1]-1,-1)%}
             {%if i in list:%}
-              <div class="bodydetails">
+              <div>
                 <!-- <div class="menu1"> -->
-                <div class="startersframe">
-                  <h3 class="starters1"><i><u>Order ID #{{i}}</u></i></h3>
+                <div style="margin-top: 30px; margin-left: 30px;">
+                  <h3 style="text-align: center; margin-bottom: 20px;"><i><u>Order ID #{{i}}</u></i></h3>
                   <!-- <h4 class="starters1">User ID {{i}}</h4> -->
-                  {%for row in menu:%}
-                      {%if row[1]==i:%}
-                        <div class="item11">
-                          <h3 class="item-1-name-container4">
-                            <ul>
-                              <li><p class="item-1-name4">Item ID: {{row[4]}}</p>
-                              <p class="item-1-name4">Quanity: {{row[5]}}</p>
-                            </ul>
-                          </h3>
-                        </div> 
-                      {%endif%}
-                  {%endfor%}    
+                  <div class="pratham">
+                    {%for row in menu:%}
+                        {%if row[1]==i:%}
+                        <div class="card text-center pratham2" style="width: 18rem; background-color: #181823; color: white;">
+                          <div class="card-body">
+                            <h3 class="card-title" style="font-size: large;">Item ID: {{row[4]}}</h3>
+                            <p class="card-text" style="font-size: large">Quanity: {{row[5]}}</p>
+                          </div>
+                        </div>
+                          <!-- <div class="item11">
+                            <h3 class="item-1-name-container4">
+                              <ul>
+                                <li><p class="item-1-name4">Item ID: {{row[4]}}</p>
+                                <p class="item-1-name4">Quanity: {{row[5]}}</p>
+                              </ul>
+                            </h3>
+                          </div>  -->
+                        {%endif%}
+                    {%endfor%}    
+                  </div>
                 </div>
               </div>
             {%endif%}

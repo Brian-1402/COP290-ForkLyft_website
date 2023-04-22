@@ -18,6 +18,7 @@ def execute_db_file(db_instance,f):
             if len(i)<1 or i[:2]=="--": # if empty line or comment, skip
                 continue
             conn.execute(text(i.decode('utf-8')))
+        conn.commit()
 
 def init_db():
     with current_app.open_resource("schema.sql") as f:

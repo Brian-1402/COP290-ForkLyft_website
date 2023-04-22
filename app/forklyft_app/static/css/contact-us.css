@@ -1,6 +1,6 @@
 .forklyft-logo-icon5 {
   position: relative;
-  width: 70px;
+  width: auto;
   height: 60px;
   flex-shrink: 0;
   object-fit: cover;
@@ -72,6 +72,7 @@
   border: 0;
   padding: 0;
   background-color: transparent;
+  transform : .2s;
 }
 .home-favorite4 {
   position: relative;
@@ -79,6 +80,15 @@
   height: 50px;
   flex-shrink: 0;
   overflow: auto;
+  transform : .2s;
+}
+.home-favorite4:hover {
+  /* transform : .2s; */
+  -ms-transform: scale(1.5) slow; /* IE 9 */
+        -webkit-transform: scale(1.5); /* Safari 3-8 */
+        transform: scale(1.5); 
+  -webkit-transition: transform 0.2s ease-in-out;
+        
 }
 .homebutton6 {
   display: flex;
