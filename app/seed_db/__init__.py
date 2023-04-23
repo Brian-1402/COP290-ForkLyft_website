@@ -74,7 +74,7 @@ def add_past_orders(db_instance):
             item = random.randint(res*100+1, res*100+5)
             q = random.randint(1,3)
             with db_instance.connect() as conn:
-                conn.execute(text("INSERT INTO orders (order_id, restaurant_id, user_id, item_id, quantity) VALUES (:order, :res, :user, :item, :qty)"),
+                conn.execute(text("INSERT INTO orders (order_id, restaurant_id, user_id, item_id, quantity, order_status) VALUES (:order, :res, :user, :item, :qty, 'done')"),
                         {'order':order_id, 'res':res, 'user':user, 'item':item, 'qty':q})
                 conn.commit()
                 

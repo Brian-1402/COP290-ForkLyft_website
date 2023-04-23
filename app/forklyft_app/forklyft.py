@@ -14,14 +14,14 @@ bp=Blueprint("forklyft_bp",__name__)
 # app.config['MYSQL_DATABASE_HOST']='localhost'
 # mysql=MySQL(app)
 
-order_id1=19
+# order_id1=19
 
 def find_restaurant(restaurant_id):
 	with get_db().connect() as conn:
-		result = conn.execute(text("SELECT * FROM restaurants WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
-		if result is None:
+		result = conn.execute(text("SELECT * FROM restaurants WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id}).all()
+		if len(result)==0:
 			abort(404)
-		return result.all()
+		return result
 
 	# conn = get_db_connection()
 	# restaurant = conn.execute('SELECT * FROM restaurants WHERE restaurant_id = ?',(restaurant_id,)).fetchone()
@@ -38,7 +38,7 @@ def get_menu():
 def get_menu_item(food_name):
 	with get_db().connect() as conn:
 		result = conn.execute(text("SELECT * FROM menus WHERE UPPER(food_name) LIKE CONCAT('%', UPPER(:1) , '%')   "),{'1':food_name})
-		return result
+		return result.all()
 
 def get_menu_user(restaurant_id):
 	with get_db().connect() as conn:
@@ -53,73 +53,91 @@ def get_restaurant():
 def find_menu(restaurant_id):
 	with get_db().connect() as conn:
 		result = conn.execute(text("SELECT * FROM menus WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
-		if result is None:
-			abort(404)
+		# if result is None:
+		# 	abort(404)
 		return result.all()
 	
-def find_order(restaurant_id):
+# def find_order(restaurant_id):
+# 	with get_db().connect() as conn:
+# 		result = conn.execute(text("SELECT * FROM orders WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
+# 		# if result is None:
+# 		#     abort(404)
+# 		return result.all()
+	
+# def find_order_pending(restaurant_id):
+# 	with get_db().connect() as conn:
+# 		result = conn.execute(text("SELECT * FROM pending_orders WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
+# 		# if result is None:
+# 		#     abort(404)
+# 		return result.all()
+
+# def find_user_order(user_id):
+# 	with get_db().connect() as conn:
+# 		result = conn.execute(text("SELECT * FROM orders WHERE user_id = :user_id"),{'user_id':user_id})
+# 		# if result is None:
+# 		#     abort(404)
+# 		return result.all()
+
+def find_orders(client_id,client,status):
 	with get_db().connect() as conn:
-		result = conn.execute(text("SELECT * FROM orders WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
+		result = conn.execute(text(f"SELECT * FROM orders WHERE {client}_id = :id AND order_status = :status ORDER BY order_item_id"),{'id':client_id, 'status':status})
 		# if result is None:
 		#     abort(404)
 		return result.all()
-	
-def find_order_pending(restaurant_id):
-	with get_db().connect() as conn:
-		result = conn.execute(text("SELECT * FROM pending_orders WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
-		# if result is None:
-		#     abort(404)
-		return result.all()
-	
-def find_user_order(user_id):
-	with get_db().connect() as conn:
-		result = conn.execute(text("SELECT * FROM orders WHERE user_id = :user_id"),{'user_id':user_id})
-		# if result is None:
-		#     abort(404)
-		return result.all()
-	
+
+
+
 def find_user(user_id):
 	with get_db().connect() as conn:
 		result = conn.execute(text("SELECT * FROM users WHERE user_id = :user_id"),{'user_id':user_id})
-		if result is None:
-			abort(404)
+		# if result is None:
+		# 	abort(404)
 		return result.all()
 
-def update_user(user_id,home_n,work_n,other_n):
-	with get_db().connect() as conn:
-		conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':home_n, '2':work_n, '3':other_n, 'user_id':user_id})
-		# if result is None:
-		#     abort(404)
-		# return result.all()
-		conn.commit()
+# def update_user(user_id,home_n,work_n,other_n):
+# 	with get_db().connect() as conn:
+# 		conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':home_n, '2':work_n, '3':other_n, 'user_id':user_id})
+# 		# if result is None:
+# 		#     abort(404)
+# 		# return result.all()
+# 		conn.commit()
 
-def find_starter(menu):
-	menu_starter = []
-	for item in menu:
-		if item[3]=='starter':
-			menu_starter.append(item)
-	return menu_starter
+# def find_starter(menu):
+# 	menu_starter = []
+# 	for item in menu:
+# 		if item[3]=='starter':
+# 			menu_starter.append(item)
+# 	return menu_starter
 
-def find_dessert(menu):
-	menu_dessert = []
-	for item in menu:
-		if item[3]=='dessert':
-			menu_dessert.append(item)
-	return menu_dessert
+# def find_dessert(menu):
+# 	menu_dessert = []
+# 	for item in menu:
+# 		if item[3]=='dessert':
+# 			menu_dessert.append(item)
+# 	return menu_dessert
 
-def find_main(menu):
-	menu_main = []
-	for item in menu:
-		if item[3]=='main':
-			menu_main.append(item)
-	return menu_main
+# def find_main(menu):
+# 	menu_main = []
+# 	for item in menu:
+# 		if item[3]=='main':
+# 			menu_main.append(item)
+# 	return menu_main
 
-def find_drink(menu):
-	menu_drink = []
+# def find_drink(menu):
+# 	menu_drink = []
+# 	for item in menu:
+# 		if item[3]=='drink':
+# 			menu_drink.append(item)
+# 	return menu_drink
+
+def find_menu_category(menu,category):
+	menu_category_items = []
 	for item in menu:
-		if item[3]=='drink':
-			menu_drink.append(item)
-	return menu_drink
+		if item[3]==category:
+			menu_category_items.append(item)
+	return menu_category_items
+
+
 
 # def shutdown_server():
 # 	func = request.environ.get('werkzeug.server.shutdown')
@@ -136,6 +154,9 @@ def find_drink(menu):
 
 @bp.route('/restaurant/login', methods = ['GET', 'POST'])
 def res_login():
+	if session.get('id1'):
+		if session['id1']:
+			return redirect(url_for('forklyft_bp.display_restaurant'))
 	if request.method == 'POST' and 'restaurant_username' in request.form and 'restaurant_password' in request.form:
 		username = request.form['restaurant_username']
 		password = request.form['restaurant_password']
@@ -181,16 +202,16 @@ def restaurant_register():
 		flash(msg1,e1)
 		if(a):return redirect(url_for('forklyft_bp.res_login'))
 		else: return redirect(url_for('forklyft_bp.restaurant_register'))
-	elif request.method == 'POST':
-		flash('Please fill out the form !','error')
-		return redirect(url_for('forklyft_bp.restaurant_register'))
+	# elif request.method == 'POST':
+	# 	flash('Please fill out the form !','error')
+	# 	return redirect(url_for('forklyft_bp.restaurant_register'))
 	return render_template('index.html')
 
 @bp.route("/restaurant")
 def display_restaurant():
 	restaurant_id=session['id1']
 	rest1 = find_restaurant(restaurant_id)
-	order = find_order(restaurant_id)
+	order = find_orders(restaurant_id,"restaurant","done")
 	menu = find_menu(restaurant_id)
 	return render_template("restaurant-home.html",rest=rest1,order=order,menu=menu)
 
@@ -200,10 +221,10 @@ def display_menu_restaurant():
 	rest = find_restaurant(restaurant_id)
 	menu = find_menu(restaurant_id)
 	# return menu[0]['image_url']
-	menu_starter = find_starter(menu)
-	menu_dessert = find_dessert(menu)
-	menu_main = find_main(menu)
-	menu_drink = find_drink(menu)
+	menu_starter = find_menu_category(menu,"starter")
+	menu_dessert = find_menu_category(menu,"dessert")
+	menu_main = find_menu_category(menu,"main")
+	menu_drink = find_menu_category(menu,"drink")
 	return render_template("restaurant-menu.html",rest=rest, menu_s=menu_starter, menu_d = menu_dessert, menu_m = menu_main, menu_dr = menu_drink)
 
 @bp.route("/restaurant/add_item", methods = ('GET','POST'))
@@ -215,21 +236,21 @@ def display_add_form():
 		ftype=request.form.get('type')
 		furl=request.form.get('url')
 		# return ("yes")
-		if not (fname and fprice and ftype and furl):
-			flash('please fill complete information')
-		else:
-			with get_db().connect() as conn:
-				conn.execute(text('INSERT INTO menus(restaurant_id, image_url, food_name, food_price, food_type) VALUES (:1, :2, :3, :4, :5)'),
-								{'1':restaurant_id, '2':furl, '3':fname, '4':fprice, '5':ftype})
-				conn.commit()
-			return redirect(url_for('forklyft_bp.display_menu_restaurant'))
+		# if not (fname and fprice and ftype and furl):
+		# 	flash('please fill complete information')
+		# else:
+		with get_db().connect() as conn:
+			conn.execute(text('INSERT INTO menus(restaurant_id, image_url, food_name, food_price, food_type) VALUES (:1, :2, :3, :4, :5)'),
+							{'1':restaurant_id, '2':furl, '3':fname, '4':fprice, '5':ftype})
+			conn.commit()
+		return redirect(url_for('forklyft_bp.display_menu_restaurant'))
 	return render_template("restaurant-add-item.html",restaurant_id=restaurant_id)
 
 @bp.route("/restaurant/order_his")
 def order_history():
 	restaurant_id = session['id1']
 	rest = find_restaurant(restaurant_id)
-	menu = find_order(restaurant_id)
+	menu = find_orders(restaurant_id,"restaurant","done")
 	list=[]
 	for row in menu:
 		list.append(row[1])
@@ -240,10 +261,10 @@ def order_history():
 def pending():
 	restaurant_id = session['id1']
 	# rest = find_restaurant(restaurant_id)
-	menu = find_order_pending(restaurant_id)
+	menu = find_orders(restaurant_id,"restaurant","pending")
 	list=[]
 	for row in menu:
-		list.append(row[6])
+		list.append(row[1])
 	return render_template("restaurant_pending.html",menu=menu,list=list)
 
 
@@ -252,14 +273,18 @@ def delete_order_pending():
 	res_id = session['id1']
 	order_id = request.args.get('order_id')
 	with get_db().connect() as conn:
-		order = conn.execute(text('SELECT * FROM pending_orders WHERE order_id = :order_id AND restaurant_id =:res_id'),{'order_id':order_id,'res_id':res_id}).all()
-	for row in order:
-		with get_db().connect() as conn:
-			conn.execute(text('INSERT INTO orders (order_id,restaurant_id,user_id,item_id,quantity) VALUES (:1,:2,:3,:4,:5)'),{'1':order_id,'2':res_id,'3':row[1],'4':row[3],'5':row[4]})
-			conn.commit()
-	with get_db().connect() as conn:
-		conn.execute(text('DELETE FROM pending_orders WHERE order_id = :order_id AND restaurant_id= :id'),{'order_id':order_id,'id':res_id})
+		conn.execute(text('UPDATE orders SET order_status = :status WHERE order_id = :order_id AND restaurant_id =:res_id'),{'status':'done' , 'order_id':order_id,'res_id':res_id})
 		conn.commit()
+
+	# 	order = conn.execute(text('SELECT * FROM orders WHERE order_id = :order_id AND restaurant_id =:res_id'),{'order_id':order_id,'res_id':res_id}).all()
+	# for row in order:
+	# 	with get_db().connect() as conn:
+	# 		conn.execute(text('INSERT INTO orders (order_id,restaurant_id,user_id,item_id,quantity) VALUES (:1,:2,:3,:4,:5)'),{'1':order_id,'2':res_id,'3':row[1],'4':row[3],'5':row[4]})
+	# 		conn.commit()
+	# with get_db().connect() as conn:
+	# 	conn.execute(text('DELETE FROM pending_orders WHERE order_id = :order_id AND restaurant_id= :id'),{'order_id':order_id,'id':res_id})
+		# conn.commit()
+	
 	return redirect(url_for("forklyft_bp.pending"))
 
 
@@ -268,7 +293,7 @@ def search(item):
 	user_id = session['id']
 	items = get_menu_item(item)
 	if(items):
-		items=items.all()
+		# items=items.all()
 		restaurants=[]
 		menus={}
 		for item in items:
@@ -341,24 +366,24 @@ def view_profile():
 		username=request.form.get('username')
 		mail=request.form.get('email_id')
 		contact=request.form.get('contact')
-		password=request.form.get('password')
+		# password=request.form.get('password')
 		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET username = :1, mail = :2, phone_number =:3 WHERE user_id = :user_id"),{'1':username, '2':mail, '3':contact, 'user_id':user_id})
 			conn.commit()
 		if(username!=user[0][4] or mail!=user[0][7] or contact!=user[0][8]):
-			if(password==user[0][6]):
-				flash("profile updated!! ","success")
-			else:
-				flash("profile updated!! Password cannot be updated!!","success")
-		elif(password!=user[0][6]):
-			flash("password cannot be updated","error")
+			# if(password==user[0][6]):
+			flash("profile updated!! ","success")
+			# else:
+			# 	flash("profile updated!! Password cannot be updated!!","success")
+		# elif(password!=user[0][6]):
+		# 	flash("password cannot be updated","error")
 		return redirect(url_for('forklyft_bp.view_profile'))
 	return render_template("my-profile.html",user=user,id=user_id)
 
 @bp.route("/user/orders")
 def view_orders():
 	user_id=session['id']
-	menu = find_user_order(user_id)
+	menu = find_orders(user_id,"user","done")
 	list=[]
 	item={}
 	for row in menu:
@@ -394,10 +419,10 @@ def cart():
 	dict2={}
 	delivery_price=0
 	with get_db().connect() as conn:
-		cart = conn.execute(text('SELECT * FROM my_cart WHERE user_id = :id'),{'id':user_id}).all()
+		cart = conn.execute(text('SELECT * FROM orders WHERE user_id = :id AND order_status="cart" ORDER BY order_item_id'),{'id':user_id}).all()
 	if(len(cart)):
 		for row in cart:
-			item_id = row[1]
+			item_id = row[4]
 			restaurant_id = row[2]
 			with get_db().connect() as conn:
 				item = conn.execute(text('SELECT food_name, food_price, image_url FROM menus WHERE menu_id = :item_id'),{'item_id':item_id}).all()[0]
@@ -411,24 +436,33 @@ def cart():
 	else: flash("you have not added any item to the cart!! pls add some thing.",'error')
 	return render_template("my-cart.html", cart=cart, dict1=dict1, dict2=dict2, total_price=total_price, delivery_price=delivery_price)
 
-
-
-@bp.route("/add_to_cart")
+@bp.route("/add_to_cart", methods=['GET','POST'])
 def add_to_cart():
-	global order_id1
-	order_id1 = order_id1+1
+	# global order_id1
+	# order_id1 = order_id1+1
 	restaurant_id=request.args.get('restaurant_id')
 	item_id=request.args.get('item_id')
 	user_id=session['id']
 	with get_db().connect() as conn:
-		cart = conn.execute(text('SELECT * FROM my_cart WHERE user_id = :id AND item_id = :item_id'),{'id':user_id,'item_id':item_id}).all()
-	if(len(cart)==0):
+		cart = conn.execute(text('SELECT * FROM orders WHERE user_id = :id AND order_status = "cart" ORDER BY order_item_id'),{'id':user_id}).all()
+	if(len(cart)==0): # if user's cart is empty
 		with get_db().connect() as conn:
-			conn.execute(text('INSERT INTO my_cart (item_id, restaurant_id, user_id, order_id) VALUES (:1, :2, :3, :4)'),{'1':item_id,'2':restaurant_id,'3':user_id, '4':order_id1})
+			# order id is 1+ the order_id of the last row of the orders table, i.e., the previous cart's order_id+1
+			orders=conn.execute(text('SELECT order_id FROM orders ORDER BY order_item_id DESC LIMIT 1')).fetchone()
+			if orders==None:
+				order_id=1
+			else:
+				order_id=orders[0]+1
+			conn.execute(text('INSERT INTO orders (item_id, restaurant_id, user_id, order_id, order_status, quantity) VALUES (:1, :2, :3, :4, "cart", 1)'),{'1':item_id,'2':restaurant_id,'3':user_id, '4':order_id})
 			conn.commit()
 	else:
+		order_id=cart[0][1]
+		cart_item=[row for row in cart if row[4]==int(item_id)] # gets the item's row from cart
 		with get_db().connect() as conn:
-			conn.execute(text('UPDATE my_cart SET quantity = :quantity WHERE user_id = :id AND item_id = :item_id'),{'quantity':cart[0][5]+1,'id':user_id,'item_id':item_id})
+			if(len(cart_item)==0): # if item not in cart, insert
+				conn.execute(text('INSERT INTO orders (item_id, restaurant_id, user_id, order_id, order_status, quantity) VALUES (:1, :2, :3, :4, "cart", 1)'),{'1':item_id,'2':restaurant_id,'3':user_id, '4':order_id})
+			else: # if item in cart, increase quantity
+				conn.execute(text('UPDATE orders SET quantity = :quantity WHERE user_id = :id AND item_id = :item_id  AND order_status = "cart"'),{'quantity':cart_item[0][5]+1,'id':user_id,'item_id':item_id})
 			conn.commit()
 	flash("item added to cart","success")
 	return redirect(url_for("forklyft_bp.user_rest_menu",restaurant_id=restaurant_id))
@@ -438,9 +472,9 @@ def add_to_cart():
 def increase_quantity():
 	item_id=request.args.get('item_id')
 	user_id=session['id']
-	quantity=int(request.args.get('quantity'))
+	quantity=int(request.args.get('quantity')) #! resolve pylance error
 	with get_db().connect() as conn:
-		conn.execute(text('UPDATE my_cart SET quantity = :quantity WHERE item_id =:id AND user_id =:user_id'),{'quantity':quantity+1,'id':item_id,'user_id':user_id})
+		conn.execute(text('UPDATE orders SET quantity = :quantity WHERE item_id =:id AND user_id =:user_id AND order_status = "cart"'),{'quantity':quantity+1,'id':item_id,'user_id':user_id})
 		conn.commit()
 	return redirect(url_for("forklyft_bp.cart"))
 
@@ -451,10 +485,11 @@ def decrease_quantity():
 	quantity=int(request.args.get('quantity'))
 	with get_db().connect() as conn:
 		if(quantity>1):
-			conn.execute(text('UPDATE my_cart SET quantity = :quantity WHERE item_id =:id AND user_id =:user_id'),{'quantity':quantity-1,'id':item_id,'user_id':user_id})
+			conn.execute(text('UPDATE orders SET quantity = :quantity WHERE item_id =:id AND user_id =:user_id AND order_status = "cart"'),{'quantity':quantity-1,'id':item_id,'user_id':user_id})
 			conn.commit()
 		else:
-			conn.execute(text('DELETE FROm my_cart WHERE item_id =:id AND user_id =:user_id'),{'id':item_id,'user_id':user_id})
+			conn.execute(text('DELETE FROM orders WHERE item_id =:id AND user_id =:user_id AND order_status = "cart"'),{'id':item_id,'user_id':user_id})
+			conn.commit()
 	return redirect(url_for("forklyft_bp.cart"))
 
 @bp.route("/remove")
@@ -462,7 +497,7 @@ def remove():
 	item_id=request.args.get('item_id')
 	user_id=session['id']
 	with get_db().connect() as conn:
-		conn.execute(text('DELETE FROM my_cart WHERE item_id =:id AND user_id =:user_id'),{'id':item_id,'user_id':user_id})
+		conn.execute(text('DELETE FROM orders WHERE item_id =:id AND user_id =:user_id AND order_status = "cart"'),{'id':item_id,'user_id':user_id})
 		conn.commit()
 	return redirect(url_for("forklyft_bp.cart"))
 
@@ -471,11 +506,11 @@ def remove():
 def user_rest_menu(restaurant_id):
 	menu = get_menu_user(restaurant_id)
 	with get_db().connect() as conn:
-		restaurant=conn.execute(text('SELECT * FROM restaurants WHERE restaurant_id = :id'),{'id':restaurant_id}).all()[0]
-	menu_starter = find_starter(menu)
-	menu_dessert = find_dessert(menu)
-	menu_main = find_main(menu)
-	menu_drink = find_drink(menu)
+		restaurant=find_restaurant(restaurant_id)[0]
+	menu_starter = find_menu_category(menu,"starter")
+	menu_dessert = find_menu_category(menu,"dessert")
+	menu_main = find_menu_category(menu,"main")
+	menu_drink = find_menu_category(menu,"drink")
 	return render_template("user-restaurant-menu.html",menu_s = menu_starter, menu_d = menu_dessert, menu_m = menu_main, menu_dr = menu_drink, rest=restaurant)
 
 
@@ -484,17 +519,22 @@ def pay():
 	user_id=session['id']
 	user = find_user(user_id)
 	if(request.method=='POST'):
-		global order_id1
+		# global order_id1
 		option=request.form.get('flexRadioDefault')
 		with get_db().connect() as conn:
-			cart = conn.execute(text('SELECT * FROM my_cart WHERE user_id =:user_id'),{'user_id':user_id}).all()
-		for row in cart:
-			with get_db().connect() as conn:
-				conn.execute(text('INSERT INTO pending_orders (user_id,restaurant_id,item_id,quantity,address, order_id) VALUES (:1,:2,:3,:4,:5, :6)'),{'1':user_id,'2':row[2],'3':row[1],'4':row[5],'5':option, '6':order_id1})
-				conn.commit()
-		with get_db().connect() as conn:
-			conn.execute(text('DELETE FROM my_cart WHERE user_id=:id'),{'id':user_id})
+			cart = conn.execute(text('UPDATE orders SET order_status = "pending", address = :address WHERE user_id =:user_id AND order_status = "cart"'),{'user_id':user_id, 'address':option})
 			conn.commit()
+
+		# with get_db().connect() as conn:
+		# 	cart = conn.execute(text('SELECT * FROM my_cart WHERE user_id =:user_id'),{'user_id':user_id}).all()
+		# for row in cart:
+		# 	with get_db().connect() as conn:
+		# 		conn.execute(text('INSERT INTO pending_orders (user_id,restaurant_id,item_id,quantity,address, order_id) VALUES (:1,:2,:3,:4,:5, :6)'),{'1':user_id,'2':row[2],'3':row[1],'4':row[5],'5':option, '6':order_id1})
+		# 		conn.commit()
+		# with get_db().connect() as conn:
+		# 	conn.execute(text('DELETE FROM my_cart WHERE user_id=:id'),{'id':user_id})
+		# 	conn.commit()
+		
 		flash("payment successful!! will reach to you soon!!",'success')
 		return redirect(url_for("forklyft_bp.user_home"))
 	return render_template("pay.html",user=user)
@@ -508,6 +548,9 @@ def main():
 
 @bp.route('/login', methods = ['GET', 'POST'])
 def login():
+	if session.get('id'):
+		if (session['id']): 
+			return redirect(url_for('forklyft_bp.user_home'))
 	if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
 		username = request.form['username']
 		password = request.form['password']
@@ -557,9 +600,9 @@ def register():
 		flash(msg1,e1)
 		if(a):return redirect(url_for('forklyft_bp.login'))
 		else: return redirect(url_for('forklyft_bp.register'))
-	elif request.method == 'POST':
-		flash('Please fill out the form !','error')
-		return redirect(url_for('forklyft_bp.register'))
+	# elif request.method == 'POST':
+	# 	flash('Please fill out the form !','error')
+	# 	return redirect(url_for('forklyft_bp.register'))
 	return render_template('user-signup.html')
 
 @bp.route('/logout')

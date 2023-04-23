@@ -89,23 +89,23 @@
         <div class="pratham">
           {%for row in cart%}
             <div class="card text-center pratham2" style="width: 22rem; height:30rem; background-color: #537FE7;">
-              <img class="card-img-top" src="{{dict1[row[1]][2]}}" alt="Card image cap" style="height: 60%;">
+              <img class="card-img-top" src="{{dict1[row[4]][2]}}" alt="Card image cap" style="height: 60%;">
               <div class="card-body">
-                <h5 class="card-title">{{dict1[row[1]][0]}}</h5>
-                <p class="card-text">price: {{dict1[row[1]][1]}}$</p>
+                <h5 class="card-title">{{dict1[row[4]][0]}}</h5>
+                <p class="card-text">price: {{dict1[row[4]][1]}}$</p>
               </div>
               <ul class="list-group list-group-flush" >
                 <li class="list-group-item" style="background-color: #537FE7;">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <a href='{{url_for("forklyft_bp.increase_quantity",item_id=row[1], quantity=row[5])}}'><button class="btn btn-outline-secondary" type="button" alt="increase quantity" style="color: green; background-color: #181823;"><i class="material-icons">add</i></button></a>
+                      <a href='{{url_for("forklyft_bp.increase_quantity",item_id=row[4], quantity=row[5])}}'><button class="btn btn-outline-secondary" type="button" alt="increase quantity" style="color: green; background-color: #181823;"><i class="material-icons">add</i></button></a>
                     </div>
                     <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" value="quantity: {{row[5]}}" readonly>
                     <div class="input-group-prepend">
-                      <a href='{{url_for("forklyft_bp.remove",item_id=row[1], quantity=row[5])}}'><button class="btn btn-outline-secondary" type="button" alt="decrease quantity" style="color: orange;background-color: #181823;"><i class="material-icons">remove</i></button></a>
+                      <a href='{{url_for("forklyft_bp.remove",item_id=row[4], quantity=row[5])}}'><button class="btn btn-outline-secondary" type="button" alt="decrease quantity" style="color: orange;background-color: #181823;"><i class="material-icons">remove</i></button></a>
                     </div>
                     <div class="input-group-prepend">
-                      <a href='{{url_for("forklyft_bp.remove",item_id=row[1], quantity=row[5])}}'><button class="btn btn-outline-secondary" type="button" alt="delete forever" style="color: red;background-color: #181823;"><span class="material-symbols-outlined">
+                      <a href='{{url_for("forklyft_bp.remove",item_id=row[4], quantity=row[5])}}'><button class="btn btn-outline-secondary" type="button" alt="delete forever" style="color: red;background-color: #181823;"><span class="material-symbols-outlined">
                         delete_forever
                         </span></button></a>
                     </div>

@@ -13,10 +13,17 @@ def test_index(client, auth):
 
 def test_user_home(client, auth):
     auth.login_user()
-    assert client.get("/user").status_code == 200
     response = client.get("/user")
+    assert response.status_code == 200
     assert b"Contact Us" in response.data # testing navbar
     assert b"Hot new picks" in response.data
+
+def test_search(client, auth):
+    auth.login_user()
+    response = client.post("/user", data={"search":"food1"}, follow_redirects=True)
+    assert b"tester_login_res" in response.data
+    response = client.post("/user", data={"search":"fffffff"}, follow_redirects=True)
+    assert b"not available" in response.data
 
     #! test search bar as well
 
@@ -58,8 +65,6 @@ def test_profile_page(client, auth, app):
             assert result[-1] == "9234567890"
             assert result[-2] == "tester_login2@tests.com"
 
-    #! "password cannot be updated" can be moved to browser js
-
     # reverting back the account details
     response = client.post("/user/profile", data={"username": "tester_login", "email_id": "tester_login@tests.com", "contact":"1234567890","password":"tester_login"}, follow_redirects=True)
     assert b"profile updated" in response.data
@@ -69,6 +74,7 @@ def test_user_my_orders(client,auth, app):
     response= client.get("/user/orders")
     assert response.status_code == 200
     assert b"Order History" in response.data
+    assert b"No orders yet" in response.data
 
 def test_user_my_addresses(client,auth, app):
     auth.login_user()
@@ -86,15 +92,20 @@ def test_user_my_addresses(client,auth, app):
     response = client.post("/user/addresses", data={"home":"test_home_address","work":"test_work_address","other":"test_other_address"}, follow_redirects=True)
     assert b"addresses updated" in response.data
 
+def test_restaurant_page(client,auth):
+    auth.login_user()
+    response= client.get("/user/14134141")
+    assert response.status_code == 200
+    assert b"tester_login_res" in response.data
+    assert b"food1" in response.data
+    assert client.get("/user/99999999").status_code == 404
+
+
+
+
+
+
 # def test_boost_coverage(client, auth):
-#     auth.login_user()
-#     assert client.get("/user/cart").status_code == 200
-#     auth.logout_user()
-#     auth.login_restaurant()
-#     assert client.get("/restaurant/menu").status_code == 200
 #     assert client.get("/restaurant/add_item").status_code == 200
-#     assert client.get("/restaurant/order_his").status_code == 200
-#     assert client.get("/restaurant/pending").status_code == 200
-#     auth.logout_restaurant()
 
 

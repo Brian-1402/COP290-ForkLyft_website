@@ -64,7 +64,7 @@
       <div class="bodyframe">
         <div class="bodycontentframe">
           <div class="headingtext"><h3 class="my-profile3">My Profile</h3></div>
-          <form class="profileframe" method="POST">
+          <form onsubmit="return validateForm()" class="profileframe" method="POST">
             <div class="profilefields">
               <div class="usernameframe">
                 <label for="username" class="email-id">Username</label>
@@ -72,7 +72,7 @@
               </div>
               <div class="usernameframe">
                 <label for="mail" class="email-id">Email ID</label>
-                <input class="usernametextfield" id="mail" type="text" name="email_id" value="{{user[0][7]}}" required/>
+                <input class="usernametextfield" id="mail" type="email" name="email_id" value="{{user[0][7]}}" required/>
               </div>
               <div class="usernameframe">
                 <label for="contact" class="email-id">Phone Number</label>
@@ -172,6 +172,18 @@
       //   });
       // }
       </script>
+      <script>
+        function validateForm() {
+            const username = document.getElementById("username").value.trim();
+
+            const usernameRegex = /^[a-zA-Z][a-zA-Z0-9_]{2,29}$/;
+            if (!usernameRegex.test(username)) {
+                alert("Username must start with a letter and contain only letters, numbers, or underscores. It must be between 3 and 30 characters long.");
+                return false
+            }
+            return true;
+        }
+    </script>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

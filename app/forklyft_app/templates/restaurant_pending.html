@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .pratham{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+      .pratham2{
+        margin: 15px 15px;
+      }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
@@ -21,8 +33,9 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
-  <body>
+  <body style="background-color: #E9F8F9; background-image: url(../static/public/main/intro-bg.jpg);">
     <div class="restaurant-menu">
       <nav class="header4">
         <img
@@ -33,32 +46,44 @@
           ><h4 class="home1">Home</h4></a
         >
       </nav>
-      <main class="body5">
-        <div class="ourmenuframe"><h3 class="our-menu">Pending Orders</h3></div>
+      <main style="width: 100%;">
+        {%if menu|length >0:%}
+          <h1 style="text-align: center;">Pending Orders</h1>
+        {%endif%}
         {%if menu==[]:%}
-          <h3>No pending orders!!</h3>
+          <h1 style="text-align: center; margin-top: 40px; margin-bottom: 40px;">No pending orders!!</h1>
         {%else:%}
-          {%for i in range(menu[-1][6],menu[0][6]-1,-1)%}
+          {%for i in range(menu[-1][1],menu[0][1]-1,-1)%}
             {%if i in list:%}
-              <div class="bodydetails">
+              <div>
                 <!-- <div class="menu1"> -->
-                <div class="startersframe">
-                  <h3 class="starters1"><i><u>Order ID #{{i}}</u></i></h3>
-                  <a href='{{url_for("forklyft_bp.delete_order_pending",order_id=i)}}'>close order</a>
+                <div style="margin-top: 30px; text-align: center;">
+                  <h3  style="text-align: center; margin-bottom: 20px;"><i><u>Order ID #{{i}}</u></i></h3>
+                  <button type="submit" style="margin-left: auto;" class="btn btn-primary"><a style="color: white;" href='{{url_for("forklyft_bp.delete_order_pending",order_id=i)}}'>Close Order!!</a></button>
+                  <!-- <button style="width: 100%;" type="button" class="btn btn-link" href='{{url_for("forklyft_bp.delete_order_pending",order_id=i)}}'>Close order</button> -->
                   <!-- <h4 class="starters1">User ID {{i}}</h4> -->
-                  {%for row in menu:%}  
-                      {%if row[6]==i:%}
-                        <div class="item11">
-                          <h3 class="item-1-name-container4">
-                            <ul>
-                              <li><p class="item-1-name4">Item ID: {{row[3]}}</p>
-                              <p class="item-1-name4">Quanity: {{row[4]}}</p>
-                              <p class="item-1-name4">Address: {{row[5]}}</p>
-                            </ul>
-                          </h3>
-                        </div> 
-                      {%endif%}
-                  {%endfor%}    
+                  <div class="pratham">
+                    {%for row in menu:%}  
+                        {%if row[1]==i:%}
+                        <div class="card text-center pratham2" style="width: 18rem; background-color: #181823; color: white;">
+                          <div class="card-body">
+                            <h3 class="card-title" style="font-size: large;">Item ID: {{row[4]}}</h3>
+                            <p class="card-text" style="font-size: large">Quanity: {{row[5]}}</p>
+                            <p class="card-text" style="font-size: large">Address: {{row[7]}}</p>
+                          </div>
+                        </div>
+                          <!-- <div class="item11">
+                            <h3 class="item-1-name-container4">
+                              <ul>
+                                <li><p class="item-1-name4">Item ID: {{row[3]}}</p>
+                                <p class="item-1-name4">Quanity: {{row[4]}}</p>
+                                <p class="item-1-name4">Address: {{row[5]}}</p>
+                              </ul>
+                            </h3>
+                          </div>  -->
+                        {%endif%}
+                    {%endfor%}  
+                  </div>  
                 </div>
               </div>
             {%endif%}
