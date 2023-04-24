@@ -47,6 +47,7 @@ def test_add_to_cart2(client, auth, app):
     response = client.get("/add_to_cart?item_id=1413414102&restaurant_id=14134141", follow_redirects=True)
     response = client.get("/add_to_cart?item_id=1413414101&restaurant_id=14134141", follow_redirects=True)
     response = client.get("/add_to_cart?item_id=1413414101&restaurant_id=14134141", follow_redirects=True)
+    response = client.get("/add_to_cart?item_id=1413414101&restaurant_id=14134141", follow_redirects=True)
     with app.app_context():
         db = get_db()
         with db.connect() as conn:
@@ -59,6 +60,8 @@ def test_add_to_cart2(client, auth, app):
 def test_cart_buttons(client, auth, app):
     auth.login_user()
     response = client.get("/increase?item_id=1413414102&quantity=1", follow_redirects=True)
+    assert b"quantity: 2" in response.data
+    response = client.get("/decrease?item_id=1413414101&quantity=3", follow_redirects=True)
     assert b"quantity: 2" in response.data
     response = client.get("/decrease?item_id=1413414101&quantity=2", follow_redirects=True)
     assert b"quantity: 1" in response.data

@@ -80,7 +80,7 @@
               </div>
               <div class="usernameframe">
                 <label for="password" class="email-id">Password</label>
-                <input class="usernametextfield" type="password" name="password" id="password" value="{{user[0][6]}}" required/>
+                <input class="usernametextfield" type="password" name="password" id="password" value="{{user[0][6]}}" readonly/>
               </div>
             </div>
             <div class="editbuttonframe">
@@ -175,12 +175,13 @@
       <script>
         function validateForm() {
             const username = document.getElementById("username").value.trim();
-
+            // const password = document.getElementById("password").value.trim();
             const usernameRegex = /^[a-zA-Z][a-zA-Z0-9_]{2,29}$/;
             if (!usernameRegex.test(username)) {
                 alert("Username must start with a letter and contain only letters, numbers, or underscores. It must be between 3 and 30 characters long.");
                 return false
             }
+            if(password!=user[0][6])
             return true;
         }
     </script>

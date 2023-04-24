@@ -2,9 +2,9 @@ TODO
 
 In forklyft.py:
 
--accessing links like /user etc without a login gives a internal server error. Should redirect to login page
+
 -no food desc field in add item
--no remove item option in restaurant menu
+-fix menu image sizing
 
 To add browser js form filling:
     -fill complete information in restaurant add item
@@ -19,7 +19,9 @@ restaurant menu with no starters just shows blank area underneath starters headi
 
 
 General:
--Confirmation on seperating frontend backend. 
--Check baadalvm proxy by looking at baadalvm website FAQ too.
 -ML API
 -Add commments everywhere to make code cleaner.
+-update yaml API
+
+Less important:
+-add coverage to PATH in baadalvm to run tests there

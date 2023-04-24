@@ -30,21 +30,27 @@ def add_menu_items(db_instance):
     food = pd.read_csv(open(os.path.join(os.path.dirname(__file__), "data/food.csv")))
     for i in range(50):
         increment = random.randint(0, 100)
-        for j in range(5):
+        random.sample(list(food.T),5)
+        j=0
+        d=food.T.to_dict()
+        arr=[d[i] for i in d.keys()]
+        for item in random.sample(arr,5):
             res_id = i + 1
             item_id = res_id*100 + j + 1
-            item = random.randint(0,24)
-            price = int(food['Price'][item] + increment)
-            url = food['Url'][item]
-            #! above, modify so that url image returns a lower resolution
-            name = food['Item_name'][item]
-            ftype = food['Category'][item]
+            # item = random.randint(0,24)
+            price = int(item['Price'] + increment)
+            url = item['Url']
+            if "?w=" not in url:
+                url+="?w=640"
+            name = item['Item_name']
+            ftype = item['Category']
             coun = random.randint(7,15)
             desc = coun*"Very" + "Tasty"
             with db_instance.connect() as conn:
                 conn.execute(text("INSERT INTO menus (menu_id, image_url, restaurant_id, food_type, food_name, food_price, food_desc) VALUES (:menu_id, :image_url, :restaurant_id, :food_type, :food_name, :food_price, :food_desc)"),
-                             {'menu_id':item_id, 'image_url':url, 'restaurant_id':res_id, 'food_type':ftype, 'food_name':name, 'food_price':price, 'food_desc':desc})
+                                {'menu_id':item_id, 'image_url':url, 'restaurant_id':res_id, 'food_type':ftype, 'food_name':name, 'food_price':price, 'food_desc':desc})
                 conn.commit()
+            j+=1
 
 # add 10 random users
 def add_users(db_instance):
@@ -64,7 +70,7 @@ def add_users(db_instance):
 
 # adds 20 random orders to random users with random items from random restaurants
 def add_past_orders(db_instance):
-    menu = pd.read_csv(open(os.path.join(os.path.dirname(__file__), "data/menu.csv")))
+    menu = pd.read_csv(open(os.path.join(os.path.dirname(__file__), "data/food.csv")))
     for i in range(20): # number of total orders
         order_id = i+1
         j = random.randint(1,5)

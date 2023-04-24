@@ -102,7 +102,7 @@
                     </div>
                     <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" value="quantity: {{row[5]}}" readonly>
                     <div class="input-group-prepend">
-                      <a href='{{url_for("forklyft_bp.remove",item_id=row[4], quantity=row[5])}}'><button class="btn btn-outline-secondary" type="button" alt="decrease quantity" style="color: orange;background-color: #181823;"><i class="material-icons">remove</i></button></a>
+                      <a href='{{url_for("forklyft_bp.decrease_quantity",item_id=row[4], quantity=row[5])}}'><button class="btn btn-outline-secondary" type="button" alt="decrease quantity" style="color: orange;background-color: #181823;"><i class="material-icons">remove</i></button></a>
                     </div>
                     <div class="input-group-prepend">
                       <a href='{{url_for("forklyft_bp.remove",item_id=row[4], quantity=row[5])}}'><button class="btn btn-outline-secondary" type="button" alt="delete forever" style="color: red;background-color: #181823;"><span class="material-symbols-outlined">
