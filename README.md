@@ -7,6 +7,3 @@ Website design idea, overview and documentation - ([checkpoint 1](https://docs.g
 [Checkpoint 2 link](https://docs.google.com/document/d/1EPqEDwyceqQRBalRPULYObm_gzGZ8LXe6VoAdhDXwMo/edit)
 
 [Figma project link](https://www.figma.com/file/6XaYre2TJufrtuY0bdsaDE/ForkLyft-team-library?node-id=0%3A1&t=0M0MVAVjKCeQOYHi-1)
-
-
-For seeding database, link to zomato.csv - https://csciitd-my.sharepoint.com/:x:/g/personal/cs5210609_iitd_ac_in/ETOLkvfszIpCtW6n1BJrl7gBERkxLhefJpYBDx2WwaTXjQ?e=Lf5ZWO
