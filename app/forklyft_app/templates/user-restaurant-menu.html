@@ -80,7 +80,7 @@
         <div>
           <div><h1 style="margin-bottom: 10px; margin-top: 10px; text-align: center;"><b>{{rest[1]}}</b></h1></div>
           <div><p style="font-size: 30px; text-align: center;">location: {{rest[2]}}</p></div>
-          <div><p style="font-size: 30px; text-align: center;">rating: {{rest[3]/rest[4]}}</p></div>
+          <div><p style="font-size: 30px; text-align: center;">rating: {{((rest[3]*10)//rest[4])/10}}</p></div>
         </div>
         <hr>
         {%if menu_s|length!=0:%}
@@ -88,7 +88,7 @@
             <h2 style="text-align: center;">Starters</h2>
             <div class="pratham">
               {%for row in menu_s%}
-              <div class="card text-center pratham2 border-primary" style="width: 21rem; height: 30rem;">
+              <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
                 <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
                 <div class="card-body">
                   <h5 class="card-title">{{row[4]}}</h5>
@@ -111,7 +111,7 @@
             <h2 style="text-align: center;">Mains</h2>
             <div class="pratham">
               {%for row in menu_m%}
-              <div class="card text-center pratham2 border-primary" style="width: 21rem; height: 30rem;">
+              <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
                 <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
                 <div class="card-body">
                   <h5 class="card-title">{{row[4]}}</h5>
@@ -134,7 +134,7 @@
             <h2 style="text-align: center;">Desserts</h2>
             <div class="pratham">
               {%for row in menu_d%}
-              <div class="card text-center pratham2 border-primary" style="width: 21rem; height: 30rem;">
+              <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
                 <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
                 <div class="card-body">
                   <h5 class="card-title">{{row[4]}}</h5>
@@ -157,7 +157,7 @@
             <h2 style="text-align: center;">Drinks</h2>
             <div class="pratham">
               {%for row in menu_dr%}
-              <div class="card text-center pratham2 border-primary" style="width: 21rem; height: 30rem;">
+              <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 30rem;">
                 <img class="card-img-top" src={{row[1]}} alt="Card image cap" style="height: 50%;">
                 <div class="card-body">
                   <h5 class="card-title">{{row[4]}}</h5>

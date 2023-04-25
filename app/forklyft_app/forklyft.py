@@ -3,7 +3,6 @@ from forklyft_app.db import get_db
 from sqlalchemy import text
 import re
 from werkzeug.exceptions import abort
-import speech_recognition as sr
 from forklyft_app import create_app # potential rename
 # app=create_app()
 bp=Blueprint("forklyft_bp",__name__)
@@ -81,15 +80,11 @@ def find_menu_category(menu,category):
 			menu_category_items.append(item)
 	return menu_category_items
 
+def get_restaurant_items(res_name):
+	with get_db().connect() as conn:
+		result = conn.execute(text("SELECT * FROM restaurants WHERE UPPER(restaurant_name) LIKE CONCAT('%', UPPER(:1) , '%')   "),{'1':res_name})
+		return result
 
-@bp.route("/voice-search")
-def voice_search():
-	r = sr.Recognizer()
-	with sr.Microphone() as source:
-		print("Speak now")
-		audio = r.listen(source)
-	search_query = r.recognize_google(audio)
-	return search_query
 
 @bp.route('/restaurant/login', methods = ['GET', 'POST'])
 def res_login():
@@ -248,6 +243,7 @@ def search(item1):
 		return redirect(url_for('forklyft_bp.login'))
 	user_id = session['id']
 	items = get_menu_item(item1)
+	name_items = get_restaurant_items(item1)
 	if(items):
 		restaurants=[]
 		menus={}
@@ -257,6 +253,16 @@ def search(item1):
 				restaurants.append(restaurant)
 			menu = find_menu(restaurant[0])[0][1]
 			menus[restaurant[0]]=menu
+	elif(name_items):
+		name_items=name_items.all()
+		restaurants=[]
+		menus={}
+		for item in name_items:
+			restaurant = item
+			restaurants.append(restaurant)
+			menu = find_menu(restaurant[0])[0][1]
+			menus[restaurant[0]]=menu
+		return render_template("user-home-search-res.html",user_id=user_id,restaurants=restaurants, menus=menus)
 	else:
 		items=[]
 		restaurants=[]
@@ -344,15 +350,15 @@ def view_orders():
 		flash("you need to login first!!","error")
 		return redirect(url_for('forklyft_bp.login'))
 	user_id=session['id']
-	menu = find_orders(user_id,"user","done")
+	orders = find_orders(user_id,"user","done")
 	list=[]
 	item={}
-	for row in menu:
+	for row in orders:
 		with get_db().connect() as conn:
 			result = conn.execute(text("SELECT food_name, food_price, image_url FROM menus WHERE menu_id = :item_id"),{'item_id':row[4]})
 			item[row[4]]=result.all()
 		list.append(row[1])
-	return render_template("my-orders.html",menu=menu,list=list,user_id=user_id, item=item)
+	return render_template("my-orders.html",menu=orders,list=list,user_id=user_id, item=item)
 
 
 @bp.route("/user/contact_us",methods=('GET','POST'))

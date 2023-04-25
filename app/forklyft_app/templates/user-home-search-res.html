@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .pratham{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .pratham2{
+        margin: 22px 30px;
+      }
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/user-home.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa Slab One:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  </head>
+  <body style="background-color: #E9F8F9;">
+    <div class="user-home" >
+      <nav class="header10">
+        <img
+          class="headerlogo-icon2"
+          alt=""
+          src="{{ url_for('static', filename= 'public/forklyft-logo@2x.png') }}"
+        />
+        <div class="headerbuttons6">
+          <a class="mycartbutton6" href="./cart" id="myCartButton"
+            ><div class="my-cart7">My cart</div></a
+          >
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                More...
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="./profile">My Profile</a>
+                <a class="dropdown-item" href="{{url_for('forklyft_bp.logout')}}">Logout!!</a>
+              </div>
+            </div>
+          <a
+            class="mycartbutton6"
+            href="./contact_us"
+            id="contactUsButton"
+            ><div class="my-profile8">Contact Us</div></a
+          >
+          <a href="/user"><button class="homebutton7" id="home_button">
+            <img
+              class="home-favorite-icon1"
+              alt=""
+              src="{{ url_for('static', filename= 'public/home-favorite.svg') }}"
+            />
+          </button></a>
+        </div>
+      </nav>
+      <main style="width: 100%;">
+        <div class="catchphrase">
+          <h3 class="you-wont-be">
+            <center>You won't be able to resist lifting your forks ;) </center>
+          </h3>
+        </div>
+        {%if restaurants|length==0:%}
+          <div class="text1"><h4 class="hot-new-picks">Sorry, no such item or restaurant!!</h4></div>
+        {%else:%}
+          <div class="text1" style="font-size: large;"><h4 class="hot-new-picks">Restaurants that match your search</h4></div>
+          <div class="pratham">
+          {%for restaurant in restaurants:%}
+            <div class="card text-center pratham2" style="width: 25rem; height:32rem;">
+              <img src="{{menus[restaurant[0]]}}" class="card-img-top" alt="..." style="width: 100%; height: 60%;">
+              <div class="card-body">
+                <h5 class="card-title">{{restaurant[1]}}</h5>
+                <p class="card-text">{{restaurant[2]}}</p>
+                <a href="/user/{{restaurant[0]}}" class="btn btn-primary">View</a>
+              </div>
+            </div>
+          {%endfor%}
+          </div>
+        {%endif%}
+      </main>
+    </div>
+
+    <!-- <script>
+      var myCartButton = document.getElementById("myCartButton");
+      if (myCartButton) {
+        myCartButton.addEventListener("click", function (e) {
+          window.location.href = "./my-cart.html";
+        });
+      }
+
+      var homeButton = document.getElementById("home_button");
+      if (homeButton) {
+        homeButton.addEventListener("click", function (e) {
+          window.location.href = "./user_home";
+        });
+      }
+
+      var myProfileButton = document.getElementById("myProfileButton");
+      if (myProfileButton) {
+        myProfileButton.addEventListener("click", function (e) {
+          window.location.href = "./{{user_id}}/profile";
+        });
+      }
+      
+      var contactUsButton = document.getElementById("contactUsButton");
+      if (contactUsButton) {
+        contactUsButton.addEventListener("click", function (e) {
+          window.location.href = "./contact_us";
+        });
+      }
+      </script> -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </body>
+</html>
