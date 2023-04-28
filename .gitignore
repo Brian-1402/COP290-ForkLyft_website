@@ -9,6 +9,7 @@ misc_code
 env/
 venv/
 .venv/
+circleci_venv/
 htmlcov/
 coverage_report/
 
