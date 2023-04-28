@@ -3,6 +3,12 @@ from sqlalchemy import text
 from flask import session
 
 def test_add_to_cart1(client, auth, app):
+    # test redirect to login page if not signed in
+    response = client.get("/user/cart")
+    assert response.headers["Location"]=="/login"
+    response = client.get("/add_to_cart?item_id=1413414101&restaurant_id=14134141")
+    assert response.headers["Location"]=="/login"
+
     auth.login_user()
     response = client.get("/user/cart")
     assert b"you have not added any item to the cart" in response.data
@@ -28,6 +34,10 @@ def test_add_to_cart1(client, auth, app):
 
 
 def test_pay(client, auth, app):
+    # test redirect to login page if not signed in
+    response = client.get("/user/pay")
+    assert response.headers["Location"]=="/login"
+
     auth.login_user()
     response = client.get("/user/pay")
     assert b"Select an address" in response.data
@@ -58,6 +68,14 @@ def test_add_to_cart2(client, auth, app):
     # client.post("/user/pay", data={'flexRadioDefault':'test_other_address'})
 
 def test_cart_buttons(client, auth, app):
+    # test redirect to login page if not signed in
+    response = client.get("/increase?item_id=1413414102&quantity=1")
+    assert response.headers["Location"]=="/login"
+    response = client.get("/decrease?item_id=1413414101&quantity=3")
+    assert response.headers["Location"]=="/login"
+    response = client.get("/remove?item_id=1413414102")
+    assert response.headers["Location"]=="/login"
+
     auth.login_user()
     response = client.get("/increase?item_id=1413414102&quantity=1", follow_redirects=True)
     assert b"quantity: 2" in response.data
@@ -80,6 +98,10 @@ def test_cart_buttons(client, auth, app):
 
 
 def test_pending_orders(client, auth, app):
+    # test redirect to login page if not signed in
+    response = client.get("/restaurant/pending")
+    assert response.headers["Location"]=="/restaurant/login"
+
     auth.login_restaurant()
     response = client.get("/restaurant/pending")
     assert response.status_code == 200
@@ -87,6 +109,10 @@ def test_pending_orders(client, auth, app):
     assert b"1413414101" in response.data
 
 def test_delete_order_pending(client, auth, app):
+    # test redirect to login page if not signed in
+    response = client.get("/delete_order?order_id=1")
+    assert response.headers["Location"]=="/restaurant/login"
+
     auth.login_restaurant()
     response = client.get("/delete_order?order_id=1", follow_redirects=True)
 
@@ -98,6 +124,10 @@ def test_delete_order_pending(client, auth, app):
             assert cart[0][3]==121098561 # assert user_id
 
 def test_restaurant_order_history(client, auth):
+    # test redirect to login page if not signed in
+    response = client.get("/restaurant/order_his")
+    assert response.headers["Location"]=="/restaurant/login"
+
     auth.login_restaurant()
     response = client.get("/restaurant/order_his")
     assert response.status_code == 200
@@ -105,6 +135,11 @@ def test_restaurant_order_history(client, auth):
     assert b"1413414101" in response.data
 
 def test_user_order_history(client,auth,app):
+    # test redirect to login page if not signed in
+    response = client.get("/user/orders")
+    assert response.headers["Location"]=="/login"
+
+
     auth.login_user()
     response = client.get("/user/orders")
     assert response.status_code == 200
@@ -119,7 +154,7 @@ def test_user_order_history(client,auth,app):
     response = client.get("/user/orders")
     assert b"No orders yet" in response.data
             
-def test_end_fixture(client, app):
+def test_order_end_fixture(client, app):
     with app.app_context():
         db = get_db()
         with db.connect() as conn:

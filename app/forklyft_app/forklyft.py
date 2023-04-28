@@ -245,6 +245,7 @@ def search(item1):
 	items = get_menu_item(item1)
 	name_items = get_restaurant_items(item1)
 	if(items):
+		# items=items.all()
 		restaurants=[]
 		menus={}
 		for item in items:
@@ -263,10 +264,10 @@ def search(item1):
 			menu = find_menu(restaurant[0])[0][1]
 			menus[restaurant[0]]=menu
 		return render_template("user-home-search-res.html",user_id=user_id,restaurants=restaurants, menus=menus)
-	else:
-		items=[]
-		restaurants=[]
-		menus={}
+	# else:
+	# 	items=[]
+	# 	restaurants=[]
+	# 	menus={}
 	return render_template("user-home-search.html",user_id=user_id, restaurants=restaurants, menus=menus,item1=item1)
 
 @bp.route("/user",methods=('GET','POST'))

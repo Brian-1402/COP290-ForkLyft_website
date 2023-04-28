@@ -2,20 +2,15 @@ TODO
 
 In forklyft.py:
 
-
--no food desc field in add item
+-Add image for restaurants. Seed 8 restaurants properly and manually.
+-New table for reviews. Add ratings to that too.
+-when deleting menu, order history page shows server error. Fix: when displaying order history, check if the item is there or not, if not, show item unavailable.
 -fix menu image sizing
 
-To add browser js form filling:
-    -fill complete information in restaurant add item
-    -in profile page "password cannot be updated". also copy most of the checking from signup page too.
-
--no flash html code in restaurant pending orders, add items page
-
-
-Bugs:
-userhome assumes there are atleast 8 restaurants registered already
-restaurant menu with no starters just shows blank area underneath starters heading
+CI/CD:
+-install and use flake8
+-set up CircleCI
+-try setting up Jenkins as well, maybe host it on baadalvm
 
 
 General:

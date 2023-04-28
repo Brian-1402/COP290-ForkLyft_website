@@ -14,3 +14,5 @@ create table orders ( order_item_id integer not null primary key auto_increment,
 create table users (user_id integer primary key auto_increment, home varchar(255), work_add text, other_add text, username text not null, name_user text not null, user_pass text not null, mail text, phone_number text);
 
 create table contact_us (contact_id integer primary key auto_increment, user_id integer not null, name_user text not null, mail text not null, message text);
+
+create table restaurant_reviews (review_id integer primary key auto_increment, review text, restaurant_id integer, user_id integer not null, sentiment text);

@@ -71,20 +71,25 @@ def test_logout_user(client, auth):
     auth.login_user()
 
     with client:
-        auth.logout_user()
+        response = auth.logout_user()
         assert "id" not in session
-        # ! test that redirected to index page, also test logout flash message
+        assert response.headers["Location"]=='/'
 
 
 
 
-def test_register_restaurant(client, app):
+def test_register_restaurant(client,auth,app):
     # test that viewing the page renders without template errors
     assert client.get("/restaurant/signup").status_code == 200
 
     # test that successful registration redirects to the login page
     response = client.post("/restaurant/signup", data={"username": "tester_signup_res1", "password": "tester_signup_res", "location":"test_res_address","restaurant_name":"tester_signup_res"})
     assert response.headers["Location"] == "/restaurant/login"
+
+    # test that after logged in, opening signup redirects to home page
+    assert auth.login_restaurant(username="tester_signup_res1", password="tester_signup_res").headers["Location"] == "/restaurant"
+    assert client.get("/restaurant/signup").headers["location"] == "/restaurant"
+    auth.logout_restaurant()
 
     # test for invalid user details
     wrong_response1 = client.post("/restaurant/signup", data={"username": "tester_login_res", "password": "tester_login_res", "location":"test_res_address","restaurant_name":"tester_login_res"}, follow_redirects=True)

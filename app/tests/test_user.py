@@ -12,6 +12,9 @@ def test_index(client, auth):
     assert b"Contact" in response.data
 
 def test_user_home(client, auth):
+    # test redirect to login page if not signed in
+    assert client.get("/user").headers["Location"]=="/login"
+
     auth.login_user()
     response = client.get("/user")
     assert response.status_code == 200
@@ -19,16 +22,22 @@ def test_user_home(client, auth):
     assert b"Hot new picks" in response.data
 
 def test_search(client, auth):
+    # test redirect to login page if not signed in
+    assert client.get("/user/food1").headers["Location"]=="/login"
+
     auth.login_user()
     response = client.post("/user", data={"search":"food1"}, follow_redirects=True)
     assert b"tester_login_res" in response.data
+    response = client.post("/user", data={"search":"tester_login_res"}, follow_redirects=True)
+    assert b"tester_login_res" in response.data
     response = client.post("/user", data={"search":"fffffff"}, follow_redirects=True)
-    assert b"not available" in response.data
-
-    #! test search bar as well
-
+    # print(response.data)
+    assert (b"no such item" in response.data or b"not available" in response.data)
 
 def test_contact_us(client,auth, app):
+    # test redirect to login page if not signed in
+    assert client.get("/user/contact_us").headers["Location"]=="/login"
+
     auth.login_user()
     assert client.get("/user/contact_us").status_code == 200
     response = client.get("/user/contact_us")
@@ -52,6 +61,9 @@ def test_contact_us(client,auth, app):
             assert len(result_all)==2
 
 def test_profile_page(client, auth, app):
+    # test redirect to login page if not signed in
+    assert client.get("/user/profile").headers["Location"]=="/login"
+
     auth.login_user()
     assert client.get("/user/profile").status_code == 200
     #test updating profile details
@@ -70,6 +82,9 @@ def test_profile_page(client, auth, app):
     assert b"profile updated" in response.data
 
 def test_user_my_orders(client,auth, app):
+    # test redirect to login page if not signed in
+    assert client.get("/user/orders").headers["Location"]=="/login"
+
     auth.login_user()
     response= client.get("/user/orders")
     assert response.status_code == 200
@@ -77,6 +92,9 @@ def test_user_my_orders(client,auth, app):
     assert b"No orders yet" in response.data
 
 def test_user_my_addresses(client,auth, app):
+    # test redirect to login page if not signed in
+    assert client.get("/user/addresses").headers["Location"]=="/login"
+
     auth.login_user()
     response= client.get("/user/addresses")
     assert response.status_code == 200
@@ -93,6 +111,9 @@ def test_user_my_addresses(client,auth, app):
     assert b"addresses updated" in response.data
 
 def test_restaurant_page(client,auth):
+    # test redirect to login page if not signed in
+    assert client.get("/user/14134141").headers["Location"]=="/login"
+
     auth.login_user()
     response= client.get("/user/14134141")
     assert response.status_code == 200
