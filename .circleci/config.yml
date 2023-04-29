@@ -26,7 +26,8 @@ jobs:
       - run:
           name: Set up MySQL
           command: |
-            sudo apt install -y mysql-client-8.0
+            sudo apt update
+            sudo apt install -y default-mysql-client
             sudo apt install -y libmysqlclient-dev
             mysql -h 127.0.0.1 -u root -p forklyft -e "create database if not exists forklyft_test;"
       # Step 2: create virtual env and install dependencies
