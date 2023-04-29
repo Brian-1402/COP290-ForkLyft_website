@@ -3,6 +3,9 @@ from forklyft_app.db import get_db
 from sqlalchemy import text
 import re
 from werkzeug.exceptions import abort
+import speech_recognition as sr
+import json
+import requests
 from forklyft_app import create_app # potential rename
 # app=create_app()
 bp=Blueprint("forklyft_bp",__name__)
@@ -57,6 +60,27 @@ def find_menu(restaurant_id):
 		# 	abort(404)
 		return result.all()
 	
+# def find_order(restaurant_id):
+# 	with get_db().connect() as conn:
+# 		result = conn.execute(text("SELECT * FROM orders WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
+# 		# if result is None:
+# 		#     abort(404)
+# 		return result.all()
+	
+# def find_order_pending(restaurant_id):
+# 	with get_db().connect() as conn:
+# 		result = conn.execute(text("SELECT * FROM pending_orders WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
+# 		# if result is None:
+# 		#     abort(404)
+# 		return result.all()
+
+# def find_user_order(user_id):
+# 	with get_db().connect() as conn:
+# 		result = conn.execute(text("SELECT * FROM orders WHERE user_id = :user_id"),{'user_id':user_id})
+# 		# if result is None:
+# 		#     abort(404)
+# 		return result.all()
+
 def find_orders(client_id,client,status):
 	with get_db().connect() as conn:
 		result = conn.execute(text(f"SELECT * FROM orders WHERE {client}_id = :id AND order_status = :status ORDER BY order_item_id"),{'id':client_id, 'status':status})
@@ -73,6 +97,42 @@ def find_user(user_id):
 		# 	abort(404)
 		return result.all()
 
+# def update_user(user_id,home_n,work_n,other_n):
+# 	with get_db().connect() as conn:
+# 		conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':home_n, '2':work_n, '3':other_n, 'user_id':user_id})
+# 		# if result is None:
+# 		#     abort(404)
+# 		# return result.all()
+# 		conn.commit()
+
+# def find_starter(menu):
+# 	menu_starter = []
+# 	for item in menu:
+# 		if item[3]=='starter':
+# 			menu_starter.append(item)
+# 	return menu_starter
+
+# def find_dessert(menu):
+# 	menu_dessert = []
+# 	for item in menu:
+# 		if item[3]=='dessert':
+# 			menu_dessert.append(item)
+# 	return menu_dessert
+
+# def find_main(menu):
+# 	menu_main = []
+# 	for item in menu:
+# 		if item[3]=='main':
+# 			menu_main.append(item)
+# 	return menu_main
+
+# def find_drink(menu):
+# 	menu_drink = []
+# 	for item in menu:
+# 		if item[3]=='drink':
+# 			menu_drink.append(item)
+# 	return menu_drink
+
 def find_menu_category(menu,category):
 	menu_category_items = []
 	for item in menu:
@@ -85,6 +145,26 @@ def get_restaurant_items(res_name):
 		result = conn.execute(text("SELECT * FROM restaurants WHERE UPPER(restaurant_name) LIKE CONCAT('%', UPPER(:1) , '%')   "),{'1':res_name})
 		return result
 
+# def shutdown_server():
+# 	func = request.environ.get('werkzeug.server.shutdown')
+# 	if func is None:
+# 		raise RuntimeError('Not running with the Werkzeug Server')
+# 	func()
+
+# @bp.route("/")
+# def hello():
+#     conn = get_db_connection()
+#     menu = conn.execute('SELECT * FROM menus').fetchall()
+#     return render_template("display.html",menu=menu)
+
+# @bp.route("/voice-search")
+# def voice_search():
+# 	r = sr.Recognizer()
+# 	with sr.Microphone() as source:
+# 		print("Speak now")
+# 		audio = r.listen(source)
+# 	search_query = r.recognize_google(audio)
+# 	return search_query
 
 @bp.route('/restaurant/login', methods = ['GET', 'POST'])
 def res_login():
@@ -125,6 +205,9 @@ def restaurant_register():
 		if len(restaurant):
 			msg1 = 'restaurant already exists !'
 			e1='error'
+		# elif not re.match(r'[A-Za-z0-9]+', username):
+		# 	msg1 = 'username must contain only characters and numbers !'
+		# 	e1='error'
 		else:
 			with get_db().connect() as conn:
 				conn.execute(text("INSERT INTO restaurants (restaurant_username, restaurant_password, restaurant_name, restaurant_location) VALUES (:uname, :pass, :name, :loc)"),
@@ -136,6 +219,9 @@ def restaurant_register():
 		flash(msg1,e1)
 		if(a):return redirect(url_for('forklyft_bp.res_login'))
 		else: return redirect(url_for('forklyft_bp.restaurant_register'))
+	# elif request.method == 'POST':
+	# 	flash('Please fill out the form !','error')
+	# 	return redirect(url_for('forklyft_bp.restaurant_register'))
 	return render_template('index.html')
 
 @bp.route("/restaurant")
@@ -144,10 +230,25 @@ def display_restaurant():
 		flash("you need to login first!!","error")
 		return redirect(url_for('forklyft_bp.res_login'))
 	restaurant_id=session['id1']
+	cp=0
+	cn=0
+	color={}
+	with get_db().connect() as conn:
+		review1 = conn.execute(text('SELECT user_id,review,sentiment FROM restaurant_reviews WHERE restaurant_id = :rest_id'),{'rest_id': restaurant_id}).all()
+	dict={}
+	for review in review1:
+		if(review[2]=="positive"):
+			cp=cp+1
+			color[review]="green"
+		else:
+			cn=cn+1
+			color[review]="red"
+		user =  find_user(review[0])[0]
+		dict[review[0]]=user[4]
 	rest1 = find_restaurant(restaurant_id)
 	order = find_orders(restaurant_id,"restaurant","done")
 	menu = find_menu(restaurant_id)
-	return render_template("restaurant-home.html",rest=rest1,order=order,menu=menu)
+	return render_template("restaurant-home.html",rest=rest1,order=order,menu=menu,review1=review1,dict=dict,cp=cp,cn=cn,color=color)
 
 @bp.route("/restaurant/menu")
 def display_menu_restaurant():
@@ -157,6 +258,7 @@ def display_menu_restaurant():
 	restaurant_id = session['id1']
 	rest = find_restaurant(restaurant_id)
 	menu = find_menu(restaurant_id)
+	# return menu[0]['image_url']
 	menu_starter = find_menu_category(menu,"starter")
 	menu_dessert = find_menu_category(menu,"dessert")
 	menu_main = find_menu_category(menu,"main")
@@ -186,6 +288,10 @@ def display_add_form():
 		fprice=request.form.get('price')
 		ftype=request.form.get('type')
 		furl=request.form.get('url')
+		# return ("yes")
+		# if not (fname and fprice and ftype and furl):
+		# 	flash('please fill complete information')
+		# else:
 		with get_db().connect() as conn:
 			conn.execute(text('INSERT INTO menus(restaurant_id, image_url, food_name, food_price, food_type) VALUES (:1, :2, :3, :4, :5)'),
 							{'1':restaurant_id, '2':furl, '3':fname, '4':fprice, '5':ftype})
@@ -264,10 +370,10 @@ def search(item1):
 			menu = find_menu(restaurant[0])[0][1]
 			menus[restaurant[0]]=menu
 		return render_template("user-home-search-res.html",user_id=user_id,restaurants=restaurants, menus=menus)
-	# else:
-	# 	items=[]
-	# 	restaurants=[]
-	# 	menus={}
+	else:
+		items=[]
+		restaurants=[]
+		menus={}
 	return render_template("user-home-search.html",user_id=user_id, restaurants=restaurants, menus=menus,item1=item1)
 
 @bp.route("/user",methods=('GET','POST'))
@@ -282,10 +388,13 @@ def user_home():
 	#! potential bug: assumes there are 8 restaurants existing already
 	result = get_menu()[-8:]
 	dict={}
+	# rest_images={}
 	for row in result:
 		with get_db().connect() as conn:
 			name = conn.execute(text('SELECT restaurant_name FROM restaurants WHERE restaurant_id = :id'),{'id':row[2]}).all()[0]
+			# image = conn.execute(text('SELECT restaurant_img FROM restaurants WHERE restaurant_id = :id'),{'id':row[2]}).all()[0]
 		dict[row[0]]=name
+		# rest_images[row[0]]=image
 
 	restaurant=get_restaurant()
 	Li=[]
@@ -305,7 +414,7 @@ def user_home():
 			link = conn.execute(text('SELECT image_url FROM menus WHERE restaurant_id = :id'),{'id':row[1]}).all()[0]
 		image.append(link)
 
-	return render_template("user-home.html",user_id=user_id,menu=result, dict=dict, restaurant=restaurant,image=image)
+	return render_template("user-home.html",user_id=user_id,menu=result, dict=dict,restaurant=restaurant,image=image)
 
 @bp.route("/user/addresses",methods=('GET','POST'))
 def address():
@@ -321,6 +430,7 @@ def address():
 		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET home = :1, work_add = :2, other_add =:3 WHERE user_id = :user_id"),{'1':fhome, '2':fwork, '3':fother, 'user_id':user_id})
 			conn.commit()
+		# return "updated!!"
 		if(fhome!=user[0][1] or fwork!=user[0][2] or fother!=user[0][3]):
 			flash("addresses updated!!","success")
 		return redirect(url_for('forklyft_bp.view_profile'))
@@ -337,11 +447,17 @@ def view_profile():
 		username=request.form.get('username')
 		mail=request.form.get('email_id')
 		contact=request.form.get('contact')
+		password=request.form.get('password')
 		with get_db().connect() as conn:
 			conn.execute(text("UPDATE users SET username = :1, mail = :2, phone_number =:3 WHERE user_id = :user_id"),{'1':username, '2':mail, '3':contact, 'user_id':user_id})
 			conn.commit()
 		if(username!=user[0][4] or mail!=user[0][7] or contact!=user[0][8]):
-			flash("profile updated!! ","success")
+			if(password==user[0][6]):
+				flash("profile updated!! ","success")
+			else:
+				flash("profile updated!! Password cannot be updated!!","success")
+		elif(password!=user[0][6]):
+			flash("password cannot be updated","error")
 		return redirect(url_for('forklyft_bp.view_profile'))
 	return render_template("my-profile.html",user=user,id=user_id)
 
@@ -351,15 +467,15 @@ def view_orders():
 		flash("you need to login first!!","error")
 		return redirect(url_for('forklyft_bp.login'))
 	user_id=session['id']
-	orders = find_orders(user_id,"user","done")
+	menu = find_orders(user_id,"user","done")
 	list=[]
 	item={}
-	for row in orders:
+	for row in menu:
 		with get_db().connect() as conn:
 			result = conn.execute(text("SELECT food_name, food_price, image_url FROM menus WHERE menu_id = :item_id"),{'item_id':row[4]})
 			item[row[4]]=result.all()
 		list.append(row[1])
-	return render_template("my-orders.html",menu=orders,list=list,user_id=user_id, item=item)
+	return render_template("my-orders.html",menu=menu,list=list,user_id=user_id, item=item)
 
 
 @bp.route("/user/contact_us",methods=('GET','POST'))
@@ -379,6 +495,8 @@ def contact():
 		return redirect(url_for('forklyft_bp.contact'))
 	return render_template("contact-us.html",id=user_id)
 
+
+# @bp.route("/user/<int:user_id>/")
 
 @bp.route("/user/cart")
 def cart():
@@ -484,7 +602,7 @@ def remove():
 	return redirect(url_for("forklyft_bp.cart"))
 
 
-@bp.route("/user/<int:restaurant_id>")
+@bp.route("/user/<int:restaurant_id>",methods=('GET','POST'))
 def user_rest_menu(restaurant_id):
 	if not session.get('id'):
 		flash("you need to login first!!","error")
@@ -496,7 +614,45 @@ def user_rest_menu(restaurant_id):
 	menu_dessert = find_menu_category(menu,"dessert")
 	menu_main = find_menu_category(menu,"main")
 	menu_drink = find_menu_category(menu,"drink")
-	return render_template("user-restaurant-menu.html",menu_s = menu_starter, menu_d = menu_dessert, menu_m = menu_main, menu_dr = menu_drink, rest=restaurant)
+	user_id = session['id']
+	cp=0
+	cn=0
+	color={}
+	with get_db().connect() as conn:
+		review1 = conn.execute(text('SELECT user_id,review,sentiment FROM restaurant_reviews WHERE restaurant_id = :rest_id'),{'rest_id': restaurant_id}).all()
+	dict={}
+	for review in review1:
+		if(review[2]=="positive"):
+			cp=cp+1
+			color[review]="green"
+		else:
+			cn=cn+1
+			color[review]="red"
+		user =  find_user(review[0])[0]
+		dict[review[0]]=user[4]
+	if(request.method=='POST'):
+		rating = int(request.form.get('rating'))
+		review = request.form.get('review')
+		url = "https://hf.space/embed/Amrrs/gradio-sentiment-analyzer/+/api/predict/"
+		headers = {"Content-Type": "application/json"}
+		data = {"data": [review]}
+		response = requests.post(url, headers=headers, data=json.dumps(data))
+		result = json.loads(response.text)
+		if(result['data'][0][12:20]=="POSITIVE"):
+			message="Thankyou for your kind feedback!!"
+			s="positive"
+		else:
+			message="Thankyou, We will try to improve!!"
+			s="negative"
+		with get_db().connect() as conn:
+			conn.execute(text('INSERT INTO restaurant_reviews(review,restaurant_id,user_id,sentiment) VALUES (:1, :2, :3, :4)'),{'1':review, '2': restaurant_id,'3': user_id, '4': s})
+			conn.commit()
+		with get_db().connect() as conn:
+			conn.execute(text('UPDATE restaurants SET restaurant_rating_sum = restaurant_rating_sum + :1 , restaurant_rating_count = restaurant_rating_count + 1 WHERE restaurant_id = :rest_id '),{'1':rating, 'rest_id': restaurant_id})
+			conn.commit()
+		flash(message,"success")
+		return redirect(url_for("forklyft_bp.user_rest_menu",restaurant_id=restaurant_id))
+	return render_template("user-restaurant-menu.html",menu_s = menu_starter, menu_d = menu_dessert, menu_m = menu_main, menu_dr = menu_drink, rest=restaurant, review1=review1, dict=dict, color=color, cp=cp, cn=cn)
 
 
 @bp.route("/user/pay",methods=('GET','POST'))
@@ -507,13 +663,28 @@ def pay():
 	user_id=session['id']
 	user = find_user(user_id)
 	if(request.method=='POST'):
+		# global order_id1
 		option=request.form.get('flexRadioDefault')
 		with get_db().connect() as conn:
 			cart = conn.execute(text('UPDATE orders SET order_status = "pending", address = :address WHERE user_id =:user_id AND order_status = "cart"'),{'user_id':user_id, 'address':option})
 			conn.commit()
+
+		# with get_db().connect() as conn:
+		# 	cart = conn.execute(text('SELECT * FROM my_cart WHERE user_id =:user_id'),{'user_id':user_id}).all()
+		# for row in cart:
+		# 	with get_db().connect() as conn:
+		# 		conn.execute(text('INSERT INTO pending_orders (user_id,restaurant_id,item_id,quantity,address, order_id) VALUES (:1,:2,:3,:4,:5, :6)'),{'1':user_id,'2':row[2],'3':row[1],'4':row[5],'5':option, '6':order_id1})
+		# 		conn.commit()
+		# with get_db().connect() as conn:
+		# 	conn.execute(text('DELETE FROM my_cart WHERE user_id=:id'),{'id':user_id})
+		# 	conn.commit()
+		
 		flash("payment successful!! will reach to you soon!!",'success')
 		return redirect(url_for("forklyft_bp.user_home"))
 	return render_template("pay.html",user=user)
+
+	# @bp.route("/restaurant/pending")
+	# def pending():
 
 @bp.route('/')
 def main():
@@ -556,6 +727,12 @@ def register():
 		if len(user):
 			msg1 = 'Account already exists !'
 			e1='error'
+		# elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+		# 	msg1 = 'Invalid email address !'
+		# 	e1='error'
+		# elif not re.match(r'[A-Za-z0-9]+', username):
+		# 	msg1 = 'name must contain only characters and numbers !'
+		# 	e1='error'
 		else:
 			with get_db().connect() as conn:
 				conn.execute(text("INSERT INTO users (username, user_pass, name_user, phone_number, mail) VALUES (:uname, :pass, :name, :contact, :email)"),
@@ -567,6 +744,9 @@ def register():
 		flash(msg1,e1)
 		if(a):return redirect(url_for('forklyft_bp.login'))
 		else: return redirect(url_for('forklyft_bp.register'))
+	# elif request.method == 'POST':
+	# 	flash('Please fill out the form !','error')
+	# 	return redirect(url_for('forklyft_bp.register'))
 	return render_template('user-signup.html')
 
 @bp.route('/logout')
@@ -583,6 +763,10 @@ def restaurant_logout():
 	session.pop('username', None)   
 	return redirect(url_for('forklyft_bp.main'))
 
+# @bp.get('/shutdown')
+# def shutdown():
+#     shutdown_server()
+#     return 'Server shutting down...'
 
 # if(__name__=='__main__'):
 # 	app.run(debug=True)

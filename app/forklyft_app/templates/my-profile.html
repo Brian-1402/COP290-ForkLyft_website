@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .animation{
+        transition: transform 0.3s ease-in-out;
+      }
+      .animation:hover{
+        transform: scale(1.1);
+      }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/global.css') }}" />
@@ -89,14 +97,15 @@
           </form>
           <div class="addressordersframe2">
             <div class="addressordersframe1">
-              <button class="addressesbutton" id="addressesButton">
+              <button class="addressesbutton animation" id="addressesButton">
                 <img
                   class="image-1-icon"
                   alt=""
                   src="{{ url_for('static', filename= 'public/image-1@2x.png') }}"
                 />
-                <h4 class="my-addresses">My addresses</h4></button
-              ><button class="addressesbutton" id="ordersButton">
+                <h4 class="my-addresses">My addresses</h4>
+              </button>
+              <button class="addressesbutton animation" id="ordersButton">
                 <img
                   class="image-1-icon"
                   alt=""

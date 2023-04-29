@@ -4,19 +4,42 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.11.3
+        environment:
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_DB: forklyft_test
+          MYSQL_USER: root
+          # MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_PASSWORD: forklyft
+          # TEST_DB_PATH: 'mysql://root:forklyft@127.0.0.1:3306/forklyft_test'
+      - image: cimg/mysql:8.0
+        environment:
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_DB: forklyft_test
+          MYSQL_USER: root
+          MYSQL_PASSWORD: forklyft
 
     # working_directory: ~/app
 
     steps:
       # Step 1: obtain repo from GitHub
       - checkout
+      - run:
+          name: Set up MySQL
+          command: |
+            sudo apt install -y mysql-client
+            sudo apt install -y libmysqlclient-dev
+            mysql -h 127.0.0.1 -u root -p forklyft -e "create database if not exists forklyft_test;"
       # Step 2: create virtual env and install dependencies
       - run:
-          name: install dependencies
+          name: set up env
           command: |
             python3 -m venv circleci_venv
             . circleci_venv/bin/activate
             pip install -r requirements.txt
+            
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 10s
       # Step 3: run linter and tests
       - run:
           name: run tests
@@ -24,4 +47,5 @@ jobs:
             . circleci_venv/bin/activate
             # flake8 --exclude=venv* --statistics
             cd app
+            export TEST_DB_PATH='mysql://root:forklyft@127.0.0.1:3306/forklyft_test'
             make test

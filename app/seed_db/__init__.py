@@ -83,24 +83,16 @@ def add_past_orders(db_instance):
                 conn.execute(text("INSERT INTO orders (order_id, restaurant_id, user_id, item_id, quantity, order_status) VALUES (:order, :res, :user, :item, :qty, 'done')"),
                         {'order':order_id, 'res':res, 'user':user, 'item':item, 'qty':q})
                 conn.commit()
-                
-    #     # with engine.connect() as conn:
-    #     #         result = conn.execute(text("SELECT * FROM restaurants WHERE restaurant_id = :restaurant_id"),{'restaurant_id':restaurant_id})
-    #     #         return result.all())
 
-# def set_restaurant_credentials(db_instance):
-#     u = "rest"
-#     address = "221B Baker Street, London - 2010"
-#     for i in range(52):
-#         user = u + str(i)
-#         passw = user[::-1]
-#         rid = i+1
-#         with db_instance.connect() as conn:
-#             conn.execute(text("UPDATE restaurants SET restaurant_username =:usr, restaurant_password=:pass WHERE restaurant_id = :id"),
-#                     {'usr':user, 'pass':passw, 'id':rid})
-#             conn.commit()
-            
-            
+def add_restaurants_imgs(db_instance):
+    resto = pd.read_csv(open(os.path.join(os.path.dirname(__file__), "data/res_imgs.csv")))
+    for i in range(50):
+        im = resto['Image_link'][i]
+        with db_instance.connect() as conn:
+            conn.execute(text("UPDATE restaurants SET restaurant_img = :rest_im WHERE restaurant_id = :res_id"),
+                    {'res_id': i+1, 'rest_im':im})
+            conn.commit()
+
 def print_all(db_instance):
     with db_instance.connect() as conn:
         # print(conn.execute(text("select * from restaurants")).all())
@@ -112,3 +104,4 @@ def print_all(db_instance):
         # input()
         conn.commit()
         # conn.close()
+

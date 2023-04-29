@@ -1,5 +1,8 @@
 TODO
 
+urgent:
+dump mysql for new seeded database, for test_seed.sql
+
 In forklyft.py:
 
 -Add image for restaurants. Seed 8 restaurants properly and manually.
@@ -8,6 +11,7 @@ In forklyft.py:
 -fix menu image sizing
 
 CI/CD:
+
 -install and use flake8
 -set up CircleCI
 -try setting up Jenkins as well, maybe host it on baadalvm

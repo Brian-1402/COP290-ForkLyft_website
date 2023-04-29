@@ -11,8 +11,10 @@ from flask import g
 
 @pytest.fixture(scope="session")
 def app():
-    db_path="mysql://forklyft_project:forklyft@10.17.50.188:3306/forklyft_test"
-    
+    db_path=os.environ.get('TEST_DB_PATH')
+    # if db_path is None: # use the baadalvm link by default
+    #     db_path="mysql://forklyft_project:forklyft@10.17.50.188:3306/forklyft_test"
+    # planetscale_db=""
     # db_fd, db_file_path = tempfile.mkstemp()
     # db_path =f"sqlite:///{db_file_path}"
 
@@ -24,7 +26,7 @@ def app():
         init_db() #* Executes schema.sql
         # with open("data.sql", "r") as f:
         with open(os.path.join(os.path.dirname(__file__), "test_seed.sql"), "rb") as f:
-            db=get_db()
+            db=get_db() 
             execute_db_file(db,f) #* Adds tester login data
             # if "seeded" not in g:
             #     g.seeded=True

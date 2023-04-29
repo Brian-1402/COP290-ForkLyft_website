@@ -3,9 +3,10 @@ drop table if exists menus;
 drop table if exists orders;
 drop table if exists users;
 drop table if exists contact_us;
+drop table if exists restaurant_reviews;
 
 
-create table restaurants ( restaurant_id integer primary key auto_increment, restaurant_name text not null, restaurant_location text not null, restaurant_rating_sum integer default 1, restaurant_rating_count integer default 1, restaurant_username text not null, restaurant_password text not null);
+create table restaurants ( restaurant_id integer primary key auto_increment, restaurant_name text not null, restaurant_location text not null, restaurant_rating_sum integer default 1, restaurant_rating_count integer default 1, restaurant_username text not null, restaurant_password text not null, restaurant_img text);
 
 create table menus ( menu_id integer primary key auto_increment, image_url text not null, restaurant_id integer, food_type text not null, food_name text not null, food_price integer not null, food_desc text );
 

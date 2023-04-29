@@ -13,6 +13,12 @@
       .pratham2{
         margin: 15px 15px;
       }
+      .animation{
+        transition: transform 0.3s ease-in-out;
+      }
+      .animation:hover{
+        transform: scale(1.1);
+      }
     </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -127,50 +133,58 @@
           <h3 style="text-align: center;"><b><i>Hot new picks</i></b></h3>
           <div class="frame-div">
             {%for i in range(4)%}
-            <div class="card text-center pratham2 border-dark" style="width: 20rem; height:24rem;">
-              <img src="{{menu[i][1]}}" class="card-img-top" alt="..." style="width: 100%; height: 60%;">
-              <div class="card-body">
-                <h5 class="card-title">{{menu[i][4]}}</h5>
-                <p class="card-text">{{dict[menu[i][0]][0]}}</p>
-                <a href="/user/{{menu[i][2]}}" class="btn btn-primary">View</a>
+            <a href="/user/{{menu[i][2]}}" style="color: black; text-decoration: none;" class="animation">
+              <div class="card text-center pratham2 border-dark" style="width: 20rem; height:24rem;">
+                <img src="{{menu[i][1]}}" class="card-img-top" alt="..." style="width: 100%; height: 60%;">
+                <div class="card-body">
+                  <h5 class="card-title">{{dict[menu[i][0]][0]}}</h5>
+                  <p class="card-text">{{menu[i][4]}}</p>
+                  <!-- <a href="/user/{{menu[i][2]}}" class="btn btn-primary">View</a> -->
+                </div>
               </div>
-            </div>
+            </a>
             {%endfor%}
           </div>
           <div class="frame-div">
             {%for i in range(4,8)%}
+            <a href="/user/{{menu[i][2]}}" style="color: black; text-decoration: none;" class="animation">
             <div class="card text-center pratham2 border-dark" style="width: 20rem; height:24rem;">
               <img src="{{menu[i][1]}}" class="card-img-top" alt="..." style="width: 100%; height: 60%;">
               <div class="card-body">
-                <h5 class="card-title">{{menu[i][4]}}</h5>
-                <p class="card-text">{{dict[menu[i][0]][0]}}</p>
-                <a href="/user/{{menu[i][2]}}" class="btn btn-primary">View</a>
+                <h5 class="card-title">{{dict[menu[i][0]][0]}}</h5>
+                <p class="card-text">{{menu[i][4]}}</p>
+                <!-- <a href="/user/{{menu[i][2]}}" class="btn btn-primary">View</a> -->
               </div>
             </div>
+          </a>
             {%endfor%}
           </div>
           <hr>
           <h3 style="text-align: center; "><b><i>Most popular restaurants</i></b></h3>
           <div class="frame-div">
             {%for i in range(4,8)%}
+            <a href="/user/{{menu[i][2]}}" style="color: black; text-decoration: none;" class="animation">
             <div class="card text-center pratham2 border-dark" style="width: 20rem; height:24rem;">
-              <img src="{{image[i][0]}}" class="card-img-top" alt="..." style="width: 100%; height: 50%;">
+              <img src="{{restaurant[i][8]}}" class="card-img-top" alt="..." style="width: 100%; height: 50%;">
               <div class="card-body">
-                <a href="/user/{{restaurant[i][1]}}"><h5 class="card-title">{{restaurant[i][2]}}</h5></a>
+               <h5 class="card-title">{{restaurant[i][2]}}</h5>
                 <p class="card-text">{{restaurant[i][3]}}</p>
               </div>
             </div>
+          </a>
             {%endfor%}
           </div>
           <div class="frame-div">
             {%for i in range(4)%}
+            <a href="/user/{{menu[i][2]}}" style="color: black; text-decoration: none;" class="animation">
             <div class="card text-center pratham2 border-dark" style="width: 20rem; height:24rem;">
-              <img src="{{image[i][0]}}" class="card-img-top" alt="..." style="width: 100%; height: 50%;">
+              <img src="{{restaurant[i][8]}}" class="card-img-top" alt="..." style="width: 100%; height: 50%;">
               <div class="card-body">
-                <a href="/user/{{restaurant[i][1]}}"><h5 class="card-title">{{restaurant[i][2]}}</h5></a>
+                <h5 class="card-title">{{restaurant[i][2]}}</h5>
                 <p class="card-text">{{restaurant[i][3]}}</p>
               </div>
             </div>
+          </a>
             {%endfor%}
           </div>
         </div>
