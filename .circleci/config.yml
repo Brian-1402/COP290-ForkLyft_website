@@ -57,6 +57,6 @@ jobs:
           name: make test results file
           command: |
             mkdir app/test_results
-            pytest --cov=forklyft_app --junitxml=app/test_results/junit.xml
+            python -m pytest --cov=forklyft_app --junitxml=app/test_results/junit.xml
       - store_test_results:
           path: app/test_results

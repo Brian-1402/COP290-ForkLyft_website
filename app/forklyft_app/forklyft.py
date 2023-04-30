@@ -2,7 +2,6 @@
 
 Contains the main helper functions and Flask views for our flask app.
 
-
 """
 
 
