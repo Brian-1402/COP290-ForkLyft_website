@@ -1,3 +1,11 @@
+"""Main Flask Blueprint for forklyft_app
+
+Contains the main helper functions and Flask views for our flask app.
+
+
+"""
+
+
 from flask import render_template, redirect, url_for, flash, request, session, Blueprint
 from forklyft_app.db import get_db
 from sqlalchemy import text
@@ -7,7 +15,7 @@ from werkzeug.exceptions import abort
 bp = Blueprint("forklyft_bp", __name__)
 
 
-def find_restaurant(restaurant_id):
+def find_restaurant(restaurant_id: int):
     with get_db().connect() as conn:
         result = conn.execute(
             text("SELECT * FROM restaurants WHERE restaurant_id = :restaurant_id"),
@@ -24,7 +32,7 @@ def get_menu():
         return result.all()
 
 
-def get_menu_item(food_name):
+def get_menu_item(food_name: str):
     with get_db().connect() as conn:
         result = conn.execute(
             text(

@@ -1,16 +1,10 @@
-.ignore
-_ignore
-
 app/proxy
 .vscode
 zomato.csv
 
-misc_code
 env/
 venv/
-.venv/
 circleci_venv/
-htmlcov/
 coverage_report/
 
 *.pyc
