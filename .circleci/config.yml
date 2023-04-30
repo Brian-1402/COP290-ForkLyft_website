@@ -19,7 +19,6 @@ jobs:
           # MYSQL_ROOT_PASSWORD: forklyft
           MYSQL_DB: forklyft_test
 
-
     # working_directory: ~/app
 
     steps:
@@ -39,7 +38,7 @@ jobs:
             python3 -m venv circleci_venv
             . circleci_venv/bin/activate
             pip install -r requirements.txt
-            
+
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 10s

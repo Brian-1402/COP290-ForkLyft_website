@@ -11,13 +11,9 @@ run_local:
 run_public:
 	flask --app forklyft_app run --host=0.0.0.0
 
-db_path_baadal:
-	export TEST_DB_PATH='mysql://forklyft_project:forklyft@10.17.50.188:3306/forklyft_test'
-
 test_init:
 	coverage run -m pytest
 	coverage report
-	# python3 -m pytest --cov=forklyft_app
 
 test_report_html: test_init
 	rm -rf coverage_report

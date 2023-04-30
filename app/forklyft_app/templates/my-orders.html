@@ -59,7 +59,7 @@
                   <!-- <h4 class="starters1">User ID {{i}}</h4> -->
                   <div class="pratham">
                     {%for row in menu:%}
-                        {%if row[1]==i:%}
+                        {%if row[1]==i and item.get(row[4]):%}
                           <div class="card text-center pratham2 border-primary" style="width: 25rem; height: 32rem;">
                             <img src="{{item[row[4]][0][2]}}" class="card-img-top" alt="..." style="height: 50%;">
                             <div class="card-body" style="flex:none">

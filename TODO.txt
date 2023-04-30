@@ -1,26 +1,25 @@
 TODO
 
-urgent:
-dump mysql for new seeded database, for test_seed.sql
-
 In forklyft.py:
-
--Add image for restaurants. Seed 8 restaurants properly and manually.
--New table for reviews. Add ratings to that too.
--when deleting menu, order history page shows server error. Fix: when displaying order history, check if the item is there or not, if not, show item unavailable.
--fix menu image sizing
-
-CI/CD:
-
--install and use flake8
--set up CircleCI
--try setting up Jenkins as well, maybe host it on baadalvm
-
+Bugs:
+-when deleting few items from menu, order history page shows server error. 
+    Cause: order history page accesses item id from orders table, and tries to access same item id from menus table, where it is non existent.
+    Fix: when displaying order history, check if the item is there or not, if not, show item unavailable.
 
 General:
--ML API
--Add commments everywhere to make code cleaner.
 -update yaml API
+-make website navigating video
+-describe individual contributions in report
 
-Less important:
--add coverage to PATH in baadalvm to run tests there
+CI/CD/tests:
+-Finish writing all test cases and make it close to 100%:
+    -test for reviews
+-write description in report
+
+Code cleanup:
+-write comments in a documentation syntax
+-check out the syntax requirements of flake8 and arrange accordingly
+
+If time allows:
+-Seed 8 restaurants properly and manually.
+-fix menu image sizing

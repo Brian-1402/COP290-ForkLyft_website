@@ -1,6 +1,5 @@
 [run]
 source = forklyft_app
-# dynamic_context = test_function
 
 [report]
 skip_empty = True
