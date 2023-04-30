@@ -7,3 +7,34 @@ Website design idea, overview and documentation - ([checkpoint 1](https://docs.g
 [Checkpoint 2 link](https://docs.google.com/document/d/1EPqEDwyceqQRBalRPULYObm_gzGZ8LXe6VoAdhDXwMo/edit)
 
 [Figma project link](https://www.figma.com/file/6XaYre2TJufrtuY0bdsaDE/ForkLyft-team-library?node-id=0%3A1&t=0M0MVAVjKCeQOYHi-1)
+
+
+Directory structure:
+
+/repo
+--/.circleci
+-----config.yml - for CircleCI config, CI/CD
+--/app
+-----/forklyft_app - contains main app files
+--------/static
+--------/templates
+--------__init__.py
+--------db.py
+--------forklyft.py
+-----/seed_db - only used for adding seeding data to hosted db
+-----/tests
+-----.coveragerc
+-----makefile
+-----reseed.py - only used for adding seeding data to hosted db
+--.gitignore
+--README.md
+--requirements.txt
+
+
+To set up the app, 
+1) set up virtual env, install libraries shown in requirements.txt
+2) activate virtual env
+3) go to app/ directory, and in shell, type:
+    - "make run_local" to run the flask app in localhost only,
+    - "make run_public" to run the flask app with a public link,
+    - "make test" to run tests and generate html coverage report in coverage_report directory
