@@ -14,6 +14,7 @@ from werkzeug.exceptions import abort
 bp = Blueprint("forklyft_bp", __name__)
 
 
+# Returns restaurant details from the database using restaurant_id
 def find_restaurant(restaurant_id: int):
     with get_db().connect() as conn:
         result = conn.execute(
@@ -25,12 +26,14 @@ def find_restaurant(restaurant_id: int):
         return result
 
 
+# Returns entire menus table from the database
 def get_menu():
     with get_db().connect() as conn:
         result = conn.execute(text("SELECT * FROM menus"))
         return result.all()
 
 
+# Searches the menus table in the database for specific menu item
 def get_menu_item(food_name: str):
     with get_db().connect() as conn:
         result = conn.execute(

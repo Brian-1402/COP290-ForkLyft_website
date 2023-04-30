@@ -53,10 +53,5 @@ jobs:
             make test
       - store_artifacts:
           path: app/coverage_report
-      - run:
-          name: make test results file
-          command: |
-            mkdir app/test_results
-            python -m pytest --cov=forklyft_app --junitxml=app/test_results/junit.xml
       - store_test_results:
           path: app/test_results

@@ -12,7 +12,7 @@ run_public:
 	flask --app forklyft_app run --host=0.0.0.0
 
 test_init:
-	coverage run -m pytest
+	coverage run -m pytest --junitxml=test_results/junit.xml
 	coverage report
 
 test_report_html: test_init

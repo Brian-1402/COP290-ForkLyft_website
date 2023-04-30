@@ -3,7 +3,6 @@ import os
 import forklyft_app
 from forklyft_app import create_app
 from forklyft_app.db import get_db, init_db, execute_db_file
-from seed_db import *
 from sqlalchemy import text
 import tempfile
 from flask import g
