@@ -17,7 +17,6 @@ test_init:
 
 test_report_html: test_init
 	rm -rf coverage_report
-	rm -rf test_results
 	coverage html
 	rm -f .coverage
 	rm -f **/.coverage
