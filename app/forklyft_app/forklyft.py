@@ -87,6 +87,7 @@ def find_menu(restaurant_id: int):
 def find_orders(client_id: int, client: str, status: str):
     """Returns data from orders table in the database, filtered on
     whether the client is user or restaurant, the client_id, and the order status.
+
     client : "user" or "restaurant"
     status : "done" or "pending" or "cart"
     """
@@ -118,6 +119,7 @@ def find_user(user_id: int):
 def find_menu_category(menu, category: str):
     """Takes the database menus table output as input,
     and filters out the menu items based on their category.
+
     category: "starter", "dessert", "main", "drink".
     """
 
@@ -144,11 +146,20 @@ def get_restaurant_items(res_name: str):
 @bp.route("/restaurant/login", methods=["GET", "POST"])
 def res_login():
     """Via GET request:
-    f
+    Renders and displays the restaurant login page.
+
+    Via POST request: submitting login form
+
+    Searches for restaurant credentials in database,
+        if not found, throw error flash message.
+        If found, sets session values and redirect to restaurant home.
     """
+
+    # If already logged in, redirect to restaurant home page
     if session.get("id1"):
         if session["id1"]:
             return redirect(url_for("forklyft_bp.display_restaurant"))
+
     if (
         request.method == "POST"
         and "restaurant_username" in request.form
@@ -164,6 +175,7 @@ def res_login():
                 {"username": username, "password": password},
             )
         restaurant = restaurant.all()
+
         if len(restaurant):
             restaurant = restaurant[0]
             session["loggedin"] = True
@@ -176,11 +188,26 @@ def res_login():
                 "try again!! incorrect username or password!! sign up if new restaurant",
                 "error",
             )
+
     return render_template("restaurant-login.html")
 
 
 @bp.route("/restaurant/signup", methods=("GET", "POST"))
 def restaurant_register():
+    """Via GET request:
+    Renders and displays the restaurant signup page.
+
+    Via POST request: submitting signup form
+
+    Form syntax checking (no empty fields correct email format, no special characters etc)
+    are done in browser javascript.
+
+    Searches for restaurant credentials in database,
+        If found, throws error flash message.
+        if not found, inserts the credentials into the database,
+        redirects to login page and displays success flash message.
+    """
+
     if session.get("id1"):
         if session["id1"]:
             return redirect(url_for("forklyft_bp.display_restaurant"))
@@ -202,6 +229,7 @@ def restaurant_register():
                 {"username": username},
             )
         restaurant = restaurant.all()
+
         if len(restaurant):
             msg1 = "restaurant already exists !"
             e1 = "error"
@@ -226,19 +254,31 @@ def restaurant_register():
             e1 = "success"
             a = True
         flash(msg1, e1)
+
         if a:
             return redirect(url_for("forklyft_bp.res_login"))
         else:
             return redirect(url_for("forklyft_bp.restaurant_register"))
+
     return render_template("index.html")
 
 
 @bp.route("/restaurant")
 def display_restaurant():
+    """Home page for the restaurant portal.
+
+    Takes reviews data from the database and displays according to their status.
+
+    Forwards menu, past orders, restaurant data and reviews from
+    the database to the html template and renders the restaurant home page.
+    """
+
     if not session.get("id1"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.res_login"))
     restaurant_id = session["id1"]
+
+    # The following block deals with classifying reviews
     cp = 0
     cn = 0
     color = {}
@@ -259,9 +299,11 @@ def display_restaurant():
             color[review] = "red"
         user = find_user(review[0])[0]
         dict[review[0]] = user[4]
+
     rest1 = find_restaurant(restaurant_id)
     order = find_orders(restaurant_id, "restaurant", "done")
     menu = find_menu(restaurant_id)
+
     return render_template(
         "restaurant-home.html",
         rest=rest1,
@@ -277,9 +319,16 @@ def display_restaurant():
 
 @bp.route("/restaurant/menu")
 def display_menu_restaurant():
+    """Menu page for restaurant portal
+
+    Takes menu data, classifies it into categories,
+    renders the menu page for the restaurant portal.
+    """
+
     if not session.get("id1"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.res_login"))
+
     restaurant_id = session["id1"]
     rest = find_restaurant(restaurant_id)
     menu = find_menu(restaurant_id)
@@ -287,6 +336,7 @@ def display_menu_restaurant():
     menu_dessert = find_menu_category(menu, "dessert")
     menu_main = find_menu_category(menu, "main")
     menu_drink = find_menu_category(menu, "drink")
+
     return render_template(
         "restaurant-menu.html",
         rest=rest,
@@ -299,23 +349,42 @@ def display_menu_restaurant():
 
 @bp.route("/restaurant/delete_from_menu")
 def delete_from_menu():
-    item_id = int(request.args.get("item_id"))
+    """Deletes menu item from database.
+
+    Request is sent from delete button in restaurant portal menu page.
+
+    Takes item_id from request parameters, deletes that item from
+    menus table in the database.
+    """
+
     if not session.get("id1"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.res_login"))
+
+    item_id = int(request.args.get("item_id"))
+
     with get_db().connect() as conn:
         conn.execute(
             text("DELETE FROM menus WHERE menu_id=:item_id"), {"item_id": item_id}
         )
         conn.commit()
+
     return redirect(url_for("forklyft_bp.display_menu_restaurant"))
 
 
 @bp.route("/restaurant/add_item", methods=("GET", "POST"))
 def display_add_form():
+    """Via GET request:
+    Renders add item page for restaurant.
+
+    Via POST request: filling add item form
+    Inserts new menu item into the menus table in the database.
+    """
+
     if not session.get("id1"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.res_login"))
+
     restaurant_id = session["id1"]
     if request.method == "POST":
         fname = request.form.get("food_name")
@@ -332,41 +401,65 @@ def display_add_form():
             conn.commit()
         flash("item added", "success")
         return redirect(url_for("forklyft_bp.display_menu_restaurant"))
+
     return render_template("restaurant-add-item.html", restaurant_id=restaurant_id)
 
 
 @bp.route("/restaurant/order_his")
 def order_history():
+    """Displays order history page for restaurant
+
+    Takes completed orders from orders table in database for
+    corresponding restaurant and renders order history page.
+    """
+
     if not session.get("id1"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.res_login"))
+
     restaurant_id = session["id1"]
     rest = find_restaurant(restaurant_id)
     menu = find_orders(restaurant_id, "restaurant", "done")
     list = []
     for row in menu:
         list.append(row[1])
+
     return render_template("order_history.html", rest=rest, menu=menu, list=list)
 
 
 @bp.route("/restaurant/pending")
 def pending():
+    """Displays pending orders page for restaurant
+
+    Takes pending orders from orders table in database for
+    corresponding restaurant and renders pending orders page.
+    """
+
     if not session.get("id1"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.res_login"))
+
     restaurant_id = session["id1"]
     menu = find_orders(restaurant_id, "restaurant", "pending")
     list = []
     for row in menu:
         list.append(row[1])
+
     return render_template("restaurant_pending.html", menu=menu, list=list)
 
 
 @bp.route("/delete_order")
 def delete_order_pending():
+    """Updates order status from pending to done.
+
+    Takes order_id from request parameter, and updates corresponding
+    restaurant's specific pending order to "done" status in the database.
+    """
+
     if not session.get("id1"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.res_login"))
+
     res_id = session["id1"]
     order_id = request.args.get("order_id")
     with get_db().connect() as conn:
@@ -378,21 +471,33 @@ def delete_order_pending():
         )
         conn.commit()
     flash("order delivered!!", "success")
+
     return redirect(url_for("forklyft_bp.pending"))
 
 
 @bp.route("/user/<string:item1>")
 def search(item1):
+    """Displays a user search page after entering a particular string
+
+    The string parameter item1 is the search term.
+
+    Considers the search term as both menu item or restaurant name,
+    searches the database seperately for either case. Renders different
+    templates for the two cases also.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     user_id = session["id"]
     items = get_menu_item(item1)
     name_items = get_restaurant_items(item1)
     restaurants = []
     menus = {}
+
+    # If the searched term is for a menu item
     if items:
-        # items=items.all()
         restaurants = []
         menus = {}
         for item in items:
@@ -401,6 +506,8 @@ def search(item1):
                 restaurants.append(restaurant)
             menu = find_menu(restaurant[0])[0][1]
             menus[restaurant[0]] = menu
+
+    # If the searched term is for a restaurant name
     elif name_items:
         name_items = name_items.all()
         restaurants = []
@@ -410,12 +517,14 @@ def search(item1):
             restaurants.append(restaurant)
             menu = find_menu(restaurant[0])[0][1]
             menus[restaurant[0]] = menu
+
         return render_template(
             "user-home-search-res.html",
             user_id=user_id,
             restaurants=restaurants,
             menus=menus,
         )
+
     return render_template(
         "user-home-search.html",
         user_id=user_id,
@@ -427,14 +536,20 @@ def search(item1):
 
 @bp.route("/user", methods=("GET", "POST"))
 def user_home():
+    """User home page suggesting 8 newest menu items and 8 top rated restaurants"""
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     user_id = session["id"]
+
+    # When value is entered in search bar
     if request.method == "POST":
         fsearch = request.form.get("search")
         return redirect(url_for("forklyft_bp.search", item1=fsearch))
-    #! potential bug: assumes there are 8 restaurants existing already
+
+    # Gets latest 8 items added to menus table in database, to display in page as "hot new picks"
     result = get_menu()[-8:]
     dict = {}
     # rest_images={}
@@ -450,6 +565,7 @@ def user_home():
         dict[row[0]] = name
         # rest_images[row[0]]=image
 
+    # calculates rating of all restaurants
     restaurant = get_restaurant()
     Li = []
     for row in restaurant:
@@ -460,6 +576,7 @@ def user_home():
         row = tuple(row)
         Li.append(row)
 
+    # sorts restaurants by rating, and takes highest 8 to display as "top rated restaurants"
     restaurant = sorted(Li, key=lambda x: x[0])
     restaurant = restaurant[-8:]
     image = []
@@ -483,11 +600,22 @@ def user_home():
 
 @bp.route("/user/addresses", methods=("GET", "POST"))
 def address():
+    """Via GET request:
+    Renders addresses page showing user's 3 addresses.
+
+    Via POST request:
+    Assumes the address text field has been modified and updates
+    the new values into the database.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     user_id = session["id"]
     user = find_user(user_id)
+
+    # If update addresses button is pressed
     if request.method == "POST":
         fhome = request.form.get("home")
         fwork = request.form.get("work")
@@ -503,16 +631,28 @@ def address():
         if fhome != user[0][1] or fwork != user[0][2] or fother != user[0][3]:
             flash("addresses updated!!", "success")
         return redirect(url_for("forklyft_bp.view_profile"))
+
     return render_template("addresses.html", user=user, id=user_id)
 
 
 @bp.route("/user/profile", methods=("GET", "POST"))
 def view_profile():
+    """Via GET request:
+    Renders user profile page using details from users database
+
+    Via POST request:
+    Assumes the displayed text fields has been modified and updates
+    the new values into the database.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     user_id = session["id"]
     user = find_user(user_id)
+
+    # If update button is pressed
     if request.method == "POST":
         username = request.form.get("username")
         mail = request.form.get("email_id")
@@ -528,14 +668,22 @@ def view_profile():
         if username != user[0][4] or mail != user[0][7] or contact != user[0][8]:
             flash("profile updated!! ", "success")
         return redirect(url_for("forklyft_bp.view_profile"))
+
     return render_template("my-profile.html", user=user, id=user_id)
 
 
 @bp.route("/user/orders")
 def view_orders():
+    """Displays order history of user
+
+    Accesses done orders of the user from orders table, and its
+    corresponding details from the menus table in the database.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     user_id = session["id"]
     orders = find_orders(user_id, "user", "done")
     list = []
@@ -551,6 +699,7 @@ def view_orders():
             if result:
                 item[row[4]] = result.all()
         list.append(row[1])
+
     return render_template(
         "my-orders.html", menu=orders, list=list, user_id=user_id, item=item
     )
@@ -558,9 +707,17 @@ def view_orders():
 
 @bp.route("/user/contact_us", methods=("GET", "POST"))
 def contact():
+    """Via GET request:
+    Renders the contact us page with text field inputs
+
+    Via POST request:
+    Inserts the inputted details into the contact_us table of the database.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     user_id = session["id"]
     if request.method == "POST":
         name = request.form.get("name")
@@ -576,14 +733,23 @@ def contact():
             conn.commit()
         flash("successfully submitted!!", "success")
         return redirect(url_for("forklyft_bp.contact"))
+
     return render_template("contact-us.html", id=user_id)
 
 
 @bp.route("/user/cart")
 def cart():
+    """Renders users cart page containing restaurant items
+
+    Takes the users orders in "cart" status from the database,
+    takes their corresponding details from menus and restaurants table
+    and displays them.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     user_id = session["id"]
     total_price = 0
     dict1 = {}
@@ -596,6 +762,7 @@ def cart():
             ),
             {"id": user_id},
         ).all()
+
     if len(cart):
         for row in cart:
             item_id = row[4]
@@ -622,6 +789,7 @@ def cart():
                 delivery_price = 0
     else:
         flash("you have not added any item to the cart!! pls add some thing.", "error")
+
     return render_template(
         "my-cart.html",
         cart=cart,
@@ -634,9 +802,19 @@ def cart():
 
 @bp.route("/add_to_cart", methods=["GET", "POST"])
 def add_to_cart():
+    """Adds corresponding menu item to user cart
+
+    Triggered when pressing the add to cart button under each item in
+    restaurant menu page.
+
+    Items added to cart are inserted into the orders table in database
+    with "cart" as order_status.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     restaurant_id = request.args.get("restaurant_id")
     item_id = request.args.get("item_id")
     user_id = session["id"]
@@ -690,14 +868,21 @@ def add_to_cart():
                 )
             conn.commit()
     flash("item added to cart", "success")
+
     return redirect(url_for("forklyft_bp.user_rest_menu", restaurant_id=restaurant_id))
 
 
 @bp.route("/increase")
 def increase_quantity():
+    """Increments quantity of item in cart in orders table in database
+
+    Link is on a button under each item shown in user's my_cart page.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     item_id = request.args.get("item_id")
     user_id = session["id"]
     quantity = int(request.args.get("quantity"))
@@ -709,14 +894,24 @@ def increase_quantity():
             {"quantity": quantity + 1, "id": item_id, "user_id": user_id},
         )
         conn.commit()
+
     return redirect(url_for("forklyft_bp.cart"))
 
 
 @bp.route("/decrease")
 def decrease_quantity():
+    """Decrements quantity of item in cart in orders table in database
+
+    Link is on a button under each item shown in user's my_cart page.
+
+    If quantity was 1 when button was pressed, deletes the cart item
+    from orders table in database.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     item_id = request.args.get("item_id")
     user_id = session["id"]
     quantity = int(request.args.get("quantity"))
@@ -729,6 +924,7 @@ def decrease_quantity():
                 {"quantity": quantity - 1, "id": item_id, "user_id": user_id},
             )
             conn.commit()
+        # if quantity is 1, delete item
         else:
             conn.execute(
                 text(
@@ -737,14 +933,21 @@ def decrease_quantity():
                 {"id": item_id, "user_id": user_id},
             )
             conn.commit()
+
     return redirect(url_for("forklyft_bp.cart"))
 
 
 @bp.route("/remove")
 def remove():
+    """deletes item in cart from orders table in database
+
+    Link is a button under each item shown in user's my_cart page.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     item_id = request.args.get("item_id")
     user_id = session["id"]
     with get_db().connect() as conn:
@@ -755,14 +958,34 @@ def remove():
             {"id": item_id, "user_id": user_id},
         )
         conn.commit()
+
     return redirect(url_for("forklyft_bp.cart"))
 
 
 @bp.route("/user/<int:restaurant_id>", methods=("GET", "POST"))
 def user_rest_menu(restaurant_id):
+    """Via GET request:
+    Renders the restaurant menu page in user portal.
+
+    Takes menu data of the restaurant from the database,
+    categorises them and displays in rendered webpage.
+
+    Also takes reviews data from database, categorises them
+    and displays with appropriate color, green for positive,
+    red for negative.
+
+    Via POST request:
+    Takes review text as input, makes use of ML API to classify
+    review as positive or negative, gives appropriate flash response
+    and adds review and its category to database.
+
+
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     menu = get_menu_user(restaurant_id)
     with get_db().connect() as conn:
         restaurant = find_restaurant(restaurant_id)[0]
@@ -771,6 +994,7 @@ def user_rest_menu(restaurant_id):
     menu_main = find_menu_category(menu, "main")
     menu_drink = find_menu_category(menu, "drink")
     user_id = session["id"]
+
     cp = 0
     cn = 0
     color = {}
@@ -791,6 +1015,7 @@ def user_rest_menu(restaurant_id):
             color[review] = "red"
         user = find_user(review[0])[0]
         dict[review[0]] = user[4]
+
     if request.method == "POST":
         rating = int(request.form.get("rating"))
         review = request.form.get("review")
@@ -799,11 +1024,12 @@ def user_rest_menu(restaurant_id):
         data = {"data": [review]}
         response = requests.post(url, headers=headers, data=json.dumps(data))
         result = json.loads(response.text)
+
         if result["data"][0][12:20] == "POSITIVE":
-            message = "Thankyou for your kind feedback!!"
+            message = "Thank you for your kind feedback!!"
             s = "positive"
         else:
-            message = "Thankyou, We will try to improve!!"
+            message = "Thank you for your feedback, We shall try to improve!!"
             s = "negative"
         with get_db().connect() as conn:
             conn.execute(
@@ -822,9 +1048,11 @@ def user_rest_menu(restaurant_id):
             )
             conn.commit()
         flash(message, "success")
+
         return redirect(
             url_for("forklyft_bp.user_rest_menu", restaurant_id=restaurant_id)
         )
+
     return render_template(
         "user-restaurant-menu.html",
         menu_s=menu_starter,
@@ -842,11 +1070,22 @@ def user_rest_menu(restaurant_id):
 
 @bp.route("/user/pay", methods=("GET", "POST"))
 def pay():
+    """Via GET request:
+    Renders payment portal where user chooses address.
+
+    Via POST request:
+
+    Considers payment done and updates order status from "cart"
+    to "pending" in the database.
+    """
+
     if not session.get("id"):
         flash("you need to login first!!", "error")
         return redirect(url_for("forklyft_bp.login"))
+
     user_id = session["id"]
     user = find_user(user_id)
+
     if request.method == "POST":
         option = request.form.get("flexRadioDefault")
         with get_db().connect() as conn:
@@ -859,19 +1098,32 @@ def pay():
             conn.commit()
         flash("payment successful!! will reach to you soon!!", "success")
         return redirect(url_for("forklyft_bp.user_home"))
+
     return render_template("pay.html", user=user)
 
 
 @bp.route("/")
 def main():
+    """Renders the index page of the website"""
+
     return render_template("main.html")
 
 
 @bp.route("/login", methods=["GET", "POST"])
 def login():
+    """Via GET request:
+    renders user login page.
+
+    Via POST request:
+    Takes form input values, checks if they already exist in database,
+    if exists, updates the session values and redirects to home page.
+    if does not exist, throws error flash message.
+    """
+
     if session.get("id"):
         if session["id"]:
             return redirect(url_for("forklyft_bp.user_home"))
+
     if (
         request.method == "POST"
         and "username" in request.form
@@ -887,6 +1139,7 @@ def login():
                 {"username": username, "password": password},
             )
         user = user.all()
+
         if len(user):
             user = user[0]
             session["loggedin"] = True
@@ -899,11 +1152,25 @@ def login():
                 "try again!! incorrect username or password!! sign up if new user",
                 "error",
             )
+
     return render_template("user-login.html")
 
 
 @bp.route("/signup", methods=("GET", "POST"))
 def register():
+    """Via GET request:
+    renders user signup page.
+
+    Via POST request:
+    Takes form input, checks with database whether user already exists,
+    if exists, throws error flash message,
+    if doesn't exist, inserts into the database the credentials and
+    redirects to login page.
+
+    Assumes that the form validation (proper email address, no symbols etc)
+    are done in browser javascript.
+    """
+
     if (
         request.method == "POST"
         and "name" in request.form
@@ -955,6 +1222,8 @@ def register():
 
 @bp.route("/logout")
 def logout():
+    """Removes session values and redirects to index page"""
+
     session.pop("loggedin", None)
     session.pop("id", None)
     session.pop("username", None)
@@ -963,6 +1232,8 @@ def logout():
 
 @bp.route("/restaurant/logout")
 def restaurant_logout():
+    """Removes session values and redirects to index page"""
+
     session.pop("loggedin", None)
     session.pop("id1", None)
     session.pop("username", None)

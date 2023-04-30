@@ -13,6 +13,7 @@ def test_restaurant_home(client, auth):
     assert response.status_code == 200
     assert b"tester_login_res" in response.data
     assert b"Our Menu" in response.data
+    assert b"poor service and terrible food" in response.data
 
 
 def test_restaurant_menu(client, auth):

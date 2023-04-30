@@ -163,7 +163,7 @@
           <h3 style="text-align: center; "><b><i>Most popular restaurants</i></b></h3>
           <div class="frame-div">
             {%for i in range(4,8)%}
-            <a href="/user/{{menu[i][2]}}" style="color: black; text-decoration: none;" class="animation">
+            <a href="/user/{{restaurant[i][1]}}" style="color: black; text-decoration: none;" class="animation">
             <div class="card text-center pratham2 border-dark" style="width: 20rem; height:24rem;">
               <img src="{{restaurant[i][8]}}" class="card-img-top" alt="..." style="width: 100%; height: 50%;">
               <div class="card-body">
@@ -176,7 +176,7 @@
           </div>
           <div class="frame-div">
             {%for i in range(4)%}
-            <a href="/user/{{menu[i][2]}}" style="color: black; text-decoration: none;" class="animation">
+            <a href="/user/{{restaurant[i][1]}}" style="color: black; text-decoration: none;" class="animation">
             <div class="card text-center pratham2 border-dark" style="width: 20rem; height:24rem;">
               <img src="{{restaurant[i][8]}}" class="card-img-top" alt="..." style="width: 100%; height: 50%;">
               <div class="card-body">

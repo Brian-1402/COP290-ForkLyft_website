@@ -200,5 +200,46 @@ def test_restaurant_page(client, auth):
     assert client.get("/user/99999999").status_code == 404
 
 
-# def test_boost_coverage(client, auth):
-#     assert client.get("/restaurant/add_item").status_code == 200
+def test_user_reviews(client, auth, app):
+    auth.login_user()
+    response = client.get("/user/14134141")
+    assert response.status_code == 200
+    assert b"good restaurant" in response.data
+    assert b"poor service and terrible food" in response.data
+    response = client.post(
+        "/user/14134141",
+        data={
+            "rating": "1",
+            "review": "very unpleasant experience",
+        },
+        follow_redirects=True,
+    )
+    assert b"We shall try to improve" in response.data
+    assert b"2.3" in response.data
+
+    with app.app_context():
+        with get_db().connect() as conn:
+            result = conn.execute(
+                text("SELECT * FROM restaurant_reviews WHERE user_id = 121098561")
+            ).all()
+            assert len(result) == 3
+            assert result[2][4] == "negative"
+
+    response = client.post(
+        "/user/14134141",
+        data={
+            "rating": "5",
+            "review": "great service",
+        },
+        follow_redirects=True,
+    )
+    assert b"kind feedback" in response.data
+    assert b"3" in response.data
+
+    with app.app_context():
+        with get_db().connect() as conn:
+            result = conn.execute(
+                text("SELECT * FROM restaurant_reviews WHERE user_id = 121098561")
+            ).all()
+            assert len(result) == 4
+            assert result[3][4] == "positive"
