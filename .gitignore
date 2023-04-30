@@ -6,7 +6,7 @@ env/
 venv/
 circleci_venv/
 coverage_report/
-
+test_results/
 *.pyc
 __pycache__/
 

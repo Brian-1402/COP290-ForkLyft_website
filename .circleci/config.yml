@@ -44,7 +44,7 @@ jobs:
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 10s
       # Step 3: run linter and tests
       - run:
-          name: run tests
+          name: make tests coverage report
           command: |
             . circleci_venv/bin/activate
             # flake8 --exclude=venv* --statistics
@@ -52,4 +52,11 @@ jobs:
             export TEST_DB_PATH='mysql://root@127.0.0.1:3306/forklyft_test'
             make test
       - store_artifacts:
-          path: coverage_report
+          path: app/coverage_report
+      - run:
+          name: make test results file
+          command: |
+            mkdir app/test_results
+            pytest --cov=forklyft_app --junitxml=app/test_results/junit.xml
+      - store_test_results:
+          path: app/test_results
