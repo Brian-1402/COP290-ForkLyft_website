@@ -11,25 +11,6 @@ Website design idea, overview and documentation - ([checkpoint 1](https://docs.g
 
 Directory structure:
 
-/repo
---/.circleci
------config.yml - for CircleCI config, CI/CD
---/app
------/forklyft_app - contains main app files
---------/static
---------/templates
---------__init__.py
---------db.py
---------forklyft.py
------/seed_db - only used for adding seeding data to hosted db
------/tests
------.coveragerc
------makefile
------reseed.py - only used for adding seeding data to hosted db
---.gitignore
---README.md
---requirements.txt
-
 
 To set up the app, 
 1) set up virtual env, install libraries shown in requirements.txt
