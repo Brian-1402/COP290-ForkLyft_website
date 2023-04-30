@@ -9,7 +9,8 @@ from flask import render_template, redirect, url_for, flash, request, session, B
 from forklyft_app.db import get_db
 from sqlalchemy import text
 from werkzeug.exceptions import abort
-
+import json
+import requests
 
 bp = Blueprint("forklyft_bp", __name__)
 
@@ -142,7 +143,9 @@ def get_restaurant_items(res_name: str):
 
 @bp.route("/restaurant/login", methods=["GET", "POST"])
 def res_login():
-    """Via GET request:"""
+    """Via GET request:
+    f
+    """
     if session.get("id1"):
         if session["id1"]:
             return redirect(url_for("forklyft_bp.display_restaurant"))
@@ -794,7 +797,7 @@ def user_rest_menu(restaurant_id):
         url = "https://hf.space/embed/Amrrs/gradio-sentiment-analyzer/+/api/predict/"
         headers = {"Content-Type": "application/json"}
         data = {"data": [review]}
-        response = request.post(url, headers=headers, data=json.dumps(data))
+        response = requests.post(url, headers=headers, data=json.dumps(data))
         result = json.loads(response.text)
         if result["data"][0][12:20] == "POSITIVE":
             message = "Thankyou for your kind feedback!!"
