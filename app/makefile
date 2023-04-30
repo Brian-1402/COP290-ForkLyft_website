@@ -17,13 +17,13 @@ test_init:
 
 test_report_html: test_init
 	rm -rf coverage_report
+	rm -rf test_results
 	coverage html
 	rm -f .coverage
 	rm -f **/.coverage
 	rm -rf .pytest_cache
 	rm -rf **/.pytest_cache
 	rm -rf tests/__pycache__
-	rm -rf tests/**/__pycache__
 
 test_report_txt: test_init
 	rm -f coverage_report.txt
@@ -33,7 +33,6 @@ test_report_txt: test_init
 	rm -rf .pytest_cache
 	rm -rf **/.pytest_cache
 	rm -rf tests/__pycache__
-	rm -rf tests/**/__pycache__
 
 test_full_txt:
 	coverage run -m pytest > test_output.txt

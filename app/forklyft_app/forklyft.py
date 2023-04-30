@@ -14,8 +14,9 @@ from werkzeug.exceptions import abort
 bp = Blueprint("forklyft_bp", __name__)
 
 
-# Returns restaurant details from the database using restaurant_id
 def find_restaurant(restaurant_id: int):
+    """Returns restaurant details from the database using restaurant_id."""
+
     with get_db().connect() as conn:
         result = conn.execute(
             text("SELECT * FROM restaurants WHERE restaurant_id = :restaurant_id"),
@@ -26,15 +27,17 @@ def find_restaurant(restaurant_id: int):
         return result
 
 
-# Returns entire menus table from the database
 def get_menu():
+    """Returns entire menus table from the database."""
+
     with get_db().connect() as conn:
         result = conn.execute(text("SELECT * FROM menus"))
         return result.all()
 
 
-# Searches the menus table in the database for specific menu item
 def get_menu_item(food_name: str):
+    """Searches the menus table in the database for specific menu item."""
+
     with get_db().connect() as conn:
         result = conn.execute(
             text(
@@ -45,7 +48,12 @@ def get_menu_item(food_name: str):
         return result.all()
 
 
-def get_menu_user(restaurant_id):
+def get_menu_user(restaurant_id: int):
+    """Returns items from menus table in the database specific to a restaurant.
+
+    Used for displaying content in user restaurant menu page.
+    """
+
     with get_db().connect() as conn:
         result = conn.execute(
             text("SELECT * FROM menus WHERE restaurant_id = :rest_id"),
@@ -55,12 +63,16 @@ def get_menu_user(restaurant_id):
 
 
 def get_restaurant():
+    """Returns all restaurants data from the database."""
+
     with get_db().connect() as conn:
         result = conn.execute(text("SELECT * FROM restaurants"))
         return result.all()
 
 
-def find_menu(restaurant_id):
+def find_menu(restaurant_id: int):
+    """Returns menus data for the given restaurant from the database."""
+
     with get_db().connect() as conn:
         result = conn.execute(
             text("SELECT * FROM menus WHERE restaurant_id = :restaurant_id"),
@@ -71,7 +83,13 @@ def find_menu(restaurant_id):
         return result.all()
 
 
-def find_orders(client_id, client, status):
+def find_orders(client_id: int, client: str, status: str):
+    """Returns data from orders table in the database, filtered on
+    whether the client is user or restaurant, the client_id, and the order status.
+    client : "user" or "restaurant"
+    status : "done" or "pending" or "cart"
+    """
+
     with get_db().connect() as conn:
         result = conn.execute(
             text(
@@ -84,7 +102,9 @@ def find_orders(client_id, client, status):
         return result.all()
 
 
-def find_user(user_id):
+def find_user(user_id: int):
+    """Returns database data of a specific user from users table."""
+
     with get_db().connect() as conn:
         result = conn.execute(
             text("SELECT * FROM users WHERE user_id = :user_id"), {"user_id": user_id}
@@ -94,7 +114,12 @@ def find_user(user_id):
         return result.all()
 
 
-def find_menu_category(menu, category):
+def find_menu_category(menu, category: str):
+    """Takes the database menus table output as input,
+    and filters out the menu items based on their category.
+    category: "starter", "dessert", "main", "drink".
+    """
+
     menu_category_items = []
     for item in menu:
         if item[3] == category:
@@ -102,7 +127,9 @@ def find_menu_category(menu, category):
     return menu_category_items
 
 
-def get_restaurant_items(res_name):
+def get_restaurant_items(res_name: str):
+    """Searches for restaurants in the database using the keyword res_name."""
+
     with get_db().connect() as conn:
         result = conn.execute(
             text(
@@ -115,6 +142,7 @@ def get_restaurant_items(res_name):
 
 @bp.route("/restaurant/login", methods=["GET", "POST"])
 def res_login():
+    """Via GET request:"""
     if session.get("id1"):
         if session["id1"]:
             return redirect(url_for("forklyft_bp.display_restaurant"))
@@ -766,7 +794,7 @@ def user_rest_menu(restaurant_id):
         url = "https://hf.space/embed/Amrrs/gradio-sentiment-analyzer/+/api/predict/"
         headers = {"Content-Type": "application/json"}
         data = {"data": [review]}
-        response = requests.post(url, headers=headers, data=json.dumps(data))
+        response = request.post(url, headers=headers, data=json.dumps(data))
         result = json.loads(response.text)
         if result["data"][0][12:20] == "POSITIVE":
             message = "Thankyou for your kind feedback!!"
