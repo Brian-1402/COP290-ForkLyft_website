@@ -4,3 +4,5 @@ sqlalchemy
 pandas
 pytest
 coverage
+requests
+json
