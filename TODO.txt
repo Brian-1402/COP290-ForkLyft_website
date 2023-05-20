@@ -1,25 +1,4 @@
 TODO
 
-In forklyft.py:
-Bugs:
--when deleting few items from menu, order history page shows server error. 
-    Cause: order history page accesses item id from orders table, and tries to access same item id from menus table, where it is non existent.
-    Fix: when displaying order history, check if the item is there or not, if not, show item unavailable.
-
-General:
--update yaml API
--make website navigating video
--describe individual contributions in report
-
-CI/CD/tests:
--Finish writing all test cases and make it close to 100%:
-    -test for reviews
--write description in report
-
-Code cleanup:
--write comments in a documentation syntax
--check out the syntax requirements of flake8 and arrange accordingly
-
-If time allows:
--Seed 8 restaurants properly and manually.
--fix menu image sizing
+-make .env file and use dotenv library to set up environment variables
+-Try CI/CD using GitHub Actions
